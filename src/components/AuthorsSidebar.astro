@@ -1,0 +1,159 @@
+---
+import ArticleAuthorCard from './ArticleAuthorCard.astro';
+
+const { authors } = Astro.props;
+---
+
+<aside class="authors-sidebar" id="authors-container">
+	<nav class="authors-nav">
+		<h3 class="authors-title">Authors</h3>
+		<div class="authors-list">
+			{authors.map((author, index) => (
+				<div class="author-item" key={index}>
+					<h4 class="author-name">{author.name}</h4>
+					<p class="author-role">{author.title}</p>
+					<a href="/about" class="read-about-link">
+						Read More
+						<svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+							<path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+				</div>
+			))}
+		</div>
+	</nav>
+</aside>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const authorsContainer = document.getElementById('authors-container');
+		
+		// Set initial position aligned with Overview (same as TOC)
+		const overviewElement = document.getElementById('overview');
+		if (overviewElement && authorsContainer) {
+			const overviewRect = overviewElement.getBoundingClientRect();
+			const overviewTop = overviewRect.top + window.scrollY;
+			
+			// Set initial absolute position
+			authorsContainer.style.position = 'absolute';
+			authorsContainer.style.top = overviewTop + 'px';
+			
+			// Handle scroll to fix position (same logic as TOC)
+			let isFixed = false;
+			const fixedTop = 120; // Same fixed position as TOC
+			
+			window.addEventListener('scroll', () => {
+				const scrollY = window.scrollY;
+				const shouldBeFixed = scrollY >= overviewTop - fixedTop;
+				
+				if (shouldBeFixed && !isFixed) {
+					authorsContainer.style.position = 'fixed';
+					authorsContainer.style.top = fixedTop + 'px';
+					isFixed = true;
+				} else if (!shouldBeFixed && isFixed) {
+					authorsContainer.style.position = 'absolute';
+					authorsContainer.style.top = overviewTop + 'px';
+					isFixed = false;
+				}
+			});
+		}
+	});
+</script>
+
+<style>
+	.authors-sidebar {
+		right: calc(20vw - 200px);
+		width: 200px;
+		max-height: 70vh;
+		overflow-y: auto;
+		z-index: 100;
+		display: block;
+	}
+
+	.authors-nav {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.authors-title {
+		font-size: 16px;
+		font-weight: 600;
+		color: #1a1a1a;
+		padding-bottom: 8px;
+	}
+
+	.authors-list {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	.author-item {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.author-name {
+		font-size: 16px;
+		font-weight: 500;
+		color: #666;
+		margin: 0;
+		line-height: 1.4;
+	}
+
+	.author-role {
+		font-size: 16px;
+		color: #999;
+		margin: 0;
+		line-height: 1.2;
+		font-style: italic;
+	}
+
+	.read-about-link {
+		font-size: 16px;
+		color: #999;
+		text-decoration: none;
+		transition: color 0.2s ease;
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.read-about-link:hover {
+		color: #6C43D7;
+	}
+
+	/* Show sidebar only on larger screens with enough space */
+	@media (min-width: 1200px) {
+		.authors-sidebar {
+			display: block;
+		}
+	}
+
+	/* Hide on smaller screens */
+	@media (max-width: 1199px) {
+		.authors-sidebar {
+			display: none;
+		}
+	}
+
+	/* Custom scrollbar to match table of contents */
+	.authors-sidebar::-webkit-scrollbar {
+		width: 2px;
+	}
+
+	.authors-sidebar::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.authors-sidebar::-webkit-scrollbar-thumb {
+		background: #ddd;
+		border-radius: 1px;
+	}
+
+	.authors-sidebar::-webkit-scrollbar-thumb:hover {
+		background: #bbb;
+	}
+</style> 

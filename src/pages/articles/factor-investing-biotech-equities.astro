@@ -2,6 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
+import AuthorsSidebar from '../../components/AuthorsSidebar.astro';
+
+const authors = [
+	{
+		name: 'Justin Wang',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/jstwng/'
+	},
+	{
+		name: 'Rishabh Ranjan',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/rishabhranj/'
+	}
+];
 ---
 
 <Layout title="On Factor Investing for U.S. Biotechnology Equities" description="We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.">
@@ -198,6 +212,7 @@ import TableOfContents from '../../components/TableOfContents.astro';
 	</main>
 	
 	<TableOfContents />
+	<AuthorsSidebar authors={authors} />
 </Layout>
 
 <style>

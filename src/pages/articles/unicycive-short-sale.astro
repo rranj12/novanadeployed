@@ -2,6 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
+import AuthorsSidebar from '../../components/AuthorsSidebar.astro';
+
+const authors = [
+	{
+		name: 'Justin Wang',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/jstwng/'
+	},
+	{
+		name: 'Rishabh Ranjan',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/rishabhranj/'
+	}
+];
 ---
 
 <Layout title="Our Unicycive (NASDAQ: UNCY) Short Sale" description="Analysis of Novana's beta-neutral short sale of Unicycive (UNCY) ahead of its FDA decision, betting the market had mispriced regulatory risk.">
@@ -156,6 +170,7 @@ import TableOfContents from '../../components/TableOfContents.astro';
 	</main>
 	
 	<TableOfContents />
+	<AuthorsSidebar authors={authors} />
 </Layout>
 
 <style>

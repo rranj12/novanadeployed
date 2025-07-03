@@ -2,6 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
+import AuthorsSidebar from '../../components/AuthorsSidebar.astro';
+
+const authors = [
+	{
+		name: 'Justin Wang',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/jstwng/'
+	},
+	{
+		name: 'Rishabh Ranjan',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/rishabhranj/'
+	}
+];
 ---
 
 <Layout title="What Trump's Tariff Policy means for Biotech" description="Analysis of how proposed tariff policies could impact the biotechnology sector">
@@ -264,6 +278,7 @@ import TableOfContents from '../../components/TableOfContents.astro';
 	</main>
 	
 	<TableOfContents />
+	<AuthorsSidebar authors={authors} />
 </Layout>
 
 <style>
