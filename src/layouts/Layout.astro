@@ -41,7 +41,7 @@
 	}
 
 	.container-narrow {
-		max-width: 800px;
+		max-width: 650px;
 		margin: 0 auto;
 		padding: 0 24px;
 	}
@@ -133,6 +133,23 @@
 	@media (max-width: 768px) {
 		.container, .container-narrow {
 			padding: 0 16px;
+		}
+	}
+
+	/* Only add left margin for TOC on large screens */
+	@media (min-width: 1200px) {
+		.container-narrow {
+			margin-left: 280px;
+			max-width: 650px;
+		}
+	}
+
+	/* For extra large screens, center the content better */
+	@media (min-width: 1400px) {
+		.container-narrow {
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 700px;
 		}
 	}
 </style>

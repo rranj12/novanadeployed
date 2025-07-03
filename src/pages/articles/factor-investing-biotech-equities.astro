@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 ---
 
 <Layout title="On Factor Investing for U.S. Biotechnology Equities" description="We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.">
@@ -56,13 +57,13 @@ import Header from '../../components/Header.astro';
 
 				<div class="article-content">
 					<section class="abstract">
-						<h2>OVERVIEW</h2>
+						<h2 id="overview">Overview</h2>
 						
 						<p>We ran three multifactor asset pricing models on Blackrock's U.S. Biotechnology ETF (ticker IBB) with: 1) the Bayesian-selected factors outlined in Ericsson & Karlsson (2004); 2) a basket of macroeconomic factors; and 3) common style factors—  Momentum, Quality, Value, Size and Low Volatility. Our top-down selection of pricing models enabled us to analyze the effectiveness of generalized, style-based, and macro-based factor strategies, respectively, in biotechnology equities investing. In our thirteen-factor, three-model experiment, we found that no model yielded statistically significant alpha in the timeframe spanning January 2010 to January 2025. Three factors – market excess return (0.837-1.078, 7.515t9.786), small-minus-big (0.660-0.669, 5.325t 6.094), and high-minus-low (-0.470-0.468, -4.925t-4.875) – however, revealed themselves to be significant drivers for biotechnology equity returns. For passive investors wanting exposure in the space, we suggest biases towards small-cap, high-growth biotechnology equity funds. No model's adjusted r-squared surpassed 0.578, however, indicating that – even when modeled against non-correlated baskets of factors – at least 42.2% of biotechnology equity variance lives in idiosyncratic risk. To conclude, we suggest that biotechnology equity alpha is captured by those who have deep scientific literacy and extensive analytical manpower — resources inaccessible to most retail investors.</p>
 					</section>
 
 					<section class="content-section">
-						<h2>Introduction</h2>
+						<h2 id="introduction">Introduction</h2>
 						<p>Grand View Research reported an estimated 13.96% compound annual growth rate for the U.S. biotechnology market for the period between 2024-2030, a rate higher than that of the S&P 500's from the last 10 years. However, U.S. biotechnology equities have traded horizontally since 2022 — after reaching all-time highs in early-mid 2021, all five of the top U.S. biotechnology exchange-traded funds (ETFs) by assets under management shed between 9% and 93% of their market value (see figure below).</p>
 
 						<!-- Image placeholder for biotech ETF performance chart -->
@@ -79,16 +80,16 @@ import Header from '../../components/Header.astro';
 
 						<p>A common approach that investors take to minimize risk is to acquire stakes in baskets of biotechnology companies rather than holding highly concentrated positions. Nasdaq suggests exchange-traded funds (ETFs) as a vehicle that accomplishes this. Top biotechnology ETFs by AUM are typically composed of a few dozen disparate companies, which diversifies away a significant proportion of total portfolio risk (see figure below). In this paradigm and industry context, a handful of green-lit, profitable companies drive growth, which minimizes downside potential. These funds democratize exposure to the biotechnology industry, as many retail investors lack the scientific-technical expertise needed to examine clinical trial minutiae or FDA briefs.</p>
 
-						<h3>Diversification: Total Portfolio Risk vs. Number of Stocks</h3>
+						<h3 id="diversification">Diversification: Total Portfolio Risk vs. Number of Stocks</h3>
 						<figure style="margin: 32px 0; text-align: center;">
 							<img src="/src/assets/diversification-portfolio-risk.png" alt="Diversification: total portfolio risk vs. number of stocks" style="max-width: 100%; height: auto; border: 1px solid #e5e5e5; border-radius: 8px;" />
 							<figcaption style="margin-top: 12px; color: #666; font-size: 16px;">Diversification reduces total portfolio risk as the number of stocks increases, but market risk remains irreducible. Chart shows the diminishing standard deviation of portfolio returns as more stocks are added.</figcaption>
 						</figure>
 
-						<h2>Factor Investing</h2>
+						<h2 id="factor-investing">Factor Investing</h2>
 						<p>Factor investing is an investing approach that revolves around quantifiable characteristics that are hypothesized to drive stock returns; these are known as "factors," for short. The goal of the factor investing approach is to systematize the investment process, enabling investors to extract alpha from holdings via statistical exposure as opposed to through discretionary selection. There are 2 types of factors, broadly speaking: macroeconomic factors and style factors. Macroeconomic factors reflect broad risks that permeate throughout different asset classes. Common examples are interest rate shocks, inflation expectations, credit spreads, market volatility (commonly measured through the VIX), and dollar strength. Style factors, on the other hand, are tilted towards risks that exist within an asset class. Frequently used are size (small-minus-big), value (high-minus-low), momentum, quality (robust-minus-weak), and low volatility. Integration of these factors into asset pricing models such as Fama-French, Asset Pricing Theory, and Carhart provide investors frameworks that decompose the split between any given investment's systematic  and idiosyncratic risk (taking on the latter of the two, is, according to the Efficient Market Hypothesis, the only means of "beating" the market).</p>
 
-						<h2>Methodology</h2>
+						<h2 id="methodology">Methodology</h2>
 						<p>Rishabh and I were curious as to whether or not any combination of macroeconomic or style factors yielded explanatory value with regards to U.S. biotechnology equities. To evaluate this, we ran three multi-factor asset pricing models with BlackRock's IBB ETF serving as a proxy for U.S. biotechnology ETFs. The inputs to our models are described in the table below:</p>
 
 						<div class="methodology-table">
@@ -120,10 +121,10 @@ import Header from '../../components/Header.astro';
 							</table>
 						</div>
 
-						<h2 id="results-header">Results</h2>
+						<h2 id="results">Results</h2>
 						<p>We observed statistically insignificant alpha for the tested time period across all three multifactor pricing models. Despite this, three factors consistently emerged as statistically significant drivers for U.S. biotechnology equity returns:</p>
 
-						<h3>Bayesian-selected factors regression</h3>
+						<h3 id="bayesian-factors">Bayesian-selected factors regression</h3>
 						<ul>
 							<li>Statistically insignificant alpha</li>
 							<li>Statistically significant values for excess market return, small-minus-big, and high-minus-low</li>
@@ -133,7 +134,7 @@ import Header from '../../components/Header.astro';
 							<figcaption style="margin-top: 8px; color: #666; font-size: 15px;">Regression output for Bayesian-selected factors model.</figcaption>
 						</figure>
 
-						<h3>Style factors regression</h3>
+						<h3 id="style-factors">Style factors regression</h3>
 						<ul>
 							<li>Statistically insignificant alpha</li>
 							<li>Statistically significant values for excess market return, small-minus-big, high-minus-low</li>
@@ -143,7 +144,7 @@ import Header from '../../components/Header.astro';
 							<figcaption style="margin-top: 8px; color: #666; font-size: 15px;">Regression output for style factors model.</figcaption>
 						</figure>
 
-						<h3>Macroeconomic factor regression</h3>
+						<h3 id="macro-factors">Macroeconomic factor regression</h3>
 						<ul>
 							<li>Statistically insignificant alpha</li>
 							<li>Statistically significant values for excess market return</li>
@@ -157,7 +158,7 @@ import Header from '../../components/Header.astro';
 							<p><strong>Model Fit:</strong> No model's adjusted R² surpassed 0.578, indicating that at least 42.2% of biotechnology equity variance lives in idiosyncratic risk.</p>
 						</div>
 
-						<h2>Discussion</h2>
+						<h2 id="discussion">Discussion</h2>
 						<p>We observed statistically insignificant alpha for the tested time period across all three multifactor pricing models: Bayesian-selected, style-based, and macroeconomic-based. Despite this, three factors – market excess returns, size, and value – consistently emerged as statistically significant drivers for U.S. biotechnology equity returns. This confirms our existing understanding that event-driven risk dominates in this industry. The high beta we found with U.S. biotechnology equities with regards to the market at-large shows us biotechnology's sensitivity to macroeconomic sentiment and capital market conditions. This makes sense intuitively: in bullish markets, investors' risk appetite increases, which leads to capital inflows to high-risk equities— resulting in higher biotechnology equity performance. The statistically significant size factor makes clear to us that small-cap biotechnology companies' outsized returns dominate investor returns in the sector. The logic here follows that smaller companies are positioned to disproportionately benefit from risk-on markets when compared to larger cap companies. A negative correlation against the value factor shows us that biotechnology sector returns are driven largely by high-growth, low-book-value companies, which aligns with the insights we gained from analyzing the size factor's impacts.</p>
 
 						<p>The convergence of these three factors refines our understanding of biotechnology ETFs' strategic value in investors' portfolios. These holdings make sense in bullish market cycles: they provide broad exposure to a high-beta industry while diversifying away single-stock risks. In periods of economic growth, passive investors can count on returns from an increased proportion of high-growth biotechnology companies rather than having to pick individual bets. Biotechnology ETFs' value fades during times when broad market outlook is poor, however. The high-beta nature of biotechnology equities means that the overall composite value of biotechnology ETF holdings falls proportionally to that of the market. During periods with significant economic headwinds, industry expertise pays. The ability to identify individual winners results in high-concentration portfolios that depart from broad industry underperformance.</p>
@@ -195,6 +196,8 @@ import Header from '../../components/Header.astro';
 			</div>
 		</article>
 	</main>
+	
+	<TableOfContents />
 </Layout>
 
 <style>

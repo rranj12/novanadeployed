@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 ---
 
 <Layout title="Our Unicycive (NASDAQ: UNCY) Short Sale" description="Analysis of Novana's beta-neutral short sale of Unicycive (UNCY) ahead of its FDA decision, betting the market had mispriced regulatory risk.">
@@ -56,7 +57,7 @@ import Header from '../../components/Header.astro';
 
 				<div class="article-content">
 					<section class="abstract">
-						<h2>OVERVIEW</h2>
+						<h2 id="overview">Overview</h2>
 						
 						<p>This week, Novana Investment Management completed its first trade — a beta-neutral short sale against Unicycive, a micro cap biotechnology company focused on therapeutic innovation in the kidney health space. The trade consisted of a short position in Unicycive and a long position in the SPDR S&P 500 ETF Trust (NYSEARCA: SPY), posting a 10.16% overall gain on $113,791.36 of invested capital and yielding a net P&L of $11,565.65. The trade was initiated post-market on Thursday, June 26th, when 8,000 shares of Unicycive were sold short at $6.33 per share and 103 shares of the SPDR S&P 500 ETF Trust were bought long at $613.12 per share. The trade was concluded on Monday, June 30th, with Unicycive being bought back at $4.93 per share and the SPDR S&P 500 ETF Trust being sold at $616.67 per share. Between Thursday, June 26th, to Monday, June 30th, shares of Unicycive depreciated 22.12% and shares of the SPDR S&P 500 ETF Trust appreciated 0.58%.</p>
 					</section>
@@ -114,7 +115,7 @@ import Header from '../../components/Header.astro';
 						<p>At the time of trading, our Bloomberg Terminal data feed reported Unicycive's beta to be ~1.33 and the SPDR S&P 500 ETF Trust's to be ~1.01. We hedged beta by taking positions short UNCY and long SPY in a 1.01:1.33 ratio, respectively.</p>
 
 						<div class="definitions">
-							<h3>Definitions</h3>
+							<h3 id="definitions">Definitions</h3>
 							<p><strong>¹ cGMP (current Good Manufacturing Practice)</strong> are FDA-enforced regulations that ensure drugs are consistently produced and controlled according to quality standards. They cover everything from raw materials to equipment, sanitation, personnel, and documentation.</p>
 							
 							<p><strong>² A CRL (Complete Response Letter)</strong> is a formal communication from the FDA indicating that a New Drug Application (NDA) cannot be approved in its current form. It outlines specific deficiencies (clinical, manufacturing, etc.) that must be addressed before resubmission.</p>
@@ -153,6 +154,8 @@ import Header from '../../components/Header.astro';
 			</div>
 		</article>
 	</main>
+	
+	<TableOfContents />
 </Layout>
 
 <style>

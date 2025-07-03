@@ -1,0 +1,188 @@
+---
+// This component will be populated by client-side JavaScript
+---
+
+<aside class="table-of-contents" id="toc-container">
+	<nav class="toc-nav" id="toc-nav">
+		<!-- TOC items will be dynamically generated -->
+	</nav>
+</aside>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const tocNav = document.getElementById('toc-nav');
+		const tocContainer = document.getElementById('toc-container');
+		const headings = document.querySelectorAll('h2, h3');
+		const tocItems = [];
+
+		// Generate TOC items
+		headings.forEach((heading, index) => {
+			const id = heading.id || `heading-${index}`;
+			heading.id = id; // Ensure heading has an ID
+			
+			const tocItem = document.createElement('a');
+			tocItem.href = `#${id}`;
+			tocItem.textContent = heading.textContent;
+			tocItem.className = heading.tagName === 'H2' ? 'toc-item toc-h2' : 'toc-item toc-h3';
+			tocItem.dataset.target = id;
+			
+			tocNav.appendChild(tocItem);
+			tocItems.push({
+				element: tocItem,
+				target: heading
+			});
+		});
+
+		// Set initial position aligned with Overview
+		const overviewElement = document.getElementById('overview');
+		if (overviewElement) {
+			const overviewRect = overviewElement.getBoundingClientRect();
+			const overviewTop = overviewRect.top + window.scrollY;
+			
+			// Set initial absolute position
+			tocContainer.style.position = 'absolute';
+			tocContainer.style.top = overviewTop + 'px';
+			
+			// Handle scroll to fix position
+			let isFixed = false;
+			const fixedTop = 120; // Fixed position higher up on screen
+			
+			window.addEventListener('scroll', () => {
+				const scrollY = window.scrollY;
+				const shouldBeFixed = scrollY >= overviewTop - fixedTop;
+				
+				if (shouldBeFixed && !isFixed) {
+					tocContainer.style.position = 'fixed';
+					tocContainer.style.top = fixedTop + 'px';
+					isFixed = true;
+				} else if (!shouldBeFixed && isFixed) {
+					tocContainer.style.position = 'absolute';
+					tocContainer.style.top = overviewTop + 'px';
+					isFixed = false;
+				}
+			});
+		}
+
+		// Intersection Observer for active section tracking
+		const observerOptions = {
+			rootMargin: '-20% 0px -35% 0px',
+			threshold: 0
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				const id = entry.target.id;
+				const tocItem = document.querySelector(`[data-target="${id}"]`);
+				
+				if (entry.isIntersecting) {
+					// Remove active class from all items
+					document.querySelectorAll('.toc-item').forEach(item => {
+						item.classList.remove('active');
+					});
+					// Add active class to current item
+					if (tocItem) {
+						tocItem.classList.add('active');
+					}
+				}
+			});
+		}, observerOptions);
+
+		// Observe all headings
+		headings.forEach(heading => {
+			observer.observe(heading);
+		});
+
+		// Smooth scroll for TOC links
+		tocItems.forEach(item => {
+			item.element.addEventListener('click', (e) => {
+				e.preventDefault();
+				const target = item.target;
+				target.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start'
+				});
+			});
+		});
+	});
+</script>
+
+<style>
+	.table-of-contents {
+		left: calc(20vw - 200px);
+		width: 200px;
+		z-index: 100;
+		max-height: 70vh;
+		overflow-y: auto;
+	}
+
+	.toc-nav {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+
+	.toc-item {
+		display: block;
+		padding: 0;
+		margin: 0;
+		color: #888;
+		text-decoration: none;
+		font-size: 14px;
+		line-height: 1.4;
+		transition: all 0.3s ease;
+		cursor: pointer;
+		position: relative;
+	}
+
+	.toc-h2 {
+		font-weight: 500;
+		margin: 0;
+		color: #666;
+	}
+
+	.toc-h3 {
+		padding-left: 16px;
+		font-size: 13px;
+		color: #999;
+		margin: 0;
+	}
+
+	.toc-item:hover {
+		color: #6C43D7;
+	}
+
+	.toc-item.active {
+		color: #6C43D7;
+		font-weight: 600;
+	}
+
+	.toc-item.active.toc-h3 {
+		font-weight: 500;
+		color: #6C43D7;
+	}
+
+	/* Hide on smaller screens */
+	@media (max-width: 1200px) {
+		.table-of-contents {
+			display: none;
+		}
+	}
+
+	/* Custom scrollbar */
+	.table-of-contents::-webkit-scrollbar {
+		width: 2px;
+	}
+
+	.table-of-contents::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.table-of-contents::-webkit-scrollbar-thumb {
+		background: #ddd;
+		border-radius: 1px;
+	}
+
+	.table-of-contents::-webkit-scrollbar-thumb:hover {
+		background: #bbb;
+	}
+</style> 

@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 ---
 
 <Layout title="What Trump's Tariff Policy means for Biotech" description="Analysis of how proposed tariff policies could impact the biotechnology sector">
@@ -56,17 +57,17 @@ import Header from '../../components/Header.astro';
 
 				<div class="article-content">
 					<section class="abstract">
-						<h2>OVERVIEW</h2>
+						<h2 id="overview">Overview</h2>
 						<p>We analyzed the impact of Trump administration tariff policies on the U.S. biotechnology industry through 1) import dependency analysis across five key Harmonized Tariff Schedule (HTS) codes for pharmaceutical inputs from China, India, Germany, and Canada; 2) direct price impact calculations using theoretical pass-through frameworks; and 3) sector-level vulnerability assessments mapping resource dependencies to four major biotech segments. In our multi-sector, tariff-adjusted analysis, we found that Novel Antibiotics and Small Molecule Generics face the highest adjusted price impacts at 0.87% each, while Vaccines (0.11%) and Diagnostic Products (0.08%) show minimal exposure. Two resource categories, Other Antibiotics (1.16% direct price impact) and Erythromycin (1.06% direct price impact), revealed themselves to be the most vulnerable to tariff-induced cost inflation due to heavy reliance on Chinese and Indian suppliers facing 145% and 26% tariff rates, respectively. For investors seeking biotech exposure, we suggest caution towards generic pharmaceutical companies with substantial offshore API sourcing. Conversely, tariff policies create opportunities in high-margin therapeutics (biologics, cell and gene therapies) and European-supplier-dependent diagnostics companies, which show minimal projected price impacts.</p>
 					</section>
 
 					<section class="content-section">
-						<h2>Introduction</h2>
+						<h2 id="introduction">Introduction</h2>
 						<p>In the midst of a biotechnology surge reflecting the inherent tension of progress, the Trump administration's recent tariffs will force the industry to confront vulnerabilities long considered background noise. Initially, it seemed that biotech had dodged a bullet – tariff policies spared finished drugs. Underneath that headline lies a more complicated truth. A globally distributed supply chain has long powered early-stage R&D and with the US producing only 12% of the active pharmaceutical ingredients (APIs) for its medicines, the biotech research ecosystem will be choked at its source. There's no question that cost-sensitive R&D programs will be forced to recalibrate.</p>
 						<p>Biotech didn't dodge a bullet, it caught one mid-assembly.  bru</p>
 						<p>The salient observation is that some companies will invest in process innovation to localize manufacturing, while others are rethinking pipeline strategies to favor molecules with fewer global dependencies. However, it's interesting to consider how focus might move towards higher-margin therapies to insulate elevated input costs. Here, we attempt to empirically interpret how tariff policies will impact the U.S. biotech and pharmaceutical industries, with a particular focus on supply chain bottlenecks and shifts in therapeutic focus. This consists of analyzing U.S. trade data for biotech-related imports from China, India, and the EU to assess which biotech sectors would be most affected by constraints in specific resources.</p>
 
-						<h2>Analysis</h2>
+						<h2 id="analysis">Analysis</h2>
 						<p>Our analysis used important import data from the U.S. International Trade Commission's DataWeb, focusing on five key Harmonized Tariff Schedule (HTS) Codes relevant to pharmaceutical and biotech industries:</p>
 						<ul>
 							<li>294150: Erythromycin</li>
@@ -87,7 +88,7 @@ import Header from '../../components/Header.astro';
 							<li><strong>Sector-Level Impact Assessment:</strong> We map HTS categories to biotech sectors using resource dependency weights based on industry standard relationships (Wosinska 2025). We then apply sector-specific pass-through rates based on market structure characteristics.</li>
 						</ol>
 
-						<h3>Import Dependency Analysis</h3>
+						<h3 id="import-dependency">Import Dependency Analysis</h3>
 						<p>The following figure provides a detailed view of U.S. dependency on imports from China, Germany, India, and Canada for biotech inputs. China accounted for 53.7% of total imports across the analyzed categories, followed by India (29.4%), Germany (14.5%), and Canada (2.4%).</p>
 						<figure style="margin: 32px 0; text-align: center;">
 							<img src="/src/assets/biotech-import-dependency-heatmap.png" alt="Percentage Dependency by Category and Country" style="max-width: 600px; width: 100%; height: auto; border: 1px solid #e5e5e5; border-radius: 8px;" />
@@ -100,13 +101,13 @@ import Header from '../../components/Header.astro';
 							<li>Heterocyclic Compounds show significant dependency on both China and India.</li>
 						</ul>
 
-						<h3>Direct Price Impact Analysis</h3>
+						<h3 id="price-impact">Direct Price Impact Analysis</h3>
 						<p>Using the theoretical pass-through framework (Minton and Somale, 2025), we calculated the direct price impact of tariffs on each biotech category (assuming 100% pass-through).</p>
 						<p>Total Direct Price Impact = iDiTi<br />Where:<br />Di = Dependency percentage from country i<br />Ti = Tariff rate for country i</p>
 						<p>The tariff rates used in our analysis are: China: 145% (1.45 multiplier); India: 26% (0.26 multiplier); Germany: 0%; Canada: 0%. These are modeled under Trump's recent tariff conditions. The following figure shows these impacts.</p>
 						<p>Other Antibiotics face the highest direct price impact (1.16%), followed by Erythromycin (1.06%), Heterocyclic Compounds (Imidazole) (0.82%), and Heterocyclic Compounds (Pyrimidine) (0.74%). Diagnostic Reagents show minimal impact (0.01%) due to their low dependency on imports from China and India.</p>
 
-						<h3>Sector-Level Impact Analysis</h3>
+						<h3 id="sector-impact">Sector-Level Impact Analysis</h3>
 						<p>Mapping of HTS codes to biotech sectors is based on the U.S. International Trade Commission's official descriptions of HTS codes along with common industry groupings used in pharmaceutical and biotech research.</p>
 						<p><strong>Table 7: Sector-Resource Dependency Matrix</strong></p>
 						<table style="width:100%; border-collapse: collapse; margin: 24px 0;">
@@ -197,7 +198,7 @@ import Header from '../../components/Header.astro';
 						</figure>
 						<p>Novel Antibiotics and Small Molecule Generics show the highest vulnerability to tariff impacts, both with adjusted price impacts of 0.87%. This is due to their high dependency on antibiotics and heterocyclic compounds, which face significant tariffs due to their sourcing from China and India. Vaccines (0.11%) and Diagnostic Products (0.08%) show much lower impacts due to their reliance on inputs primarily sourced from countries not subject to high tariffs.</p>
 
-						<h2>Discussion</h2>
+						<h2 id="discussion">Discussion</h2>
 						<p>Our analysis identifies several potential supply chain bottlenecks that may arise from the Trump administration's tariff policies. With direct price impacts exceeding 1%, antibiotics face the most pressure from tariffs. Firms operating in this space could see thinner margins or even discontinuations. In terms of sector specific vulnerabilities, Novel Antibiotics and Small Molecule Generics face the highest adjusted price impacts, suggesting that these areas may experience the most significant disruptions.</p>
 						<p>The differential impact of tariffs across sectors suggest potential shifts in therapeutic focus within the US. Firstly, the high tariff impact on antibiotics may accelerate the existing trend of manufacturers moving away from low-margin generic antibiotics. We might also see greater emphasis on higher-margin products – companies may shift resources towards specialized biologics and diagnostics products, sectors less affected by tariffs.</p>
 						<p>What does this mean for investors?<br />We believe that investors may want to be cautious about firms that depend on China/India for APIs for small molecules, specifically companies that specialize in mature, low-margin portfolios like generic antibiotics, where pricing flexibility is limited and regulatory burdens remain high.<br />Be cautious about segments/companies such as Teva Pharmaceuticals (TEVA) and Amneal Pharmaceuticals (AMRX) which focus on tariff-affected generics drugs and substantial offshore sourcing of APIs.</p>
@@ -210,7 +211,7 @@ import Header from '../../components/Header.astro';
 					</section>
 
 					<section class="references">
-						<h2>References</h2>
+						<h2 id="references">References</h2>
 						<div class="reference-list">
 							<div class="reference">
 								<span class="ref-number">[1]</span>
@@ -261,6 +262,8 @@ import Header from '../../components/Header.astro';
 			</div>
 		</article>
 	</main>
+	
+	<TableOfContents />
 </Layout>
 
 <style>
