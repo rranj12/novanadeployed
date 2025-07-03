@@ -1,0 +1,88 @@
+---
+const { currentPath } = Astro.props;
+---
+
+<header class="header">
+	<div class="container">
+		<nav class="nav">
+			<a href="/" class="logo">
+				<span class="logo-text">Novana</span>
+			</a>
+			<div class="nav-links">
+				<a href="/" class={currentPath === '/' ? 'nav-link active' : 'nav-link'}>Home</a>
+				<a href="/research" class={currentPath === '/research' ? 'nav-link active' : 'nav-link'}>Research</a>
+				<a href="/markets" class={currentPath === '/markets' ? 'nav-link active' : 'nav-link'}>Markets</a>
+				<a href="/about" class={currentPath === '/about' ? 'nav-link active' : 'nav-link'}>About</a>
+			</div>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.header {
+		background: white;
+		border-bottom: 1px solid #e5e5e5;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		backdrop-filter: blur(10px);
+	}
+
+	.nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 70px;
+	}
+
+	.logo {
+		text-decoration: none;
+		color: #1a1a1a;
+	}
+
+	.logo-text {
+		font-size: 24px;
+		font-weight: 500;
+		color: #1a1a1a;
+	}
+
+	.nav-links {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+	}
+
+	.nav-link {
+		color: #666;
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.2s ease;
+		position: relative;
+	}
+
+	.nav-link:hover,
+	.nav-link.active {
+		color: #6C43D7;
+	}
+
+	.nav-link.active::after {
+		content: '';
+		position: absolute;
+		bottom: -8px;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: #6C43D7;
+		border-radius: 1px;
+	}
+
+	@media (max-width: 768px) {
+		.nav-links {
+			gap: 20px;
+		}
+		
+		.logo-text {
+			font-size: 20px;
+		}
+	}
+</style>

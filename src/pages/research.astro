@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const researchArticles = [
+	{
+		slug: 'trump-tariff-policy-biotech',
+		title: 'What Trump\'s Tariff Policy means for Biotech',
+		excerpt: 'Analysis of how proposed tariff policies could impact the biotechnology sector, from supply chain costs to international market access and competitive dynamics.',
+		tags: ['Trade Policy', 'Biotechnology', 'Tariffs'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'June 18, 2025',
+		readingTime: '8 min read'
+	},
+	{
+		slug: 'factor-investing-biotech-equities',
+		title: 'On Factor Investing for U.S. Biotechnology Equities',
+		excerpt: 'We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.',
+		tags: ['Factor Investing', 'Biotechnology', 'Equities'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'June 13, 2025',
+		readingTime: '10 min read'
+	}
+];
+---
+
+<Layout title="Research" description="Deep tech investment research and analysis">
+	<Header currentPath="/research" />
+	
+	<main class="main">
+		<section class="hero">
+			<div class="container">
+				<div class="hero-content">
+					<h1 class="hero-title">Novana Research</h1>
+					<p class="hero-subtitle">In-depth investment research and technical analysis on emerging deep technology opportunities.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="articles">
+			<div class="container">
+				<div class="articles-list">
+					{researchArticles.map(article => (
+						<ArticleCard article={article} />
+					))}
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.main {
+		min-height: calc(100vh - 70px);
+	}
+
+	.hero {
+		padding: 80px 0;
+		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+		border-bottom: 1px solid #e5e5e5;
+	}
+
+	.hero-content {
+		max-width: 600px;
+	}
+
+	.hero-title {
+		font-size: clamp(2.5rem, 5vw, 3.5rem);
+		font-weight: 700;
+		color: #1a1a1a;
+		margin-bottom: 24px;
+		line-height: 1.1;
+	}
+
+	.hero-subtitle {
+		font-size: 20px;
+		color: #666;
+		line-height: 1.5;
+		max-width: 500px;
+	}
+
+	.articles {
+		padding: 100px 0;
+	}
+
+	.articles-list {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			padding: 60px 0;
+		}
+
+		.articles {
+			padding: 80px 0;
+		}
+
+		.articles-list {
+			gap: 24px;
+		}
+	}
+</style>

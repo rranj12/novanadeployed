@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const allArticles = [
+	{
+		slug: 'unicycive-short-sale',
+		title: 'Our Unicycive (NASDAQ: UNCY) Short Sale',
+		excerpt: "Overview of Novana's beta-neutral short sale of Unicycive (UNCY) ahead of its FDA decision, betting the market had mispriced regulatory risk.",
+		tags: ['Markets', 'Biotechnology', 'FDA Regulation'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'June 30, 2025',
+		readingTime: '5 min read',
+		category: 'markets'
+	},
+	{
+		slug: 'trump-tariff-policy-biotech',
+		title: 'What Trump\'s Tariff Policy means for Biotech',
+		excerpt: 'Analysis of tariff-driven cost pressures in the U.S. biotech supply chain, highlighting emerging opportunities in high-margin therapeutics and diagnostics.',
+		tags: ['Research', 'Biotechnology', 'Tariffs'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'June 18, 2025',
+		readingTime: '8 min read',
+		category: 'research'
+	},
+	{
+		slug: 'factor-investing-biotech-equities',
+		title: 'On Factor Investing for U.S. Biotechnology Equities',
+		excerpt: 'We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.',
+		tags: ['Research', 'Factor Investing', 'Biotechnology'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'June 13, 2025',
+		readingTime: '10 min read',
+		category: 'research'
+	}
+];
+---
+
+<Layout title="Deep Tech Insights and Market Analysis" description="Professional analysis of emerging technology opportunities and market trends">
+	<Header currentPath="/" />
+	
+	<main class="main">
+		<section class="hero">
+			<div class="container">
+				<div class="hero-content">
+					<h1 class="hero-title">Deep Tech Insights</h1>
+					<p class="hero-subtitle">Professional analysis of emerging technology opportunities, investment research, and market trends in quantum computing, biotechnology, AI hardware, and other frontier technologies.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="articles">
+			<div class="container">
+				<h2 class="section-title">Latest Insights</h2>
+				<div class="articles-list">
+					{allArticles.map(article => (
+						<ArticleCard article={article} />
+					))}
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.main {
+		min-height: calc(100vh - 70px);
+	}
+
+	.hero {
+		padding: 80px 0;
+		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+		border-bottom: 1px solid #e5e5e5;
+	}
+
+	.hero-content {
+		max-width: 700px;
+	}
+
+	.hero-title {
+		font-size: clamp(2.5rem, 5vw, 3.5rem);
+		font-weight: 700;
+		color: #1a1a1a;
+		margin-bottom: 24px;
+		line-height: 1.1;
+	}
+
+	.hero-subtitle {
+		font-size: 20px;
+		color: #666;
+		line-height: 1.5;
+		max-width: 600px;
+	}
+
+	.articles {
+		padding: 75px 0;
+	}
+
+	.section-title {
+		font-size: 36px;
+		font-weight: 600;
+		color: #1a1a1a;
+		margin-bottom: 60px;
+		text-align: center;
+		position: relative;
+	}
+
+	.section-title::after {
+		content: '';
+		position: absolute;
+		bottom: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60px;
+		height: 3px;
+		background: linear-gradient(90deg, #6C43D7, #8B5FE8);
+		border-radius: 2px;
+	}
+
+	.articles-list {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			padding: 60px 0;
+		}
+
+		.articles {
+			padding: 60px 0;
+		}
+
+		.section-title {
+			font-size: 28px;
+			margin-bottom: 48px;
+		}
+
+		.articles-list {
+			gap: 24px;
+		}
+	}
+</style>
