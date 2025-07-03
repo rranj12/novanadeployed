@@ -63,34 +63,45 @@
 			});
 		}
 
-		// Intersection Observer for active section tracking
-		const observerOptions = {
-			rootMargin: '-20% 0px -35% 0px',
-			threshold: 0
-		};
+		// Function to update active section based on scroll position
+		function updateActiveSection() {
+			const scrollPosition = window.scrollY + 150;
+			let activeHeading = null;
 
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				const id = entry.target.id;
-				const tocItem = document.querySelector(`[data-target="${id}"]`);
+			// Find the heading that's currently visible
+			headings.forEach((heading) => {
+				const rect = heading.getBoundingClientRect();
+				const top = rect.top + window.scrollY;
 				
-				if (entry.isIntersecting) {
-					// Remove active class from all items
-					document.querySelectorAll('.toc-item').forEach(item => {
-						item.classList.remove('active');
-					});
-					// Add active class to current item
-					if (tocItem) {
-						tocItem.classList.add('active');
-					}
+				if (scrollPosition >= top) {
+					activeHeading = heading;
 				}
 			});
-		}, observerOptions);
 
-		// Observe all headings
-		headings.forEach(heading => {
-			observer.observe(heading);
-		});
+			// Update active class
+			document.querySelectorAll('.toc-item').forEach(item => {
+				item.classList.remove('active');
+				item.style.color = '#888'; // Reset color
+				item.style.fontWeight = 'normal'; // Reset font weight
+			});
+
+			if (activeHeading) {
+				const tocItem = document.querySelector(`[data-target="${activeHeading.id}"]`);
+				if (tocItem) {
+					tocItem.classList.add('active');
+					tocItem.style.color = '#6C43D7'; // Force purple color
+					tocItem.style.fontWeight = 'bold'; // Make current section bold
+				}
+			}
+		}
+
+		// Listen for scroll events
+		window.addEventListener('scroll', updateActiveSection);
+		
+		// Set initial active section
+		setTimeout(() => {
+			updateActiveSection();
+		}, 1000);
 
 		// Smooth scroll for TOC links
 		tocItems.forEach(item => {
@@ -152,13 +163,25 @@
 	}
 
 	.toc-item.active {
-		color: #6C43D7;
+		color: #6C43D7 !important;
 		font-weight: 600;
+		position: relative;
+	}
+
+	.toc-item.active::before {
+		content: '';
+		position: absolute;
+		left: -8px;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		background: #6C43D7;
+		border-radius: 2px;
 	}
 
 	.toc-item.active.toc-h3 {
 		font-weight: 500;
-		color: #6C43D7;
+		color: #6C43D7 !important;
 	}
 
 	/* Hide on smaller screens */
