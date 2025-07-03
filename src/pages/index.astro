@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import Footer from '../components/Footer.astro';
 
 const allArticles = [
 	{
@@ -42,7 +43,7 @@ const allArticles = [
 	
 	<main class="main">
 		<section class="hero">
-			<div class="container">
+			<div class="container-narrow">
 				<div class="hero-content">
 					<h1 class="hero-title">Deep Tech Insights</h1>
 					<p class="hero-subtitle">Professional analysis of emerging technology opportunities, investment research, and market trends in quantum computing, biotechnology, AI hardware, and other frontier technologies.</p>
@@ -51,7 +52,7 @@ const allArticles = [
 		</section>
 
 		<section class="articles">
-			<div class="container">
+			<div class="container-narrow">
 				<h2 class="section-title">Latest Insights</h2>
 				<div class="articles-list">
 					{allArticles.map(article => (
@@ -61,6 +62,7 @@ const allArticles = [
 			</div>
 		</section>
 	</main>
+	<Footer />
 </Layout>
 
 <style>

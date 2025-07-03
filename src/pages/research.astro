@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import Footer from '../components/Footer.astro';
 
 const researchArticles = [
 	{
@@ -30,7 +31,7 @@ const researchArticles = [
 	
 	<main class="main">
 		<section class="hero">
-			<div class="container">
+			<div class="container-narrow">
 				<div class="hero-content">
 					<h1 class="hero-title">Novana Research</h1>
 					<p class="hero-subtitle">In-depth investment research and technical analysis on emerging deep technology opportunities.</p>
@@ -39,7 +40,8 @@ const researchArticles = [
 		</section>
 
 		<section class="articles">
-			<div class="container">
+			<div class="container-narrow">
+				<h2 class="section-title">Latest Research</h2>
 				<div class="articles-list">
 					{researchArticles.map(article => (
 						<ArticleCard article={article} />
@@ -48,6 +50,7 @@ const researchArticles = [
 			</div>
 		</section>
 	</main>
+	<Footer />
 </Layout>
 
 <style>
@@ -62,7 +65,7 @@ const researchArticles = [
 	}
 
 	.hero-content {
-		max-width: 600px;
+		max-width: 700px;
 	}
 
 	.hero-title {
@@ -77,11 +80,32 @@ const researchArticles = [
 		font-size: 20px;
 		color: #666;
 		line-height: 1.5;
-		max-width: 500px;
+		max-width: 600px;
 	}
 
 	.articles {
-		padding: 100px 0;
+		padding: 75px 0;
+	}
+
+	.section-title {
+		font-size: 36px;
+		font-weight: 500;
+		color: #1a1a1a;
+		margin-bottom: 60px;
+		text-align: center;
+		position: relative;
+	}
+
+	.section-title::after {
+		content: '';
+		position: absolute;
+		bottom: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60px;
+		height: 3px;
+		background: linear-gradient(90deg, #6C43D7, #8B5FE8);
+		border-radius: 2px;
 	}
 
 	.articles-list {
@@ -96,7 +120,12 @@ const researchArticles = [
 		}
 
 		.articles {
-			padding: 80px 0;
+			padding: 60px 0;
+		}
+
+		.section-title {
+			font-size: 28px;
+			margin-bottom: 48px;
 		}
 
 		.articles-list {
