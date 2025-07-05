@@ -21,6 +21,9 @@ const { authors } = Astro.props;
 				</div>
 			))}
 		</div>
+		<div class="contact-note">
+			<p>Have a question or a different opinion on our findings? Want to contribute to future pieces? Send our team a note.</p>
+		</div>
 	</nav>
 </aside>
 
@@ -123,6 +126,17 @@ const { authors } = Astro.props;
 
 	.read-about-link:hover {
 		color: #6C43D7;
+	}
+
+	.contact-note {
+		margin-top: 12px;
+	}
+
+	.contact-note p {
+		font-size: 16px;
+		color: #666;
+		line-height: 1.4;
+		margin: 0;
 	}
 
 	/* Show sidebar only on larger screens with enough space */
