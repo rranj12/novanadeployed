@@ -34,8 +34,8 @@
 			});
 		});
 
-		// Set initial position aligned with Overview
-		const overviewElement = document.getElementById('overview');
+		// Set initial position aligned with Overview or Abstract
+		const overviewElement = document.getElementById('overview') || document.getElementById('abstract');
 		if (overviewElement) {
 			const overviewRect = overviewElement.getBoundingClientRect();
 			const overviewTop = overviewRect.top + window.scrollY;

@@ -31,8 +31,8 @@ const { authors } = Astro.props;
 	document.addEventListener('DOMContentLoaded', function() {
 		const authorsContainer = document.getElementById('authors-container');
 		
-		// Set initial position aligned with Overview (same as TOC)
-		const overviewElement = document.getElementById('overview');
+		// Set initial position aligned with Overview or Abstract (same as TOC)
+		const overviewElement = document.getElementById('overview') || document.getElementById('abstract');
 		if (overviewElement && authorsContainer) {
 			const overviewRect = overviewElement.getBoundingClientRect();
 			const overviewTop = overviewRect.top + window.scrollY;
