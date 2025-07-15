@@ -1,6 +1,6 @@
 import { c as createComponent, a as createAstro, m as maybeRenderHead, b as addAttribute, r as renderTemplate, d as renderComponent } from '../chunks/astro/server_nkSBzcqr.mjs';
 import 'kleur/colors';
-import { $ as $$Layout, a as $$Header } from '../chunks/Header_CI2If0cw.mjs';
+import { $ as $$Layout, a as $$Header } from '../chunks/Header_CDs6HL6l.mjs';
 import 'clsx';
 /* empty css                                 */
 import { $ as $$Footer } from '../chunks/Footer_DGXmjOo7.mjs';

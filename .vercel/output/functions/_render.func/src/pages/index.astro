@@ -43,7 +43,15 @@ const allArticles = [
 	
 	<main class="main">
 		<section class="hero hero-video">
-			<video autoplay muted loop class="hero-background-video">
+			<video 
+				autoplay 
+				muted 
+				loop 
+				playsinline
+				preload="none"
+				class="hero-background-video"
+				id="hero-video"
+			>
 				<source src="/background-video.mp4" type="video/mp4">
 			</video>
 			<div class="hero-overlay"></div>
@@ -54,6 +62,20 @@ const allArticles = [
 				</div>
 			</div>
 		</section>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const video = document.getElementById('hero-video');
+				if (video) {
+					video.addEventListener('canplay', function() {
+						video.style.opacity = '1';
+					});
+					video.addEventListener('error', function() {
+						console.log('Video failed to load, using fallback background');
+					});
+				}
+			});
+		</script>
 
 		<section class="articles">
 			<div class="container-narrow">
