@@ -1,0 +1,504 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import AuthorsSidebar from '../../components/AuthorsSidebar.astro';
+
+const authors = [
+	{
+		name: 'Justin Wang',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/jstwng/'
+	},
+	{
+		name: 'Rishabh Ranjan',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/rishabhranj/'
+	}
+];
+---
+
+<Layout title="What Trump's Tariff Policy Means for Biotechnology" description="Analysis of how proposed tariff policies could impact the biotechnology sector">
+	<Header currentPath="/research" />
+	
+	<main class="main">
+		<nav class="breadcrumb">
+			<div class="container-narrow">
+				<a href="/research" class="breadcrumb-link">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M19 12H5M12 19l-7-7 7-7"/>
+					</svg>
+					Back to Research
+				</a>
+			</div>
+		</nav>
+
+		<article class="article">
+			<div class="container-narrow">
+				<header class="article-header">
+					<div class="article-tags">
+						<span class="tag">Trade Policy</span>
+						<span class="tag">Biotechnology</span>
+						<span class="tag">Tariffs</span>
+					</div>
+					
+					<h1 class="article-title">What Trump's Tariff Policy Means for Biotechnology</h1>
+					
+					<p class="article-subtitle">Analysis of tariff-driven cost pressures in the U.S. biotech supply chain, highlighting emerging opportunities in high-margin therapeutics and diagnostics.</p>
+					
+					<div class="article-meta">
+						<div class="authors">
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+								<circle cx="12" cy="7" r="4"></circle>
+							</svg>
+							<span>Justin Wang, Rishabh Ranjan</span>
+						</div>
+						<div class="article-date">
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+								<line x1="16" y1="2" x2="16" y2="6"></line>
+								<line x1="8" y1="2" x2="8" y2="6"></line>
+								<line x1="3" y1="10" x2="21" y2="10"></line>
+							</svg>
+							<span>June 18, 2025</span>
+						</div>
+						<div class="reading-time">
+							<span>8 min read</span>
+						</div>
+					</div>
+				</header>
+
+				<div class="article-content">
+					<section class="abstract">
+						<h2 id="overview">Overview</h2>
+						<p>We analyzed the impact of Trump administration tariff policies on the U.S. biotechnology industry through 1) import dependency analysis across five key Harmonized Tariff Schedule (HTS) codes for pharmaceutical inputs from China, India, Germany, and Canada; 2) direct price impact calculations using theoretical pass-through frameworks; and 3) sector-level vulnerability assessments mapping resource dependencies to four major biotech segments. In our multi-sector, tariff-adjusted analysis, we found that Novel Antibiotics and Small Molecule Generics face the highest adjusted price impacts at 0.87% each, while Vaccines (0.11%) and Diagnostic Products (0.08%) show minimal exposure. Two resource categories, Other Antibiotics (1.16% direct price impact) and Erythromycin (1.06% direct price impact), revealed themselves to be the most vulnerable to tariff-induced cost inflation due to heavy reliance on Chinese and Indian suppliers facing 145% and 26% tariff rates, respectively. For investors seeking biotech exposure, we suggest caution towards generic pharmaceutical companies with substantial offshore API sourcing. Conversely, tariff policies create opportunities in high-margin therapeutics (biologics, cell and gene therapies) and European-supplier-dependent diagnostics companies, which show minimal projected price impacts.</p>
+					</section>
+
+					<section class="content-section">
+						<h2 id="introduction">Introduction</h2>
+						<p>In the midst of a biotechnology surge reflecting the inherent tension of progress, the Trump administration's recent tariffs will force the industry to confront vulnerabilities long considered background noise. Initially, it seemed that biotech had dodged a bullet – tariff policies spared finished drugs. Underneath that headline lies a more complicated truth. A globally distributed supply chain has long powered early-stage R&D and with the US producing only 12% of the active pharmaceutical ingredients (APIs) for its medicines, the biotech research ecosystem will be choked at its source. There's no question that cost-sensitive R&D programs will be forced to recalibrate.</p>
+						<p>The salient observation is that some companies will invest in process innovation to localize manufacturing, while others are rethinking pipeline strategies to favor molecules with fewer global dependencies. However, it's interesting to consider how focus might move towards higher-margin therapies to insulate elevated input costs. Here, we attempt to empirically interpret how tariff policies will impact the U.S. biotech and pharmaceutical industries, with a particular focus on supply chain bottlenecks and shifts in therapeutic focus. This consists of analyzing U.S. trade data for biotech-related imports from China, India, and the EU to assess which biotech sectors would be most affected by constraints in specific resources.</p>
+
+						<h2 id="analysis">Analysis</h2>
+						<p>Our analysis used important import data from the U.S. International Trade Commission's DataWeb, focusing on five key Harmonized Tariff Schedule (HTS) Codes relevant to pharmaceutical and biotech industries:</p>
+						<ul>
+							<li>294150: Erythromycin</li>
+							<li>294190: Other Antibiotics</li>
+							<li>293329: Heterocyclic Compounds (Imidazole)</li>
+							<li>293359: Heterocyclic Compounds (Pyrimidine)</li>
+							<li>382213: Diagnostic Reagents</li>
+						</ul>
+						<p>Justin and I employed standard methodologies from economic trade literature to analyze tariff impacts. Our approach boiled down to understanding how:</p>
+						<ol>
+							<li><strong>Import Sector Dependency:</strong> Following the approach used by the U.S. International Trade Commission (USITC 2023), we calculate the percentage of U.S. Imports (listed above) sourced from each country for each biotech category.</li>
+							<li><strong>Direct Price Impact Calculation:</strong> We use the theoretical pass-through framework developed by Minton and Somale (2025) at the Federal Reserve, where each country's tariff impact is calculated as:<br />
+							<p style="text-align: center; font-size: 1.15em; margin: 32px 0 16px 0;"><strong>Total Direct Price Impact</strong> = <span style="font-size:1.2em;">&Sigma;<sub>i</sub> D<sub>i</sub> &times; T<sub>i</sub></span></p>
+							<p><strong>Where:</strong><br/>
+							<em>D<sub>i</sub></em> = Dependency percentage from country <em>i</em><br/>
+							<em>T<sub>i</sub></em> = Tariff rate for country <em>i</em></p>
+							This approach assumes full pass-through of tariffs to consumer prices with domestic producers and retailers maintaining constant dollar markups.</li>
+							<li><strong>Sector-Level Impact Assessment:</strong> We map HTS categories to biotech sectors using resource dependency weights based on industry standard relationships (Wosinska 2025). We then apply sector-specific pass-through rates based on market structure characteristics.</li>
+						</ol>
+
+						<h2 id="import-dependency">Import Dependency Analysis</h2>
+						<p>The following figure provides a detailed view of U.S. dependency on imports from China, Germany, India, and Canada for biotech inputs. China accounted for 53.7% of total imports across the analyzed categories, followed by India (29.4%), Germany (14.5%), and Canada (2.4%).</p>
+						<figure style="margin: 32px 0; text-align: center;">
+							<img src="/biotech-import-dependency-heatmap.png" alt="Percentage Dependency by Category and Country" style="max-width: 600px; width: 100%; height: auto; border: 1px solid #e5e5e5; border-radius: 8px;" />
+							<figcaption style="margin-top: 12px; color: #666; font-size: 16px;">Percentage dependency of key U.S. biotech input categories on imports from Canada, China, Germany, and India. Data source: USITC DataWeb.</figcaption>
+						</figure>
+						<p>Notable findings include:</p>
+						<ul>
+							<li>Diagnostic Reagents (HTS 382213) show high dependency on Germany (96.9%)</li>
+							<li>Antibiotics (294150, 294190) show high dependency on China (67.7%, 76.6%)</li>
+							<li>Heterocyclic Compounds show significant dependency on both China and India.</li>
+						</ul>
+
+						<h2 id="price-impact">Direct Price Impact Analysis</h2>
+						<p>Using the theoretical pass-through framework (Minton and Somale, 2025), we calculated the direct price impact of tariffs on each biotech category (assuming 100% pass-through).</p>
+						<p>Total Direct Price Impact = iDiTi<br />Where:<br />Di = Dependency percentage from country i<br />Ti = Tariff rate for country i</p>
+						<p>The tariff rates used in our analysis are: China: 145% (1.45 multiplier); India: 26% (0.26 multiplier); Germany: 0%; Canada: 0%. These are modeled under Trump's recent tariff conditions. The following figure shows these impacts.</p>
+						<p>Other Antibiotics face the highest direct price impact (1.16%), followed by Erythromycin (1.06%), Heterocyclic Compounds (Imidazole) (0.82%), and Heterocyclic Compounds (Pyrimidine) (0.74%). Diagnostic Reagents show minimal impact (0.01%) due to their low dependency on imports from China and India.</p>
+
+						<h2 id="sector-impact">Sector-Level Impact Analysis</h2>
+						<p>Mapping of HTS codes to biotech sectors is based on the U.S. International Trade Commission's official descriptions of HTS codes along with common industry groupings used in pharmaceutical and biotech research.</p>
+						<p><strong>Table 7: Sector-Resource Dependency Matrix</strong></p>
+						<table style="width:100%; border-collapse: collapse; margin: 24px 0;">
+							<thead>
+								<tr style="background: #f5f5f5;">
+									<th style="border: 1px solid #ddd; padding: 8px;">Sector</th>
+									<th style="border: 1px solid #ddd; padding: 8px;">294150<br/>(Erythromycin)</th>
+									<th style="border: 1px solid #ddd; padding: 8px;">294190<br/>(Other Antibiotics)</th>
+									<th style="border: 1px solid #ddd; padding: 8px;">293329<br/>(Imidazole)</th>
+									<th style="border: 1px solid #ddd; padding: 8px;">293359<br/>(Pyrimidine)</th>
+									<th style="border: 1px solid #ddd; padding: 8px;">382213<br/>(Diagnostic Reagents)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Novel Antibiotics</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.3</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.6</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.05</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.05</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0</td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Small Molecule Generics</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.15</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.25</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.25</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.3</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0</td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Vaccines</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.1</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.8</td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Diagnostic Produce</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.05</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.9</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>The values in this matrix represent the dependency weight of each sector on each resource category. For example,  Novel Antibiotics have a 30% dependency on Erythromycin and 60% dependency on Other Antibiotics.  Without public access to proprietary pharmaceutical manufacturing data and detailed input-output tables at the specific product level, sector-resource dependencies remain a limitation in the analysis and should be treated as informed estimates.</p>
+						<p>From here, we determined sector specific pass-through rates based on economic literature on tariff pass-through in different market structures (Minton and Somale 2025), taking into account factors such as market concentration, elasticity of demand, price regulation, and cost-sharing mechanisms.</p>
+						<table style="width:100%; border-collapse: collapse; margin: 24px 0;">
+							<thead>
+								<tr style="background: #f5f5f5;">
+									<th style="border: 1px solid #ddd; padding: 8px;">Sector</th>
+									<th style="border: 1px solid #ddd; padding: 8px;">Estimated Pass-Through</th>
+									<th style="border: 1px solid #ddd; padding: 8px;">Why?</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Generics</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.95</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">Spot market, high elasticity, low margin (Wosińska 2025, AAM 2024)</td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Novel Antibiotics</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.80</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">High value, few competitors, pricing power (Wosińska 2025, Chaudhuri et al. 2019)</td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Vaccines</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.70</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">Public purchase, fixed pricing contracts (WHO & UNICEF Vaccine Market Reports)</td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Diagnostics</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">0.90</td>
+									<td style="border: 1px solid #ddd; padding: 8px;">B2B market, high cost sensitivity (IQVIA 2022, McKinsey 2021)</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>The calculation formula for each sector's raw price impact is:<br />Raw Price Impact =  (Direct Price Impact × Dependency Weight)</p>
+						<p>The adjusted price impact is then calculated as:<br />Adjusted Price Impact = Raw Price Impact × Pass-Through Rate</p>
+						<p>The following graph shows the adjusted price impact by biotech sector, accounting for resource dependencies and sector-specific pass-through rates.</p>
+						<figure style="margin: 32px 0; text-align: center;">
+							<img src="/adjusted-price-impact-by-sector.png" alt="Adjusted Price Impact of Tariffs by Biotech Sector" style="max-width: 600px; width: 100%; height: auto; border: 1px solid #e5e5e5; border-radius: 8px;" />
+							<figcaption style="margin-top: 12px; color: #666; font-size: 16px;">Adjusted price impact of tariffs by biotech sector. Novel Antibiotics and Small Molecule Generics show the highest vulnerability, while Vaccines and Diagnostic Products are less affected.</figcaption>
+						</figure>
+						<p>Novel Antibiotics and Small Molecule Generics show the highest vulnerability to tariff impacts, both with adjusted price impacts of 0.87%. This is due to their high dependency on antibiotics and heterocyclic compounds, which face significant tariffs due to their sourcing from China and India. Vaccines (0.11%) and Diagnostic Products (0.08%) show much lower impacts due to their reliance on inputs primarily sourced from countries not subject to high tariffs.</p>
+
+						<h2 id="discussion">Discussion</h2>
+						<p>Our analysis identifies several potential supply chain bottlenecks that may arise from the Trump administration's tariff policies. With direct price impacts exceeding 1%, antibiotics face the most pressure from tariffs. Firms operating in this space could see thinner margins or even discontinuations. In terms of sector specific vulnerabilities, Novel Antibiotics and Small Molecule Generics face the highest adjusted price impacts, suggesting that these areas may experience the most significant disruptions.</p>
+						<p>The differential impact of tariffs across sectors suggest potential shifts in therapeutic focus within the US. Firstly, the high tariff impact on antibiotics may accelerate the existing trend of manufacturers moving away from low-margin generic antibiotics. We might also see greater emphasis on higher-margin products – companies may shift resources towards specialized biologics and diagnostics products, sectors less affected by tariffs.</p>
+						<p>What does this mean for investors?<br />We believe that investors may want to be cautious about firms that depend on China/India for APIs for small molecules, specifically companies that specialize in mature, low-margin portfolios like generic antibiotics, where pricing flexibility is limited and regulatory burdens remain high.<br />Be cautious about segments/companies such as Teva Pharmaceuticals (TEVA) and Amneal Pharmaceuticals (AMRX) which focus on tariff-affected generics drugs and substantial offshore sourcing of APIs.</p>
+						<p>Conversely, tariff-induced shifts also open avenues for opportunity:</p>
+						<ul>
+							<li>High-margin or niche therapeutics (e.g., biologics, cell and gene therapies, orphan drugs) are less exposed to the affected input categories and may attract more capital as firms reallocate R&D away from commoditized products.</li>
+							<li>Diagnostic companies relying on European suppliers (e.g. Germany) show minimal projected price impact (such as QIAGEN (QGEN)). Furthermore, we expect increased interest as diagnostics become central to personalized medicine strategies.</li>
+						</ul>
+						<p>These findings suggest that tariffs are more than just a trade nuisance. They're going to act as a strategic stress test for the Biotech sector while pushing capital towards more robust, innovation-driven areas. Strategic investors would do well to watch how firms adjust to this pressure: those that pivot toward supply chain resilience and product differentiation may be the long-term winners.</p>
+					</section>
+
+					<section class="references">
+						<h2 id="references">References</h2>
+						<div class="reference-list">
+							<div class="reference">
+								<span class="ref-number">[1]</span>
+								<span class="ref-text">Minton, R., & Somale, M. (2025). Detecting Tariff Effects on Consumer Prices in Real Time. FEDS Notes. Washington: Board of Governors of the Federal Reserve System.</span>
+							</div>
+							<div class="reference">
+								<span class="ref-number">[2]</span>
+								<span class="ref-text">U.S. International Trade Commission. (2023). Economic Impact of Section 232 and 301 Tariffs on U.S. Industries. Publication 5405.</span>
+							</div>
+							<div class="reference">
+								<span class="ref-number">[3]</span>
+								<span class="ref-text">Wosińska, M. E. (2025). Will pharmaceutical tariffs achieve their goals? Brookings Institution.</span>
+							</div>
+							<div class="reference">
+								<span class="ref-number">[4]</span>
+								<span class="ref-text">U.S. International Trade Commission's DataWeb. (2025). Import data for HTS codes 294150, 294190, 293329, 293359, and 382213.</span>
+							</div>
+						</div>
+					</section>
+				</div>
+
+				<footer class="article-footer">
+					<div class="footer-content">
+						<div class="copyright">
+							<p>© 2025 Novana Insights. All rights reserved.</p>
+							<p>This research is intended for institutional investors and qualified professionals.</p>
+						</div>
+						<div class="footer-actions">
+							<button class="btn btn-outline">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+									<polyline points="16,6 12,2 8,6"/>
+									<line x1="12" y1="2" x2="12" y2="15"/>
+								</svg>
+								Share
+							</button>
+							<button class="btn">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+									<polyline points="7,10 12,15 17,10"/>
+									<line x1="12" y1="15" x2="12" y2="3"/>
+								</svg>
+								Download PDF
+							</button>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</article>
+	</main>
+	
+	<TableOfContents />
+	<AuthorsSidebar authors={authors} />
+</Layout>
+</Layout>
+
+<style>
+	.main {
+		min-height: calc(100vh - 70px);
+	}
+
+	.breadcrumb {
+		padding: 20px 0;
+		border-bottom: 1px solid #e5e5e5;
+	}
+
+	.breadcrumb-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: #666;
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.2s ease;
+	}
+
+	.breadcrumb-link:hover {
+		color: #6C43D7;
+	}
+
+	.article {
+		padding: 60px 0 80px;
+	}
+
+	.article-header {
+		margin-bottom: 60px;
+		padding-bottom: 40px;
+		border-bottom: 1px solid #e5e5e5;
+	}
+
+	.article-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 24px;
+	}
+
+	.article-title {
+		font-size: clamp(2rem, 4vw, 2.8rem);
+		font-weight: 700;
+		color: #1a1a1a;
+		margin-bottom: 24px;
+		line-height: 1.1;
+	}
+
+	.article-subtitle {
+		font-size: 20px;
+		color: #666;
+		line-height: 1.5;
+		margin-bottom: 32px;
+		font-style: italic;
+	}
+
+	.article-meta {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		color: #888;
+		font-size: 14px;
+	}
+
+	.authors,
+	.article-date {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.reading-time {
+		margin-left: auto;
+		font-weight: 500;
+		color: #6C43D7;
+	}
+
+	.article-content {
+		font-size: 18px;
+		line-height: 1.7;
+		color: #333;
+	}
+
+	.abstract {
+		background: #f8f9fa;
+		border: 1px solid #e5e5e5;
+		border-radius: 12px;
+		padding: 40px;
+		margin-bottom: 48px;
+	}
+
+	.abstract h2 {
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 24px;
+		color: #1a1a1a;
+		letter-spacing: 0.5px;
+	}
+
+	.abstract p {
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	.content-section {
+		margin-bottom: 40px;
+	}
+
+	.content-section p {
+		margin-bottom: 20px;
+	}
+
+	.references {
+		margin-top: 60px;
+		padding-top: 40px;
+		border-top: 1px solid #e5e5e5;
+	}
+
+	.references h2 {
+		font-size: 24px;
+		font-weight: 600;
+		margin-bottom: 32px;
+		color: #1a1a1a;
+	}
+
+	.reference-list {
+		font-size: 16px;
+		line-height: 1.6;
+	}
+
+	.reference {
+		display: flex;
+		margin-bottom: 16px;
+		gap: 12px;
+	}
+
+	.ref-number {
+		color: #1a1a1a;
+		font-weight: 500;
+		flex-shrink: 0;
+	}
+
+	.ref-text {
+		color: #666;
+	}
+
+	.ref-text em {
+		font-style: italic;
+	}
+
+	.article-footer {
+		margin-top: 60px;
+		padding-top: 40px;
+		border-top: 1px solid #e5e5e5;
+	}
+
+	.footer-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 32px;
+	}
+
+	.copyright {
+		color: #888;
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	.footer-actions {
+		display: flex;
+		gap: 16px;
+	}
+
+	@media (max-width: 768px) {
+		.article {
+			padding: 40px 0 60px;
+		}
+
+		.article-meta {
+			flex-wrap: wrap;
+			gap: 16px;
+		}
+
+		.reading-time {
+			margin-left: 0;
+		}
+
+		.abstract {
+			padding: 24px;
+		}
+
+		.footer-content {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 24px;
+		}
+
+		.footer-actions {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+
+	.content-section h2 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin-top: 48px;
+		margin-bottom: 24px;
+		color: #1a1a1a;
+	}
+
+	.content-section h3 {
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin-top: 32px;
+		margin-bottom: 16px;
+		color: #333;
+	}
+</style>

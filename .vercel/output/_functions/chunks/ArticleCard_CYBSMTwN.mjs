@@ -1,0 +1,13 @@
+import { c as createComponent, a as createAstro, m as maybeRenderHead, b as addAttribute, r as renderTemplate } from './astro/server_nkSBzcqr.mjs';
+import 'kleur/colors';
+import 'clsx';
+
+const $$Astro = createAstro();
+const $$ArticleCard = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$ArticleCard;
+  const { article } = Astro2.props;
+  return renderTemplate`${maybeRenderHead()}<article class="article-card"> <div class="article-content"> <div class="article-header"> <h2 class="article-title"> <a${addAttribute(`/articles/${article.slug}`, "href")}>${article.title}</a> </h2> <div class="article-tags"> ${article.tags.map((tag) => renderTemplate`<span class="tag">${tag}</span>`)} </div> </div> <p class="article-excerpt">${article.excerpt}</p> <div class="article-meta"> <div class="authors"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path> <circle cx="12" cy="7" r="4"></circle> </svg> <span>${article.authors}</span> </div> <div class="article-date"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect> <line x1="16" y1="2" x2="16" y2="6"></line> <line x1="8" y1="2" x2="8" y2="6"></line> <line x1="3" y1="10" x2="21" y2="10"></line> </svg> <span>${article.date}</span> </div> <div class="reading-time"> <span>${article.readingTime}</span> </div> </div> </div> </article>`;
+}, "/Users/justinwang/Downloads/coding-projects/novanadeployed/src/components/ArticleCard.astro", void 0);
+
+export { $$ArticleCard as $ };

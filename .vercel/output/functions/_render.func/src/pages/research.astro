@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import Footer from '../components/Footer.astro';
+
+const researchArticles = [
+	{
+		slug: 'trump-tariff-policy-biotech',
+		title: 'What Trump\'s Tariff Policy means for Biotech',
+		excerpt: 'Analysis of how proposed tariff policies could impact the biotechnology sector, from supply chain costs to international market access and competitive dynamics.',
+		tags: ['Trade Policy', 'Biotechnology', 'Tariffs'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'June 18, 2025',
+		readingTime: '8 min read'
+	},
+	{
+		slug: 'factor-investing-biotech-equities',
+		title: 'On Factor Investing for U.S. Biotechnology Equities',
+		excerpt: 'We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.',
+		tags: ['Factor Investing', 'Biotechnology', 'Equities'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'June 13, 2025',
+		readingTime: '10 min read'
+	}
+];
+---
+
+<Layout title="Research" description="Deep tech investment research and analysis">
+	<Header currentPath="/research" />
+	
+	<main class="main">
+		<section class="hero">
+			<div class="container-narrow">
+				<div class="hero-content">
+					<h1 class="hero-title">Thematic Research</h1>
+					<p class="hero-subtitle">In-depth investment research and technical analysis on emerging deep technology investment opportunities.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="articles">
+			<div class="container-narrow">
+				<h2>Latest Research</h2>
+				<div class="articles-list">
+					{researchArticles.map(article => (
+						<ArticleCard article={article} />
+					))}
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

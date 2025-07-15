@@ -1,0 +1,56 @@
+import { c as createComponent, d as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_nkSBzcqr.mjs';
+import 'kleur/colors';
+import { $ as $$Layout, a as $$Header } from '../chunks/Header_CI2If0cw.mjs';
+import { $ as $$ArticleCard } from '../chunks/ArticleCard_CYBSMTwN.mjs';
+import { $ as $$Footer } from '../chunks/Footer_DGXmjOo7.mjs';
+export { renderers } from '../renderers.mjs';
+
+const $$Index = createComponent(($$result, $$props, $$slots) => {
+  const allArticles = [
+    {
+      slug: "unicycive-short-sale",
+      title: "Our Unicycive (NASDAQ: UNCY) Short Sale",
+      excerpt: "Overview of Novana's beta-neutral short sale of Unicycive (UNCY) ahead of its FDA decision, betting the market had mispriced regulatory risk.",
+      tags: ["Markets", "Biotechnology", "FDA Regulation"],
+      authors: "Justin Wang, Rishabh Ranjan",
+      date: "June 30, 2025",
+      readingTime: "5 min read",
+      category: "markets"
+    },
+    {
+      slug: "trump-tariff-policy-biotech",
+      title: "What Trump's Tariff Policy means for Biotech",
+      excerpt: "Analysis of tariff-driven cost pressures in the U.S. biotech supply chain, highlighting emerging opportunities in high-margin therapeutics and diagnostics.",
+      tags: ["Research", "Biotechnology", "Tariffs"],
+      authors: "Justin Wang, Rishabh Ranjan",
+      date: "June 18, 2025",
+      readingTime: "8 min read",
+      category: "research"
+    },
+    {
+      slug: "factor-investing-biotech-equities",
+      title: "On Factor Investing for U.S. Biotechnology Equities",
+      excerpt: "We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.",
+      tags: ["Research", "Factor Investing", "Biotechnology"],
+      authors: "Justin Wang, Rishabh Ranjan",
+      date: "June 13, 2025",
+      readingTime: "10 min read",
+      category: "research"
+    }
+  ];
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Thematic Deep Technology Insights and Market Analysis", "description": "Professional analysis of emerging technology opportunities and market trends" }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "Header", $$Header, { "currentPath": "/" })} ${maybeRenderHead()}<main class="main"> <section class="hero hero-video"> <video autoplay muted loop class="hero-background-video"> <source src="/background-video.mp4" type="video/mp4"> </video> <div class="hero-overlay"></div> <div class="container"> <div class="hero-content"> <h1 class="hero-title">We're betting on deep technology innovation and adoption, from the <em>birthplace</em> of Silicon Valley.</h1> <p class="hero-subtitle">Novana's Stanford-based team produces in-house technology analyses, investment research briefs, and market trends writeups across edge computing, biotechnology, artificial intelligence, and other frontier industries.</p> </div> </div> </section> <section class="articles"> <div class="container-narrow"> <h2>Latest Insights</h2> <div class="articles-list"> ${allArticles.map((article) => renderTemplate`${renderComponent($$result2, "ArticleCard", $$ArticleCard, { "article": article })}`)} </div> </div> </section> </main> ${renderComponent($$result2, "Footer", $$Footer, {})} ` })}`;
+}, "/Users/justinwang/Downloads/coding-projects/novanadeployed/src/pages/index.astro", void 0);
+
+const $$file = "/Users/justinwang/Downloads/coding-projects/novanadeployed/src/pages/index.astro";
+const $$url = "";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+	__proto__: null,
+	default: $$Index,
+	file: $$file,
+	url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
