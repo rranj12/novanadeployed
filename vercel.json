@@ -1,0 +1,10 @@
+{
+  "routes": [
+    {
+      "src": "^/_astro/(.*)\\.(js|css|woff2?|png|jpe?g|gif|svg|ico)$",
+      "headers": {
+        "cache-control": "public, max-age=86400, stale-while-revalidate=31536000"
+      }
+    }
+  ]
+} 

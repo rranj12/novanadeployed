@@ -1,7 +1,7 @@
 /* Global CSS Variables */
 :root {
-	--primary-color: #6C43D7;
-	--primary-hover: #8B5FE8;
+	--primary-color: #21752F;
+	--primary-hover: #21752F;
 	--text-primary: #1a1a1a;
 	--text-secondary: #666;
 	--text-muted: #888;
@@ -310,7 +310,7 @@ a:hover {
 .article-card:hover {
 	border-color: var(--primary-color);
 	transform: translateY(-2px);
-	box-shadow: 0 8px 25px rgba(108, 67, 215, 0.1);
+	box-shadow: 0 8px 25px rgba(33, 117, 47, 0.1);
 }
 
 .article-card .article-content {
