@@ -1,6 +1,6 @@
 import { c as createComponent, d as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_nkSBzcqr.mjs';
 import 'kleur/colors';
-import { $ as $$Layout, a as $$Header } from '../chunks/Header_CDs6HL6l.mjs';
+import { $ as $$Layout, a as $$Header } from '../chunks/Header_BipSNua-.mjs';
 import { $ as $$ArticleCard } from '../chunks/ArticleCard_CYBSMTwN.mjs';
 import { $ as $$Footer } from '../chunks/Footer_DGXmjOo7.mjs';
 export { renderers } from '../renderers.mjs';
