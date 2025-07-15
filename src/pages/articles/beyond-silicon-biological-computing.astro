@@ -1,0 +1,181 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const authors = [
+  {
+    name: 'Justin Wang',
+    title: 'Co-Founder & Principal Researcher',
+    linkedin: 'https://www.linkedin.com/in/jstwng/'
+  },
+  {
+    name: 'Rishabh Ranjan',
+    title: 'Co-Founder & Principal Researcher',
+    linkedin: 'https://www.linkedin.com/in/rishabhranj/'
+  }
+];
+---
+
+<Layout title="Beyond Silicon: Inside the Era of Biological Computing" description="Exploring the rise of biological (wetware) computing, its pioneers, and the future of hybrid AI hardware.">
+  <Header currentPath="/research" />
+  <main class="main">
+    <nav class="breadcrumb">
+      <div class="container-narrow">
+        <a href="/research" class="breadcrumb-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Back to Research
+        </a>
+      </div>
+    </nav>
+    <article class="article">
+      <div class="container-narrow">
+        <header class="article-header">
+          <div class="article-tags">
+            <span class="tag">Biological Computing</span>
+            <span class="tag">Wetware</span>
+            <span class="tag">AI Hardware</span>
+          </div>
+          <h1 class="article-title">Beyond Silicon: Inside the Era of Biological Computing</h1>
+          <p class="article-subtitle">Exploring the rise of biological (wetware) computing, its pioneers, and the future of hybrid AI hardware.</p>
+          <div class="article-meta">
+            <div class="authors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Justin Wang, Rishabh Ranjan</span>
+            </div>
+            <div class="article-date">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>June 2025</span>
+            </div>
+            <div class="reading-time">
+              <span>15 min read</span>
+            </div>
+          </div>
+        </header>
+        <div class="article-content">
+          <section>
+            <h2>Overview</h2>
+            <p>Novana has previously explored the semiconductor industry’s general trends, significant shifts, and geopolitical tensions surrounding its supply chain. This piece, however, will focus on a more unconventional advancement: biological computing. Biological computing, also referred to sometimes as wetware computing, is when biological material, such as neurons, are used to perform computational tasks. We believe two companies – Biological Black Box (BBB) and Cortical Labs – are promising first movers in this nascent field.</p>
+          </section>
+          <section>
+            <h2>Introduction – Moore’s Law Plateau and the Need for New Paradigms</h2>
+            <p>In an industry largely dominated by conventional silicon-based processors, one might question the rationale behind investing in what seems like a disparate technology. The answer fundamentally lies in the implications of Moore's Law. First introduced in 1965, Moore's Law states that the number of transistors in a dense integrated circuit should double approximately every two years. The semiconductor industry has loosely followed the Law ever since, packing more transistors into chips every year. However, as transistors are now mere nanometers across nearing atomic scales, their physical limits are being pushed to the brim. Progress has slowed and further gains have become very expensive. As MIT Professor Charles Leiserson states, “the only way to get more computing capacity today is to build bigger, more energy-consuming machines” – an unsustainable path as AI workloads balloon.</p>
+            <p>This slowdown has forced exploration of radically new computing paradigms. Along with quantum and photonic computing, one unconventional prospect is to leverage biology itself by using living cells as information processors. Nature’s computing substrate, the brain, outclasses silicon in several aspects. For one, human brains perform trillions of operations on ~20 watts; by contrast, a top supercomputer (6,800 sq. ft. “Frontier”) recently matched the brain’s compute capacity while drawing a million-fold more energy. Biological computing aims to break through where conventional chips falter by delivering leaps in computing efficiency and adaptability to sustain the next era of technological growth.</p>
+            <p>In practice, biological or “wetware” computing means cultured neural networks, or living brain cells arranged on a chip, that can process information via their electrical activity. These neuron-based systems are dynamic unlike silicon chips with fixed circuits, meaning that they can rewire themselves and form new connections in response to stimuli. This gives such systems an inherent ability to continuously adapt and perform real-time self-optimizations that traditional hardware simply cannot.</p>
+            <p>Crucially, biological neural networks promise extreme power efficiency. Banyan Ventures notes, silicon GPUs consume enormous power and generate heat when training AI models; on the other hand, integrating actual neurons offers a low-power alternative. The goal is to engineer hybrid systems where living processors handle tasks they are uniquely good at – like intuitive perception alongside conventional digital processors –, rather than to replace electronic computers entirely.</p>
+          </section>
+          <section>
+            <h2>Brief History of Innovations</h2>
+            <p>Over the past couple of years, this vision has rapidly moved from theory towards proof-of-concept. In 2022, a team of researchers demonstrated in an experiment dubbed “DishBrain” that neurons in a dish can learn to play the video game Pong. A network of roughly 800,000 human and mouse neurons were grown on a high-density electrode array and connected to a simulated game environment. With the appropriate sensory cues and stimuli, the cultures self-organized their activity to improve at Pong within a few minutes. The creators coined the term “synthetic biological intelligence” for this new form of in-vitro cognition.</p>
+            <p>Since then, there has been a surge in research termed Organoid Intelligence (OI). In late 2023, a team reported using a brain organoid connected to an electrode grid to carry out speech recognition and solve a math task. These early experiments have showcased biological neural networks performing practical AI functions (e.g. pattern recognition) with training models distinct from digital neural nets.</p>
+            <figure>
+              <img src="/hypothesized-learning-curve.png" alt="Hypothesized learning curve of brain-organoid brainware" style="max-width: 600px; width: 100%; margin: 0 auto; display: block;" />
+              <figcaption>Hypothesized learning curve of brain-organoid “brainware”: performance climbs as synaptic plasticity reshapes the network (red) but remains flat when plasticity is blocked (blue).<br/>Data Source: Nature Electronics</figcaption>
+            </figure>
+            <p>Because these systems are made of human cells, there are additional possibilities for drug discovery and neurobiology research applications. For instance, testing new therapies on a “brain-on-a-chip” would model human neural responses more faithfully than animal experiments. They also blur the line between AI and biology, which could give rise to new, hybrid AI models that learn more like a brain (robustly and with less data).</p>
+          </section>
+          <section>
+            <h2>Cortical Labs</h2>
+            <p>Cortical Labs is an Australian company that sprang from the academic work behind DishBrain. Since that research earned international headlines in 2022, they have been advancing the technology and scaling it up for broader use. In March 2025, Cortical Labs announced CL1, the world’s first commercially available biological computing system built on human neurons. Branded as a form of Synthetic Biological Intelligence (SBI), it integrates living neurons with electronics in a self-contained unit independent of an external computer for function. Each CL1 includes a chamber where human-derived neurons grow on a planar 59-electrode array, along with internal life support to keep the cells healthy. As Cortical Labs explains it, “Real neurons are cultivated inside a nutrient rich solution, supplying them with everything they need to be healthy. They grow across a silicon chip, which sends and receives electrical impulses into the neural structure.” In essence, this means users can treat the CL1 as a stable neural processing unit without needing specialized lab infrastructure.</p>
+            <figure>
+              <img src="/cl1-biological-computer.png" alt="Image of CL1 Biological computing system" style="max-width: 600px; width: 100%; margin: 0 auto; display: block;" />
+              <figcaption>Image of CL1 Biological computing system. Source: Cortical Labs</figcaption>
+            </figure>
+            <p>Cortical Labs is positioning CL1 as a R&D tool to democratize access to biological computing. “We’re offering ‘Wetware-as-a-Service’,” CEO Hon Weng Chong said, meaning customers can either buy a CL1 outright or access the neural chips remotely via cloud hookups. Potential applications could cover everything from drug discovery and toxicity testing (using neural responses as a read-out for pharmacological effects) to new forms of adaptive robotics. The CL1’s design chives also reflect lessons from the DishBrian prototype. The company moves from an overly complex high-density electrode array (which created issues like electric charge buildup) to a more stable electrode design to gain reliability. Chief Scientific Officer Dr. Brett Kagan explains that this allows long-term continuous operation and learning, which is crucial if these systems are to be useful computers rather than short-lived demos.</p>
+            <p>Early units of CL1 are rolling out to partner labs, priced around $35,000 each. Impressively, a rack of 30 CL1 units networked together consumes ~850–1000 W of power, orders of magnitude less energy compared to equivalently scaled compute clusters. In addition to their computational pursuits, Cortical Labs is remaining cognizant of the ethical dimension by working with ethicists and regulators to ensure responsible development. There’s questions around potential pain in these neural cultures – such concerns are taken seriously. Cortical emphasizes that these neurons are far simpler than a brain and lack structural sensory inputs beyond structured lab stimuli. The team notes that initially, the technology was hard for early investors and grant committees to grasp since it didn’t fall into traditional categories. But, this is changing: Cortical has attracted funding from major deep-tech investors such as Horizon Ventures and In-Q-Tel, the CIA’s venture arm. They’re betting on an industry paradigm shift looking to scale up biological computing for real-world impact.</p>
+          </section>
+          <section>
+            <h2>Biological Black Box (BBB)</h2>
+            <p>Biological Black Box (BBB), a U.S. startup (founded in Baltimore, relocating to San Francisco) is another key player that recently came out of stealth. They’re building what they call to be the Bionode platform – a computing system that integrates lab-grown neurons with traditional processors. This will act as a novel class of AI accelerator. In March 2025, BBB announced that its neural chips are running computer vision and large language models for early partners. The company’s ambition is to “remove our dependence on silicon by offering a more adaptive, energy-efficient alternative to the GPU-dominated status quo”.</p>
+            <p>Each Bionode chip consists of a network of hundreds of thousands of neurons cultured (from either human stem cells or rodent neurons) on a microelectrode array with 4096 stimulation/recording sites. The living network interfaces with conventional computing via the electrode grid, in which neurons receive inputs (such as  encoded images or data) as electrical signals and the system reads out their collective electrical responses. Since the neurons can rewire themselves in response to inputs, the Bionode functions as a learning hardware module. BBB describes it as a closed-loop “continuous reinforcement learning” system in silicon and wetware. Their neural chip achieved a 5x improvement for running a transformer-based language model inference compared to a purely digital baseline. If generalized, such gains hint that bio-accelerators could dramatically cut the energy draw of future AI workloads.</p>
+            <p>BBB has been careful to position itself as a complement to existing chip giants rather than an adversary. In fact, the startup is a member of Nvidia’s Inception incubator program. BBB’s CEO, Alex Ksendzovsky, emphasizes that “biological computing and silicon computing will coexist” The Bionode isn’t here to replace GPU; rather, to augment them. In practical terms, a server might still use CPU/GPUs to handle logic and interface tasks, while offloading certain adaptive learning or pattern-matching tasks to the neural co-processors. This approach aligns with a broader vision of future computing hardware. Notably, Nvidia’s support suggests the established industry sees promise in this hybrid strategy of integrating wetware accelerators into AI computing pipelines for efficiency gains.</p>
+          </section>
+          <section>
+            <h2>Conclusion and the Road Ahead</h2>
+            <p>Biological computing is emerging as a bold answer to the slowdown of Moore’s law by transplanting learning and energy efficiency from living neurons into hybrid hardware. Early successes such as Cortical Lab’s CL1 and BBB’s Bionode AI accelerator demonstrate that tiny neural cultures can navigate pattern recognition and adaptive tasks. They’re not alone in resurrecting wetware ideas either – startups such as Koniku are attempting to embed living neurons on a chip to act as an artificial olfactory system. For investors and technologists alike, these hint at a new compute tier where wetware complements silicon. The result is an architecture that maintains exponential AI growth without skyrocketing energy costs.</p>
+            <p>The road ahead is equal parts opportunity and engineering hurdle. Reliability and scale of neurons must advance; electrode I/O and automated cell maintenance will dictate winners. Novana expects first deployments as bio-accelerator racks for niche AI workloads. Governments and incumbents like NVIDIA are already eyeing the space, while bioethicists are getting involved with setting guardrails for this consciousness-like complexity. If startups are able to navigate these challenges, biological computing very well may sit beside CMOS and quantum in a heterogenous stack to propel AI in a post-silicon era.</p>
+          </section>
+          <section>
+            <h2>References</h2>
+            <ul>
+              <li>Leiserson, C. E., & Thompson, D. (2024). The Death of Moore’s Law: What it means and what might fill the gap going forward (CSAIL Alliances)</li>
+              <li>Hartung, T., & Smirnova, L. (2024). Could future computers run on human brain cells? (Hub at Johns Hopkins University)</li>
+              <li>Banyan Ventures. (2025). The Future of AI Compute is Biological: Why Banyan Ventures AI Fund I Invested in Biological Black Box (BBB).</li>
+              <li>Blain, L. (2025). World’s first “Synthetic Biological Intelligence” runs on living human cells (New Atlas).</li>
+              <li>Kagan, B. J., et al. (2022). In vitro neurons learn and exhibit sentience when embodied in a simulated game-world. (PubMed)</li>
+              <li>Cai, H., et al. (2023). Brain organoid reservoir computing for artificial intelligence. (Nature Electronics)</li>
+              <li>Karabell, S., & Ksendzovsky, A. (2025). GPUs go biological: BBB unveils Bionode, lab-grown, living neuron compute for AI applications (VentureBeat)</li>
+              <li>Nasdaq Contributors. (2025). How Living Neural Chips Could Power AI. (Nasdaq.com)</li>
+              <li>Tzamaloukas, M. (2025). Cortical Labs Launches $35K Biological Computer Built on Human Brain Cells. (BioPharmaTrend.com)</li>
+              <li>Makoni, M. (2022). Made in Africa: World’s first device that can detect explosives and drugs using living cells. (FurtherAfrica.com)</li>
+              <li>Mance, H. (2021). Airbus to deploy smell sensors to detect explosives on passengers (Financial Times)</li>
+            </ul>
+          </section>
+        </div>
+        <footer class="article-footer">
+          <div class="footer-content">
+            <div class="copyright">
+              <p>© 2025 Novana. All rights reserved.</p>
+              <p>This research is intended for institutional investors and qualified professionals.</p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+.article-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #222;
+}
+.article-content h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: #1a1a1a;
+}
+.article-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 40px;
+  margin-bottom: 18px;
+  color: #6C43D7;
+}
+.article-content figure {
+  margin: 32px 0;
+  text-align: center;
+}
+.article-content figcaption {
+  font-size: 0.98rem;
+  color: #666;
+  margin-top: 8px;
+}
+@media (max-width: 600px) {
+  .article-content {
+    padding: 20px 5px;
+  }
+  .article-content h1 {
+    font-size: 1.5rem;
+  }
+  .article-content h2 {
+    font-size: 1.1rem;
+  }
+}
+</style> 
