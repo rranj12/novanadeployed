@@ -41,7 +41,7 @@ const researchArticles = [
 
 		<section class="articles">
 			<div class="container-narrow">
-				<h2 class="section-title">Latest Research</h2>
+				<h2>Latest Research</h2>
 				<div class="articles-list">
 					{researchArticles.map(article => (
 						<ArticleCard article={article} />
@@ -52,84 +52,3 @@ const researchArticles = [
 	</main>
 	<Footer />
 </Layout>
-
-<style>
-	.main {
-		min-height: calc(100vh - 70px);
-	}
-
-	.hero {
-		padding: 80px 0;
-		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-		border-bottom: 1px solid #e5e5e5;
-	}
-
-	.hero-content {
-		max-width: 700px;
-	}
-
-	.hero-title {
-		font-size: clamp(2rem, 4vw, 2.8rem);
-		font-weight: 700;
-		color: #1a1a1a;
-		margin-bottom: 24px;
-		line-height: 1.1;
-	}
-
-	.hero-subtitle {
-		font-size: 20px;
-		color: #666;
-		line-height: 1.5;
-		max-width: 600px;
-	}
-
-	.articles {
-		padding: 75px 0;
-	}
-
-	.section-title {
-		font-size: 36px;
-		font-weight: 500;
-		color: #1a1a1a;
-		margin-bottom: 60px;
-		text-align: center;
-		position: relative;
-	}
-
-	.section-title::after {
-		content: '';
-		position: absolute;
-		bottom: -12px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 60px;
-		height: 3px;
-		background: linear-gradient(90deg, #6C43D7, #8B5FE8);
-		border-radius: 2px;
-	}
-
-	.articles-list {
-		display: flex;
-		flex-direction: column;
-		gap: 32px;
-	}
-
-	@media (max-width: 768px) {
-		.hero {
-			padding: 60px 0;
-		}
-
-		.articles {
-			padding: 60px 0;
-		}
-
-		.section-title {
-			font-size: 28px;
-			margin-bottom: 48px;
-		}
-
-		.articles-list {
-			gap: 24px;
-		}
-	}
-</style>

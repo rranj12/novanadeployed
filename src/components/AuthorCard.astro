@@ -10,7 +10,9 @@ const { author } = Astro.props;
 				<p class="author-title">{author.title}</p>
 				<p class="author-education">{author.education}</p>
 			</div>
-			<p class="author-bio">{author.bio}</p>
+			<div class="author-bio-section">
+				<p class="author-bio">{author.bio}</p>
+			</div>
 		</div>
 		<div class="author-image">
 			<img src={author.image} alt={author.name} />
@@ -49,7 +51,7 @@ const { author } = Astro.props;
 		border-radius: 12px;
 		padding: 40px;
 		height: 100%;
-		min-height: 480px;
+		min-height: 320px;
 		display: flex;
 		flex-direction: column;
 		gap: 24px;
@@ -66,7 +68,7 @@ const { author } = Astro.props;
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
-		gap: 20px;
+		gap: 32px;
 		border-bottom: 1px solid #f5f5f5;
 		padding-bottom: 24px;
 	}
@@ -84,8 +86,8 @@ const { author } = Astro.props;
 
 	.author-image {
 		flex-shrink: 0;
-		width: 45%;
-		aspect-ratio: 3/4;
+		width: 200px;
+		height: 267px;
 		border-radius: 8px;
 		overflow: hidden;
 	}
@@ -122,10 +124,15 @@ const { author } = Astro.props;
 		font-style: italic;
 	}
 
+	.author-bio-section {
+		width: 100%;
+	}
+
 	.author-bio {
 		color: #666;
 		line-height: 1.6;
 		font-size: 16px;
+		margin: 0;
 	}
 
 	.author-expertise {
@@ -159,7 +166,7 @@ const { author } = Astro.props;
 	@media (max-width: 768px) {
 		.author-card {
 			padding: 32px;
-			min-height: 440px;
+			min-height: 400px;
 		}
 
 		.author-header {
@@ -175,7 +182,8 @@ const { author } = Astro.props;
 		}
 
 		.author-image {
-			width: 50%;
+			width: 150px;
+			height: 200px;
 		}
 
 		.author-name {

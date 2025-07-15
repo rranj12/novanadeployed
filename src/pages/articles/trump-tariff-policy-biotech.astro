@@ -18,7 +18,7 @@ const authors = [
 ];
 ---
 
-<Layout title="What Trump's Tariff Policy means for Biotech" description="Analysis of how proposed tariff policies could impact the biotechnology sector">
+<Layout title="What Trump's Tariff Policy Means for Biotechnology" description="Analysis of how proposed tariff policies could impact the biotechnology sector">
 	<Header currentPath="/research" />
 	
 	<main class="main">
@@ -42,7 +42,7 @@ const authors = [
 						<span class="tag">Tariffs</span>
 					</div>
 					
-					<h1 class="article-title">What Trump's Tariff Policy means for Biotech</h1>
+					<h1 class="article-title">What Trump's Tariff Policy Means for Biotechnology</h1>
 					
 					<p class="article-subtitle">Analysis of tariff-driven cost pressures in the U.S. biotech supply chain, highlighting emerging opportunities in high-margin therapeutics and diagnostics.</p>
 					
@@ -101,7 +101,7 @@ const authors = [
 							<li><strong>Sector-Level Impact Assessment:</strong> We map HTS categories to biotech sectors using resource dependency weights based on industry standard relationships (Wosinska 2025). We then apply sector-specific pass-through rates based on market structure characteristics.</li>
 						</ol>
 
-						<h3 id="import-dependency">Import Dependency Analysis</h3>
+						<h2 id="import-dependency">Import Dependency Analysis</h2>
 						<p>The following figure provides a detailed view of U.S. dependency on imports from China, Germany, India, and Canada for biotech inputs. China accounted for 53.7% of total imports across the analyzed categories, followed by India (29.4%), Germany (14.5%), and Canada (2.4%).</p>
 						<figure style="margin: 32px 0; text-align: center;">
 							<img src="/biotech-import-dependency-heatmap.png" alt="Percentage Dependency by Category and Country" style="max-width: 600px; width: 100%; height: auto; border: 1px solid #e5e5e5; border-radius: 8px;" />
@@ -114,13 +114,13 @@ const authors = [
 							<li>Heterocyclic Compounds show significant dependency on both China and India.</li>
 						</ul>
 
-						<h3 id="price-impact">Direct Price Impact Analysis</h3>
+						<h2 id="price-impact">Direct Price Impact Analysis</h2>
 						<p>Using the theoretical pass-through framework (Minton and Somale, 2025), we calculated the direct price impact of tariffs on each biotech category (assuming 100% pass-through).</p>
 						<p>Total Direct Price Impact = iDiTi<br />Where:<br />Di = Dependency percentage from country i<br />Ti = Tariff rate for country i</p>
 						<p>The tariff rates used in our analysis are: China: 145% (1.45 multiplier); India: 26% (0.26 multiplier); Germany: 0%; Canada: 0%. These are modeled under Trump's recent tariff conditions. The following figure shows these impacts.</p>
 						<p>Other Antibiotics face the highest direct price impact (1.16%), followed by Erythromycin (1.06%), Heterocyclic Compounds (Imidazole) (0.82%), and Heterocyclic Compounds (Pyrimidine) (0.74%). Diagnostic Reagents show minimal impact (0.01%) due to their low dependency on imports from China and India.</p>
 
-						<h3 id="sector-impact">Sector-Level Impact Analysis</h3>
+						<h2 id="sector-impact">Sector-Level Impact Analysis</h2>
 						<p>Mapping of HTS codes to biotech sectors is based on the U.S. International Trade Commission's official descriptions of HTS codes along with common industry groupings used in pharmaceutical and biotech research.</p>
 						<p><strong>Table 7: Sector-Resource Dependency Matrix</strong></p>
 						<table style="width:100%; border-collapse: collapse; margin: 24px 0;">
@@ -279,225 +279,3 @@ const authors = [
 	<TableOfContents />
 	<AuthorsSidebar authors={authors} />
 </Layout>
-
-<style>
-	.main {
-		min-height: calc(100vh - 70px);
-	}
-
-	.breadcrumb {
-		padding: 20px 0;
-		border-bottom: 1px solid #e5e5e5;
-	}
-
-	.breadcrumb-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		color: #666;
-		text-decoration: none;
-		font-weight: 500;
-		transition: color 0.2s ease;
-	}
-
-	.breadcrumb-link:hover {
-		color: #6C43D7;
-	}
-
-	.article {
-		padding: 60px 0 80px;
-	}
-
-	.article-header {
-		margin-bottom: 60px;
-		padding-bottom: 40px;
-		border-bottom: 1px solid #e5e5e5;
-	}
-
-	.article-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		margin-bottom: 24px;
-	}
-
-	.article-title {
-		font-size: clamp(2rem, 4vw, 2.8rem);
-		font-weight: 700;
-		color: #1a1a1a;
-		margin-bottom: 24px;
-		line-height: 1.1;
-	}
-
-	.article-subtitle {
-		font-size: 20px;
-		color: #666;
-		line-height: 1.5;
-		margin-bottom: 32px;
-		font-style: italic;
-	}
-
-	.article-meta {
-		display: flex;
-		align-items: center;
-		gap: 24px;
-		color: #888;
-		font-size: 14px;
-	}
-
-	.authors,
-	.article-date {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-	}
-
-	.reading-time {
-		margin-left: auto;
-		font-weight: 500;
-		color: #6C43D7;
-	}
-
-	.article-content {
-		font-size: 18px;
-		line-height: 1.7;
-		color: #333;
-	}
-
-	.abstract {
-		background: #f8f9fa;
-		border: 1px solid #e5e5e5;
-		border-radius: 12px;
-		padding: 40px;
-		margin-bottom: 48px;
-	}
-
-	.abstract h2 {
-		font-size: 20px;
-		font-weight: 600;
-		margin-bottom: 24px;
-		color: #1a1a1a;
-		letter-spacing: 0.5px;
-	}
-
-	.abstract p {
-		line-height: 1.6;
-		margin: 0;
-	}
-
-	.content-section {
-		margin-bottom: 40px;
-	}
-
-	.content-section p {
-		margin-bottom: 20px;
-	}
-
-	.references {
-		margin-top: 60px;
-		padding-top: 40px;
-		border-top: 1px solid #e5e5e5;
-	}
-
-	.references h2 {
-		font-size: 24px;
-		font-weight: 600;
-		margin-bottom: 32px;
-		color: #1a1a1a;
-	}
-
-	.reference-list {
-		font-size: 16px;
-		line-height: 1.6;
-	}
-
-	.reference {
-		display: flex;
-		margin-bottom: 16px;
-		gap: 12px;
-	}
-
-	.ref-number {
-		color: #1a1a1a;
-		font-weight: 500;
-		flex-shrink: 0;
-	}
-
-	.ref-text {
-		color: #666;
-	}
-
-	.ref-text em {
-		font-style: italic;
-	}
-
-	.article-footer {
-		margin-top: 60px;
-		padding-top: 40px;
-		border-top: 1px solid #e5e5e5;
-	}
-
-	.footer-content {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
-		gap: 32px;
-	}
-
-	.copyright {
-		color: #888;
-		font-size: 14px;
-		line-height: 1.5;
-	}
-
-	.footer-actions {
-		display: flex;
-		gap: 16px;
-	}
-
-	@media (max-width: 768px) {
-		.article {
-			padding: 40px 0 60px;
-		}
-
-		.article-meta {
-			flex-wrap: wrap;
-			gap: 16px;
-		}
-
-		.reading-time {
-			margin-left: 0;
-		}
-
-		.abstract {
-			padding: 24px;
-		}
-
-		.footer-content {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 24px;
-		}
-
-		.footer-actions {
-			width: 100%;
-			justify-content: center;
-		}
-	}
-
-	.content-section h2 {
-		font-size: 1.25rem;
-		font-weight: 600;
-		margin-top: 48px;
-		margin-bottom: 24px;
-		color: #1a1a1a;
-	}
-
-	.content-section h3 {
-		font-size: 1.1rem;
-		font-weight: 600;
-		margin-top: 32px;
-		margin-bottom: 16px;
-		color: #333;
-	}
-</style>

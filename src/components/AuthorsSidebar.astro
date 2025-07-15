@@ -21,6 +21,9 @@ const { authors } = Astro.props;
 				</div>
 			))}
 		</div>
+		<div class="contact-note">
+			<p>Have a question or a different opinion on our findings? Want to contribute to future pieces? <a href="mailto:justinwang@stanford.edu,rishabh12ranjan@gmail.com" class="contact-link">Send our team a note</a>.</p>
+		</div>
 	</nav>
 </aside>
 
@@ -28,8 +31,8 @@ const { authors } = Astro.props;
 	document.addEventListener('DOMContentLoaded', function() {
 		const authorsContainer = document.getElementById('authors-container');
 		
-		// Set initial position aligned with Overview (same as TOC)
-		const overviewElement = document.getElementById('overview');
+		// Set initial position aligned with Overview or Abstract (same as TOC)
+		const overviewElement = document.getElementById('overview') || document.getElementById('abstract');
 		if (overviewElement && authorsContainer) {
 			const overviewRect = overviewElement.getBoundingClientRect();
 			const overviewTop = overviewRect.top + window.scrollY;
@@ -123,6 +126,28 @@ const { authors } = Astro.props;
 
 	.read-about-link:hover {
 		color: #6C43D7;
+	}
+
+	.contact-note {
+		margin-top: 12px;
+	}
+
+	.contact-note p {
+		font-size: 16px;
+		color: #666;
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	.contact-link {
+		color: #6C43D7;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.contact-link:hover {
+		color: #8B5FE8;
+		text-decoration: underline;
 	}
 
 	/* Show sidebar only on larger screens with enough space */

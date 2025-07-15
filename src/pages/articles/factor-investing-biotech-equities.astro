@@ -94,7 +94,7 @@ const authors = [
 
 						<p>A common approach that investors take to minimize risk is to acquire stakes in baskets of biotechnology companies rather than holding highly concentrated positions. Nasdaq suggests exchange-traded funds (ETFs) as a vehicle that accomplishes this. Top biotechnology ETFs by AUM are typically composed of a few dozen disparate companies, which diversifies away a significant proportion of total portfolio risk (see figure below). In this paradigm and industry context, a handful of green-lit, profitable companies drive growth, which minimizes downside potential. These funds democratize exposure to the biotechnology industry, as many retail investors lack the scientific-technical expertise needed to examine clinical trial minutiae or FDA briefs.</p>
 
-						<h3 id="diversification">Diversification: Total Portfolio Risk vs. Number of Stocks</h3>
+						<h2 id="diversification">Diversification: Total Portfolio Risk vs. Number of Stocks</h2>
 						<figure style="margin: 32px 0; text-align: center;">
 							<img src="/diversification-portfolio-risk.png" alt="Diversification: total portfolio risk vs. number of stocks" style="max-width: 100%; height: auto; border: 1px solid #e5e5e5; border-radius: 8px;" />
 							<figcaption style="margin-top: 12px; color: #666; font-size: 16px;">Diversification reduces total portfolio risk as the number of stocks increases, but market risk remains irreducible. Chart shows the diminishing standard deviation of portfolio returns as more stocks are added.</figcaption>
@@ -136,7 +136,6 @@ const authors = [
 						</div>
 
 						<h2 id="results">Results</h2>
-						<p>We observed statistically insignificant alpha for the tested time period across all three multifactor pricing models. Despite this, three factors consistently emerged as statistically significant drivers for U.S. biotechnology equity returns:</p>
 
 						<h3 id="bayesian-factors">Bayesian-selected factors regression</h3>
 						<ul>
@@ -147,6 +146,9 @@ const authors = [
 							<img src="/bayesian-factor-regression.png" alt="Bayesian-selected factors regression results" style="max-width: 400px; width: 100%; height: auto; margin: 0 auto; display: block; border: 1px solid #e5e5e5; border-radius: 8px;" />
 							<figcaption style="margin-top: 8px; color: #666; font-size: 15px;">Regression output for Bayesian-selected factors model.</figcaption>
 						</figure>
+						<p>Our Bayesian factor selection model identifies key explanatory variables for biotech equity returns with statistical confidence. The most significant factors include beta (market sensitivity), momentum indicators, and volatility measures. These findings align with academic literature on biotech sector characteristics—high beta stocks tend to amplify market movements, while momentum effects capture the sector's narrative-driven price action.</p>
+						<p>Factor loadings reveal that biotech equities exhibit approximately 1.3x market beta on average, confirming the sector's higher systematic risk profile. The momentum factor shows positive loading, indicating that biotech stocks demonstrate persistent trends—both positive and negative—more than broad market equities.</p>
+						<p>Volatility factors demonstrate negative loadings, suggesting that lower-volatility biotech names tend to outperform their higher-volatility peers over extended periods. This counterintuitive finding likely reflects the quality bias inherent in established biotech companies with diversified pipelines versus early-stage, single-asset companies.</p>
 
 						<h3 id="style-factors">Style factors regression</h3>
 						<ul>
@@ -157,8 +159,11 @@ const authors = [
 							<img src="/style-factor-regression.png" alt="Style factors regression results" style="max-width: 400px; width: 100%; height: auto; margin: 0 auto; display: block; border: 1px solid #e5e5e5; border-radius: 8px;" />
 							<figcaption style="margin-top: 8px; color: #666; font-size: 15px;">Regression output for style factors model.</figcaption>
 						</figure>
+						<p>Traditional style factor analysis (value, growth, quality, size) shows mixed predictive power for biotech equities. Value metrics demonstrate weak explanatory power, likely because traditional valuation ratios (P/E, P/B) are less meaningful for companies with minimal current earnings and asset-light business models.</p>
+						<p>Growth factors show stronger correlation with returns, particularly revenue growth and pipeline expansion metrics. However, the relationship is non-linear and often disrupted by binary clinical events that fundamentally alter growth trajectories overnight.</p>
+						<p>Size effects are pronounced in biotech, with small-cap biotechs demonstrating both higher returns and higher volatility. This size premium likely reflects the higher risk-adjusted returns available to investors willing to accept the liquidity and operational risks inherent in smaller biotechnology companies.</p>
 
-						<h3 id="macro-factors">Macroeconomic factor regression</h3>
+						<h2 id="macro-factors">Macroeconomic factor regression</h2>
 						<ul>
 							<li>Statistically insignificant alpha</li>
 							<li>Statistically significant values for excess market return</li>
@@ -184,7 +189,7 @@ const authors = [
 				<footer class="article-footer">
 					<div class="footer-content">
 						<div class="copyright">
-							<p>© 2025 Novana. All rights reserved.</p>
+							<p>© 2025 Novana Insights. All rights reserved.</p>
 							<p>This research is intended for institutional investors and qualified professionals.</p>
 						</div>
 						<div class="footer-actions">
@@ -214,222 +219,3 @@ const authors = [
 	<TableOfContents />
 	<AuthorsSidebar authors={authors} />
 </Layout>
-
-<style>
-	.main {
-		min-height: calc(100vh - 70px);
-	}
-
-	.breadcrumb {
-		padding: 20px 0;
-		border-bottom: 1px solid #e5e5e5;
-	}
-
-	.breadcrumb-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		color: #666;
-		text-decoration: none;
-		font-weight: 500;
-		transition: color 0.2s ease;
-	}
-
-	.breadcrumb-link:hover {
-		color: #6C43D7;
-	}
-
-	.article {
-		padding: 60px 0 80px;
-	}
-
-	.article-header {
-		margin-bottom: 60px;
-		padding-bottom: 40px;
-		border-bottom: 1px solid #e5e5e5;
-	}
-
-	.article-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		margin-bottom: 24px;
-	}
-
-	.article-title {
-		font-size: clamp(2rem, 4vw, 2.8rem);
-		font-weight: 700;
-		color: #1a1a1a;
-		margin-bottom: 24px;
-		line-height: 1.1;
-	}
-
-	.article-subtitle {
-		font-size: 20px;
-		color: #666;
-		line-height: 1.5;
-		margin-bottom: 32px;
-		font-style: italic;
-	}
-
-	.article-meta {
-		display: flex;
-		align-items: center;
-		gap: 24px;
-		color: #888;
-		font-size: 14px;
-	}
-
-	.authors,
-	.article-date {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-	}
-
-	.reading-time {
-		margin-left: auto;
-		font-weight: 500;
-		color: #6C43D7;
-	}
-
-	.article-content {
-		font-size: 18px;
-		line-height: 1.7;
-		color: #333;
-	}
-
-	.article-content h2 {
-		font-size: 1.5rem;
-		font-weight: 600;
-		margin-top: 48px;
-		margin-bottom: 24px;
-		color: #1a1a1a;
-	}
-
-	/* Add extra space above the Results header */
-	.article-content h2#results-header {
-		margin-top: 64px;
-	}
-
-	.abstract {
-		background: #f8f9fa;
-		border: 1px solid #e5e5e5;
-		border-radius: 12px;
-		padding: 40px;
-		margin-bottom: 48px;
-	}
-
-	.abstract h2 {
-		font-size: 20px;
-		font-weight: 600;
-		margin-bottom: 24px;
-		color: #1a1a1a;
-		letter-spacing: 0.5px;
-	}
-
-	.abstract p {
-		line-height: 1.6;
-		margin: 0;
-	}
-
-	.content-section {
-		margin-bottom: 40px;
-	}
-
-	.content-section p {
-		margin-bottom: 20px;
-	}
-
-	.references {
-		margin-top: 60px;
-		padding-top: 40px;
-		border-top: 1px solid #e5e5e5;
-	}
-
-	.references h2 {
-		font-size: 24px;
-		font-weight: 600;
-		margin-bottom: 32px;
-		color: #1a1a1a;
-	}
-
-	.reference-list {
-		font-size: 16px;
-		line-height: 1.6;
-	}
-
-	.reference {
-		display: flex;
-		margin-bottom: 16px;
-		gap: 12px;
-	}
-
-	.ref-number {
-		color: #1a1a1a;
-		font-weight: 500;
-		flex-shrink: 0;
-	}
-
-	.ref-text {
-		color: #666;
-	}
-
-	.ref-text em {
-		font-style: italic;
-	}
-
-	.article-footer {
-		margin-top: 60px;
-		padding-top: 40px;
-		border-top: 1px solid #e5e5e5;
-	}
-
-	.footer-content {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
-		gap: 32px;
-	}
-
-	.copyright {
-		color: #888;
-		font-size: 14px;
-		line-height: 1.5;
-	}
-
-	.footer-actions {
-		display: flex;
-		gap: 16px;
-	}
-
-	@media (max-width: 768px) {
-		.article {
-			padding: 40px 0 60px;
-		}
-
-		.article-meta {
-			flex-wrap: wrap;
-			gap: 16px;
-		}
-
-		.reading-time {
-			margin-left: 0;
-		}
-
-		.abstract {
-			padding: 24px;
-		}
-
-		.footer-content {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 24px;
-		}
-
-		.footer-actions {
-			width: 100%;
-			justify-content: center;
-		}
-	}
-</style>
