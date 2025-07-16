@@ -138,6 +138,78 @@ OpenAI is far from the only Silicon Valley giant that has placed a deep focus on
 
             <p> With our merged, cleaned, imputed, and pre-processed data, we began preliminary training on our set of 8 supervised models. We cut off our time series training data at 2023, setting 2024 and 2025 data aside for test validation purposes. Below are the initial results for the models. </p>
 
+            <div class="model-results-table" style="margin: 2rem 0; overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-family: 'Inter', system-ui, sans-serif; font-size: 14px;">
+                <thead>
+                  <tr style="background-color: #f8f9fa; border-bottom: 2px solid #e5e5e5;">
+                    <th style="padding: 12px; text-align: left; font-weight: 600; color: #1a1a1a;">Model</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600; color: #1a1a1a;">MAE (log)</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600; color: #1a1a1a;">R² (log)</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600; color: #1a1a1a;">MAE (count)</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600; color: #1a1a1a;">R² (count)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">Multiple Linear Regression</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3460</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.884</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">17.64</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.741</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">Ridge</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.5135</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.700</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">29.34</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.396</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">Lasso</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.7837</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.455</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">40.04</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.011</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">ElasticNet</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.6582</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.607</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">37.02</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.100</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">Decision Tree</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3403</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.806</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">19.41</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.634</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">Random Forest</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3364</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.817</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">18.91</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.635</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">Gradient Boosting</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3347</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.817</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">19.00</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.622</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">XGBoost</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3362</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.814</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">18.53</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.640</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <p> We then tuned the hyperparameters for the XGBoost and Random Forest models, using a 5-fold grid search cross-validation methodology to iteratively optimize for Mean Absolute Error (MAE). Below is a comparison of pre-tuned and post-tuned performance on these two models. </p>
 
             <p> Therefore, our machine learning models yielded the following final results: </p>
