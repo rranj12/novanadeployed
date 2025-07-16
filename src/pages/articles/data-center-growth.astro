@@ -212,6 +212,50 @@ OpenAI is far from the only Silicon Valley giant that has placed a deep focus on
 
             <p> We then tuned the hyperparameters for the XGBoost and Random Forest models, using a 5-fold grid search cross-validation methodology to iteratively optimize for Mean Absolute Error (MAE). Below is a comparison of pre-tuned and post-tuned performance on these two models. </p>
 
+            <div class="model-comparison-table" style="margin: 2rem 0; overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-family: 'Inter', system-ui, sans-serif; font-size: 14px;">
+                <thead>
+                  <tr style="background-color: #f8f9fa; border-bottom: 2px solid #e5e5e5;">
+                    <th style="padding: 12px; text-align: left; font-weight: 600; color: #1a1a1a;">Model</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600; color: #1a1a1a;">MAE (log)</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600; color: #1a1a1a;">R² (log)</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600; color: #1a1a1a;">MAE (count)</th>
+                    <th style="padding: 12px; text-align: center; font-weight: 600; color: #1a1a1a;">R² (count)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">XGBoost Model (Tuned)</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3359</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.817</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">19.15</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.611</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">XGBoost (Default)</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3362</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.814</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">18.53</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.640</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e5e5;">
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">Random Forest Model (Tuned)</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3375</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.812</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">19.26</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.628</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px; font-weight: 500; color: #1a1a1a;">Random Forest (Default)</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.3364</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.817</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">18.91</td>
+                    <td style="padding: 12px; text-align: center; color: #666;">0.635</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
             <p> Therefore, our machine learning models yielded the following final results: </p>
 
             <p> Even after tuning hyperparameters, the XGBoost and Random models had lower R2 and higher MAE values than the base Multiple Linear Regression Model. So, we retrained our Multiple Linear Regression Model on data up until 2025 and produced a CSV file containing the state-level counts of data centers in the U.S. through the end of the decade. Below is a graphical display of this model’s predictions. </p>
