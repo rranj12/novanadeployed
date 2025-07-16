@@ -6,8 +6,8 @@
   <div id="datacenter-map" style="width: 100%; height: 550px;"></div>
   <div class="map-controls">
     <div class="year-slider-container">
-      <label for="year-slider">Year: <span id="current-year">2026</span></label>
-      <input type="range" id="year-slider" min="2026" max="2030" value="2026" step="1">
+      <label for="year-slider">Year: <span id="current-year">2008</span></label>
+      <input type="range" id="year-slider" min="2008" max="2030" value="2008" step="1">
     </div>
   </div>
 </div>
@@ -112,7 +112,7 @@
     };
 
     // Initial render
-    let currentYear = '2026';
+    let currentYear = '2008';
     Plotly.newPlot('datacenter-map', createMapData(currentYear), layout, config);
 
     // Year slider functionality
