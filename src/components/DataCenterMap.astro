@@ -94,7 +94,8 @@
         scope: 'usa',
         projection: { type: 'albers usa' },
         showlakes: true,
-        lakecolor: 'rgb(255, 255, 255)'
+        lakecolor: 'rgb(255, 255, 255)',
+        domain: { x: [0, 1], y: [0, 1] }
       },
       margin: { t: 50, r: 20, b: 20, l: 20 },
       font: { family: 'Inter, system-ui, sans-serif' },
@@ -104,7 +105,10 @@
 
     const config = {
       responsive: true,
-      displayModeBar: false
+      displayModeBar: false,
+      scrollZoom: false,
+      doubleClick: false,
+      staticPlot: false
     };
 
     // Initial render
