@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import AuthorsSidebar from '../../components/AuthorsSidebar.astro';
+import DataCenterMap from '../../components/DataCenterMap.astro';
 
 const authors = [
   {
@@ -20,7 +21,7 @@ const authors = [
 ];
 ---
 
-<Layout title="OUR THOUGHTS ON DATA CENTER GROWTH" description="Novana Research examines the data center: its role in the AI value chain, infrastructure context, and future expansion hotbeds.">
+<Layout title="Our Thoughts on Data Center Growth" description="Novana Research examines the data center: its role in the AI value chain, infrastructure context, and future expansion hotbeds.">
   <Header currentPath="/research" />
   <main class="main">
     <nav class="breadcrumb">
@@ -41,7 +42,7 @@ const authors = [
             <span class="tag">AI</span>
             <span class="tag">Infrastructure</span>
           </div>
-          <h1 class="article-title">OUR THOUGHTS ON DATA CENTER GROWTH</h1>
+          <h1 class="article-title">Our Thoughts on Data Center Growth</h1>
           <p class="article-subtitle">Novana Research examines the data center: its role in the AI value chain, infrastructure context, and future expansion hotbeds.</p>
           <div class="article-meta">
             <div class="authors">
@@ -119,6 +120,17 @@ OpenAI is far from the only Silicon Valley giant that has placed a deep focus on
 
             <h3 id="other-states">Other States</h3>
             <p>Virginia, Texas, and California’s data centers comprise a disproportionate amount of all American data centers. Nonetheless, there are significant secondary hubs scattered throughout several key states that cannot be ignored. Illinois and Ohio, with 224 and 187 data centers apiece, are where hyperscalers go to source their Midwest compute infrastructure needs. These two states’ cooler climate and proximity to the Great Lakes support data center operators’ cooling operations, offering tangible energy overhead savings. Furthermore, their state and local governments have taken note of and adapted to hyperscalers’ needs: bespoke tax exemptions and tax breaks have made way for major projects, such as Meta’s $1 billion investment into a 1.5 million square foot data center facility in Northern Illinois and Amazon Web Service’s $3.5 billion expansion into Central Ohio, totaling five new data centers with combined 1.25 million square footage. Washington and Oregon, with 113 and 131 data centers respectively, form a sizable Pacific Northwest fleet. The region leads the U.S. in hydroelectric power generation, which, as a source of clean energy, aligns with many technology companies’ corporate ESG mandates. And, like almost all the other states mentioned thus far, Washington and Oregon offer up attractive corporate incentives for data center operators, with property tax abatements and accelerated permitting processes pulling significant weight. The last secondary data center hub we will touch upon in this piece is the Southeast: Georgia and Florida house 279 data centers collectively, and are seeing strong growth year-after-year. The Southeast region boasts strong connectivity to major population centers, access to some of the nation’s lowest electricity costs, as well as a medley of property, sales, and energy tax incentives that specifically target data center operators. These three secondary hubs, when bundled together with Virginia, Texas, and California, comprise nearly 60% of all U.S. data centers.</p>
+          </section>
+
+          <section class="content-section">
+            <h2 id="projected-growth">Projected Data Center Growth by State (2026-2030)</h2>
+            <p>Looking ahead, our analysis of projected data center expansion reveals significant growth opportunities across multiple states. The interactive map below displays our forecasts for data center distribution from 2026 through 2030, highlighting the states positioned to benefit most from continued AI infrastructure investment.</p>
+            
+            <DataCenterMap />
+            
+            <p>Use the year slider above to explore how data center distribution is expected to evolve. Virginia maintains its leadership position, with projections showing nearly 2,000 data centers by 2030 - a reflection of its established infrastructure and regulatory advantages. Texas and California follow closely, each expected to house over 1,000 data centers by the end of the decade.</p>
+            
+            <p>Notably, the projections reveal emerging opportunities in states like Illinois, Ohio, and Georgia, which benefit from strategic geographical positioning, favorable energy costs, and state-level incentives designed to attract data center investment. These secondary markets represent significant growth potential as hyperscalers seek to diversify their infrastructure footprints while maintaining proximity to major population centers.</p>
           </section>
         </div>
       </div>
