@@ -3,7 +3,7 @@
 ---
 
 <div id="datacenter-map-container">
-  <div id="datacenter-map" style="width: 100%; height: 500px;"></div>
+  <div id="datacenter-map" style="width: 100%; height: 550px;"></div>
   <div class="map-controls">
     <div class="year-slider-container">
       <label for="year-slider">Year: <span id="current-year">2026</span></label>
@@ -81,7 +81,7 @@
           orientation: 'h',
           x: 0.5,
           xanchor: 'center',
-          y: 1.02,
+          y: 1.05,
           thickness: 15,
           len: 0.8,
           ticksuffix: '%'
@@ -90,19 +90,13 @@
     }
 
     const layout = {
-      title: {
-        text: 'Data Center Distribution by State (% of US Total)',
-        font: { size: 20, color: '#1a1a1a' },
-        x: 0.5,
-        y: 0.95
-      },
       geo: {
         scope: 'usa',
         projection: { type: 'albers usa' },
         showlakes: true,
         lakecolor: 'rgb(255, 255, 255)'
       },
-      margin: { t: 80, r: 20, b: 20, l: 20 },
+      margin: { t: 50, r: 20, b: 20, l: 20 },
       font: { family: 'Inter, system-ui, sans-serif' },
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(0,0,0,0)'
@@ -194,7 +188,7 @@
 
   @media (max-width: 768px) {
     #datacenter-map {
-      height: 350px !important;
+      height: 400px !important;
     }
     
     #year-slider {
