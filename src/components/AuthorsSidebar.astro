@@ -2,14 +2,15 @@
 import ArticleAuthorCard from './ArticleAuthorCard.astro';
 
 const { authors } = Astro.props;
+const safeAuthors = Array.isArray(authors) ? authors : [];
 ---
 
 <aside class="authors-sidebar" id="authors-container">
 	<nav class="authors-nav">
 		<h3 class="authors-title">Authors</h3>
 		<div class="authors-list">
-			{authors.map((author, index) => (
-				<div class="author-item" key={index}>
+			{safeAuthors.map((author, index) => (
+				<div class="author-item">
 					<h4 class="author-name">{author.name}</h4>
 					<p class="author-role">{author.title}</p>
 					<a href="/about" class="read-about-link">

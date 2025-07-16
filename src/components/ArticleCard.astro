@@ -1,5 +1,6 @@
 ---
 const { article } = Astro.props;
+const safeTags = Array.isArray(article.tags) ? article.tags : [];
 ---
 
 <article class="article-card">
@@ -9,7 +10,7 @@ const { article } = Astro.props;
 				<a href={`/articles/${article.slug}`}>{article.title}</a>
 			</h2>
 			<div class="article-tags">
-				{article.tags.map(tag => (
+				{safeTags.map((tag: string) => (
 					<span class="tag">{tag}</span>
 				))}
 			</div>

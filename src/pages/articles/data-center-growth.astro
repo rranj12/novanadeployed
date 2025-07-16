@@ -1,0 +1,225 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import AuthorsSidebar from '../../components/AuthorsSidebar.astro';
+
+const authors = [
+  {
+    name: 'Justin Wang',
+    title: 'Co-Founder & Principal Researcher',
+    linkedin: 'https://www.linkedin.com/in/jstwng/',
+    image: '/justin.jpeg'
+  },
+  {
+    name: 'Rishabh Ranjan',
+    title: 'Co-Founder & Principal Researcher',
+    linkedin: 'https://www.linkedin.com/in/rishabhranj/',
+    image: '/rishabh.jpeg'
+  }
+];
+---
+
+<Layout title="OUR THOUGHTS ON DATA CENTER GROWTH" description="Novana Research examines the data center: its role in the AI value chain, infrastructure context, and future expansion hotbeds.">
+  <Header currentPath="/research" />
+  <main class="main">
+    <nav class="breadcrumb">
+      <div class="container-narrow">
+        <a href="/research" class="breadcrumb-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Back to Research
+        </a>
+      </div>
+    </nav>
+    <div class="article-layout">
+      <aside class="toc-col">
+        <TableOfContents />
+      </aside>
+      <article class="article">
+        <div class="container-narrow">
+          <header class="article-header">
+            <div class="article-tags">
+              <span class="tag">Data Centers</span>
+              <span class="tag">AI</span>
+              <span class="tag">Infrastructure</span>
+            </div>
+            <h1 class="article-title">OUR THOUGHTS ON DATA CENTER GROWTH</h1>
+            <p class="article-subtitle">Novana Research examines the data center: its role in the AI value chain, infrastructure context, and future expansion hotbeds.</p>
+            <div class="article-meta">
+              <div class="authors">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Justin Wang, Rishabh Ranjan</span>
+              </div>
+              <div class="article-date">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>July 15, 2025</span>
+              </div>
+              <div class="reading-time">
+                <span>7 min read</span>
+              </div>
+            </div>
+          </header>
+          <div class="article-content">
+            <section class="abstract">
+              <h2 id="overview">Overview</h2>
+              <p>Software companies, headed up by the likes of OpenAI, Google, and Meta, are expected to capture a substantial amount of the value creation associated with artificial intelligence (AI). However, as AI models continue to scale in both complexity and adoption, they will require increasingly massive demands for physical capital infrastructure, which we believe will create positive spillover effects for businesses in non-technology sectors. In this Part One of Concrete Foundations of Compute, Novana Research examines the data center: where it is utilized within the AI value chain, how it fits in the context of AI infrastructure, and places in which we expect its hotbeds of expansion. Near the end, we introduce a simple XGBoost model that we have trained to predict the state-level distribution of data centers over the next 5 to 10 years.</p>
+            </section>
+            <section class="content-section">
+              <h2 id="introduction">Introduction</h2>
+              <p>Software companies, headed up by the likes of OpenAI, Google, and Meta, are expected to capture a substantial amount of the value creation associated with artificial intelligence (AI). However, as AI models continue to scale in both complexity and adoption, they will require increasingly massive demands for physical capital infrastructure, which we believe will create positive spillover effects for businesses in non-technology sectors. In this Part One of Concrete Foundations of Compute, Novana Research examines the data center: where it is utilized within the AI value chain, how it fits in the context of AI infrastructure, and places in which we expect its hotbeds of expansion. Near the end, we introduce a simple XGBoost model that we have trained to predict the state-level distribution of data centers over the next 5 to 10 years.</p>
+            </section>
+            <section class="content-section">
+              <h2 id="ai-value-chain">The AI Value Chain</h2>
+              <figure style="margin: 2rem 0; text-align: center;">
+                <img src="/ai-value-chain.png" alt="The AI Value Chain, Mapped" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e5e5;" />
+                <figcaption style="font-size: 0.95em; color: #666; margin-top: 0.5em;">The AI Value Chain, Mapped.</figcaption>
+              </figure>
+              <p>Artificial intelligence (AI) models are requiring increasingly massive amounts of physical capital to power, both for their training and inference processes. The training-inference dichotomy is an important one to understand when projecting future physical capital infrastructure spillovers and can be decomposed into several constituent parts. 
+
+Model providers, including OpenAI, Google, Anthropic, and others, are competing against one another to produce and distribute the best general-purpose foundation models. In the context of the training-inference dichotomy, these companies are most primarily involved in the former, focusing their efforts on the iterative improvement of frontier model performance over time. Their production-ready models are passed downstream to enterprise and individual end users, which, when done so at-scale, is where AI’s largest infrastructure demands originate. 
+
+End users comprise the latter piece of the dichotomy. The enterprise user segment can be decomposed in and of itself into a few key categories, including: orchestration and tooling layers, AI-native application companies, and model-integrating incumbents. Orchestration and tooling layers help developers prototype, deploy, and scale AI applications by abstracting away a significant proportion of the complexities associated with fine tuning, agent organization, and vector databases. Companies operating in this category include players like LangChain, Hugging Face, and Pinecone; all three were founded within the last decade in response to accelerated AI model performance. AI-native application companies are those whose core offerings create added value to users in specific domains. These companies are often vertically integrated, and include Harvey for law, Hebbia for finance, and Cursor for code editing. Model-integrating incumbents are legacy companies that actively embed AI models into their platform offerings, with Microsoft, Adobe, and Salesforce serving as key examples. Companies in this category embedded significant AI capabilities into their product offerings, leveraging pre-existing distribution and capital resources as key competitive advantages. 
+
+The end user ecosystem also encompasses individuals — people using AI as part of their day to day. A March 2025 national survey by Elon University’s Imagining the Digital Future Center revealed that 52% of adults in the U.S. have used AI models in some form or another, marking “one of the fastest, if not the fastest, adoption rates of a major technology in history.” 
+
+An overview of the stakeholders and relationships within the AI value chain reveals that inference forms the largest AI-related volume demands both today and moving forward. The MIT Technology Review’s conversations with industry experts led to their estimate that “…80–90% of computing power for AI is used for inference.” In contrast to training, which is concentrated within the model provider ecosystem, inference scales in direct relationship to user adoption. Each and every usage of an AI model contributes marginal inference demand that aggregates to billions of interactions per day. Another contributory factor to increased AI infrastructure demands is driven by the scaling hypothesis: that compute resources increase, model performance will improve. OpenAI’s frontier models reveal a tangible example of this idea. GPT-2 used up to 1.5 billion parameters; GPT-3, 175 billion parameters; and GPT-4, 1 trillion — according to expert estimates. Furthermore, as AI becomes more embedded into society, increased enterprise and individual use cases will only further contribute to inference volume, driving a continuation in the exponential inference demand growth that researchers have already documented.</p>
+            </section>
+            <section class="content-section">
+              <h2 id="ais-infrastructure-needs">AI’s Infrastructure Needs</h2>
+              <p>Scaling inference loads are already reshaping global AI infrastructure needs. Alexandr Wang, whose Scale AI was famously and recently invested in by Meta, decomposed the AI space into three key pillars: compute, data, and algorithms. In the context of AI, compute refers to the hardware and software systems that run and train AI models, data to the information upon which bleeding-edge models are built, and algorithms to the set of instructions that enable AI models to learn. Rapidly increasing inference volume is putting significant upward pressure on AI’s compute demands in particular, which has led to an explosion in AI chip production and data center expansion — epitomized by Nvidia’s ascension to the world’s most valuable public company and OpenAI’s recent commencement of its multilateral Stargate Project, respectively. 
+
+Novana Research analyzes the AI chip production landscape in Part 3 of Concrete Foundations of Compute: “Chips, China, and (Supply) Chains”
+
+OpenAI’s Stargate Project is compelling in several respects. It epitomizes Silicon Valley’s recent “rightward lurch,” wherein numerous high-profile Big Tech magnates – including Elon Musk, Peter Thiel, Mark Zuckerberg, Marc Andreessen, and now, Sam Altman – have shifted toward alignment with President Trump’s conservative, America First-platform. Participation from the United Arab Emirates’ MGX Fund Management and Japan’s SoftBank Group highlights international cooperation in fueling America’s technological supremacy over China’s. And, with regards to AI infrastructure, Stargate reveals the massive importance of the data center — specialized facilities equipped with suites of computational resources that are designed to either train or deploy AI models. 
+
+OpenAI is far from the only Silicon Valley giant that has placed a deep focus on data center development. Microsoft, Google, and Amazon have each operated hyperscaler businesses since 2006, 2006, and 2010, respectively; in the 15-20 years that Microsoft Azure, Google Cloud Platforms, and Amazon Web Services have been in service, the parent companies of all three have invested heavily in massive data center networks. Originally built to service general-purpose cloud computing needs, these hyperscalers’ data center networks have seen an increasing shift towards AI-optimized infrastructures so as to serve increasingly AI-driven volume demands.</p>
+            </section>
+            <section class="content-section">
+              <h2 id="distribution-of-us-data-centers">On the Distribution of U.S. Data Centers</h2>
+              <p>The U.S. is home to the largest fleet of data centers in the world, larger than that of all other countries combined. As of March 2025, the U.S. had 5,426 data centers, more than 10x Germany, which trailed second with 529 data centers. Furthermore, within the U.S., the geographic distribution of data centers is heavily overweight in a handful of select locales: three states – Virginia, Texas, and California – house approximately 33% of all U.S. data centers. These states contain vital infrastructure advantages and regulatory alignments for data center operators, which have created compelling economic incentives for hyperscalers and led to the dramatic right skew distribution of data centers that we observe today.</p>
+
+              <h3 id="virginia">Virginia</h3>
+              <p>North Virginia’s “Data Center Alley” houses 585 data centers and is the world’s largest concentration of data centers, with roots that can be traced back to as early as the Metropolitan Area Exchange-East (MAE-East).</p>
+              <p>MAE-East was an ethernet network that connected locations across Washington, D.C. and Northern Virginia. It started in 1992, making it the first commercial internet exchange point, predating even Al Gore’s National Information Infrastructure plan. By 1997, MAE-East handled half of the world’s internet traffic, drawing the attention of early internet players AOL (America Online), UUNET, Yahoo, and AT&T. These companies’ heavy commercial internet investment in the area created dense fiber infrastructure, a sizable network of Virginia-terminating transatlantic cables, and pull for more companies to establish presences in North Virginia.</p>
+              <p>Virginia’s legacy infrastructure and already strong commercial presence seeded it as a major contender for early data center construction. Additional advantages – access to cheap electricity, ample land availability, minimal natural disaster risk, and proximity to the federal government – further contributed towards North Virginia’s competitive moat as a candidate for data center housing. However, what arguably cemented its dominance was the aggressive regulatory efforts that Virginia’s state and local governments have pushed for: an amendment to Virginia Code § 58.1-609.3, passed in 2010 and valid through 2035, allows data center operators to exempt sales and use taxes on manufactured capital on the condition that they invest capital in and create high paying jobs for the state; Virginia’s local tax authorities are allowed to autonomously and competitively designate their localities’ tax rates for data center equipment.</p>
+              <p>Virginia’s historical precedent as a technological hub, abundant access to natural capital, and strong regulatory tailwinds have compounded onto one another to make it the data center hub that it is today. Yet, despite all of its strengths, Virginia’s legacy status as a data center hub also has its drawbacks with regards to future growth. Data Center Valley’s large scale operations have contributed significantly to bloated infrastructure that has manifested in strained power grids. Data centers are responsible for just over one fourth of Virginia’s total electricity consumption, making it the state with the highest data center power consumption percentage. For context: Texas is second, and its data centers consume under 5% of its total electricity consumption. We believe Virginia to be a hotspot for data center expansion, but we also note that its status as an already established data center powerhouse may render it incapable of the rapid growth necessary to lead data center growth as AI inference continues to scale.</p>
+
+              <h3 id="texas-california">Texas and California</h3>
+              <p>Texas and California, with 363 and 314 data centers, have the second and third highest data center counts by state, respectively. Land abundance is an obvious contributory factor — these are the two largest states by land area in the contiguous U.S.. Asides from size, however, Texas and California diverge largely – yet complementarily – in the key incentives that have attracted data center construction to each.</p>
+              <p>Abilene, a small city in Central Texas, has become the staging ground for OpenAI’s Stargate Project, bringing $100 billion of foreign investment into the state. Yet, the model provider’s decision to concentrate its early hyperscaling efforts in Texas marks a continuation of – rather than the inception of – Texas’s data center market. Dallas-Fort Worth (DFW) is now home to the U.S.’s second-largest data center market, having seen a 600% increase in data center space in the three years leading up to 2023. Trailing just behind DFW are the Austin and San Antonio markets, which have both seen explosive growth in data center construction in the past year: the CBRE’s latest North American Data Center Trend Report detailed that the under-construction data center activities in these two markets had quadrupled between 2023 to 2024, adding ​​a total of 463.5 megawatts to Texas’s data center construction pipeline.</p>
+              <p>Texas’s quick climb to status as a major data center hub is supported by its low costs, electricity source diversity, scaling capacity, and business-friendly policies. It boasts the fourth lowest average commercial electricity cost across all U.S. states, beaten only by North Dakota, Oklahoma, and Utah. Moreover, Texas is able to produce its inexpensive electricity at-scale. The state produces nearly a third of the country’s primary energy, sourced from a combination of natural gas, wind, coal, nuclear, and now, solar, fuel types: its Permian Basin, Eagle Ford Shale, and Barnett Shale drive natural gas production; its 16,000 wind turbines form the largest fleet in the U.S. in quantity and volume; its Eastern Lignite coal belt contributes to a state-wide combined capacity of 20,000 megawatts of coal-fired power; its Comanche Peak Nuclear Power Plant and South Texas Project Electric Generating Station produce upwards of 10% of the state’s electricity; and investments into solar energy have put it first in the nation for projected growth in solar capacity. The cost-effectiveness, volume, and diversity of Texas’s electricity sources, paired with its expansive reserves of unused land parcels, make it a near-perfect candidate for rapid data center operation scaling. Strategic regulatory alignment from its state and local governments have only created further economic incentives, in the forms of grants from the Texas Enterprise Fund, state sales tax exemptions, and local property tax abatements — on top of an already statewide exemption on corporate income taxes.</p>
+              <p>California presents a complementary role to Texas’s in the context of data center development. Whereas Texas offers hyperscalers cheap access to land and electricity, California provides undisputed competitive advantages in clean energy optionality and proximity to Silicon Valley. In Governor Edmund Brown’s 2018 Executive Order B-55-18, California legally committed to achieving a 100% carbon-free electricity grid by 2045. Since then, state-sponsored sustainability initiatives – such as centralized clean energy purchases overseen by the California Public Utilities Commission and Department of Water Resources – are already targeting large-scale solar, wind, geothermal, and long-duration storage to support these mandates. The state’s clean energy goals intersect significantly with those adopted by major technology players: Amazon’s Climate Pledge promises net-zero carbon emissions by 2040; Microsoft has seeded a $1 billion climate innovation fund with the goal of achieving negative net carbon by 2030 and a reversal of its historical carbon emissions by 2050; and Google has set a global goal of reaching net-zero carbon emissions by 2030.</p>
+              <p>Naturally, California’s clean energy options and proximity advantage come with steep costs. Politico’s recent article, “Abundance clashes with affordability in California’s data center debate,” encapsulates the state’s tensions on the sustainability-affordability tradeoff with great brevity. In it, California Environment Reporter Camille von Kaenel and Sacramento Technology Reporter Tyler Katzenberger write, “Yet if lawmakers don’t find a way forward soon, they risk losing the advanced infrastructure fueling Silicon Valley’s artificial intelligence boom to other states while simultaneously failing to align in-state data centers with California’s ambitious climate goals.” For hyperscalers looking to build data centers in California, multidimensional costs pose an incredibly tangible barrier that could make Virginia, Texas, Illinois, and Ohio more attractive options.</p>
+
+              <h3 id="other-states">Other States</h3>
+              <p>Virginia, Texas, and California’s data centers comprise a disproportionate amount of all American data centers. Nonetheless, there are significant secondary hubs scattered throughout several key states that cannot be ignored. Illinois and Ohio, with 224 and 187 data centers apiece, are where hyperscalers go to source their Midwest compute infrastructure needs. These two states’ cooler climate and proximity to the Great Lakes support data center operators’ cooling operations, offering tangible energy overhead savings. Furthermore, their state and local governments have taken note of and adapted to hyperscalers’ needs: bespoke tax exemptions and tax breaks have made way for major projects, such as Meta’s $1 billion investment into a 1.5 million square foot data center facility in Northern Illinois and Amazon Web Service’s $3.5 billion expansion into Central Ohio, totaling five new data centers with combined 1.25 million square footage. Washington and Oregon, with 113 and 131 data centers respectively, form a sizable Pacific Northwest fleet. The region leads the U.S. in hydroelectric power generation, which, as a source of clean energy, aligns with many technology companies’ corporate ESG mandates. And, like almost all the other states mentioned thus far, Washington and Oregon offer up attractive corporate incentives for data center operators, with property tax abatements and accelerated permitting processes pulling significant weight. The last secondary data center hub we will touch upon in this piece is the Southeast: Georgia and Florida house 279 data centers collectively, and are seeing strong growth year-after-year. The Southeast region boasts strong connectivity to major population centers, access to some of the nation’s lowest electricity costs, as well as a medley of property, sales, and energy tax incentives that specifically target data center operators. These three secondary hubs, when bundled together with Virginia, Texas, and California, comprise nearly 60% of all U.S. data centers.</p>
+            </section>
+          </div>
+        </div>
+      </article>
+      <aside class="authors-col">
+        <AuthorsSidebar authors={authors} note="Novana Research Team" />
+      </aside>
+    </div>
+  </main>
+</Layout>
+
+<style>
+.article-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+.toc-col {
+  flex: 0 0 220px;
+  min-width: 180px;
+}
+.article {
+  flex: 1 1 0%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.authors-col {
+  flex: 0 0 220px;
+  min-width: 180px;
+}
+.abstract {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+  font-size: 1.08em;
+  color: #222;
+  border: 1px solid #e5e5e5;
+}
+.article-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+.article-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+.article-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+.article-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #888;
+  font-size: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #f5f5f5;
+  margin-top: auto;
+}
+.authors,
+.article-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.reading-time {
+  margin-left: auto;
+  font-weight: 500;
+}
+.article-content {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+}
+.content-section {
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 1100px) {
+  .article-layout {
+    flex-direction: column;
+  }
+  .toc-col, .authors-col {
+    min-width: 0;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+</style> 
