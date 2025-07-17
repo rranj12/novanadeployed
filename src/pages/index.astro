@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 
 const allArticles = [
 	{
-		slug: 'scientific/data-center-predictor',
+		slug: 'data-center-predictor',
 		title: 'Data Center Growth Predictor',
 		excerpt: 'Interactive visualization of historical and projected data center distribution across U.S. states from 2008-2030, powered by machine learning models.',
 		tags: ['Scientific', 'Machine Learning', 'Infrastructure'],
@@ -98,7 +98,7 @@ const allArticles = [
 				<h2>Latest Insights</h2>
 				<div class="articles-list">
 					{allArticles.map(article => (
-						<ArticleCard article={article} />
+						<ArticleCard article={article} basePath={article.category === 'scientific' ? '/scientific' : '/articles'} />
 					))}
 				</div>
 			</div>
