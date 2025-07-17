@@ -35,9 +35,11 @@ const safeTags = Array.isArray(article.tags) ? article.tags : [];
 				</svg>
 				<span>{article.date}</span>
 			</div>
-			<div class="reading-time">
-				<span>{article.readingTime}</span>
-			</div>
+			{article.readingTime && (
+				<div class="reading-time">
+					<span>{article.readingTime}</span>
+				</div>
+			)}
 		</div>
 	</div>
 </article>
