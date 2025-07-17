@@ -35,7 +35,7 @@
 		});
 
 		// Set initial position aligned with Overview or Abstract
-		const overviewElement = document.getElementById('overview') || document.getElementById('abstract');
+		const overviewElement = document.getElementById('overview') || document.getElementById('abstract') || document.querySelector('.article-content h2');
 		if (overviewElement) {
 			const overviewRect = overviewElement.getBoundingClientRect();
 			const overviewTop = overviewRect.top + window.scrollY;
@@ -126,16 +126,24 @@
 		max-height: 70vh;
 		overflow-y: auto;
 		font-family: 'Inter', system-ui, sans-serif !important;
+		font-size: 14px !important;
+	}
+
+	.table-of-contents,
+	.table-of-contents *,
+	.toc-nav,
+	.toc-nav *,
+	.toc-item,
+	.toc-h2,
+	.toc-h3 {
+		font-family: 'Inter', system-ui, sans-serif !important;
+		font-size: 14px !important;
 	}
 
 	.toc-nav {
 		display: flex;
 		flex-direction: column;
 		gap: 14px !important;
-		font-family: 'Inter', system-ui, sans-serif !important;
-	}
-
-	.toc-nav * {
 		font-family: 'Inter', system-ui, sans-serif !important;
 		font-size: 14px !important;
 	}
@@ -146,24 +154,28 @@
 		margin: 0;
 		color: #888;
 		text-decoration: none;
-		font-size: 14px;
+		font-size: 14px !important;
 		line-height: 1.4;
 		transition: all 0.3s ease;
 		cursor: pointer;
 		position: relative;
+		font-family: 'Inter', system-ui, sans-serif !important;
 	}
 
 	.toc-h2 {
 		font-weight: 500;
 		margin: 0;
 		color: #666;
+		font-size: 14px !important;
+		font-family: 'Inter', system-ui, sans-serif !important;
 	}
 
 	.toc-h3 {
 		padding-left: 16px;
-		font-size: 14px;
+		font-size: 14px !important;
 		color: #999;
 		margin: 0;
+		font-family: 'Inter', system-ui, sans-serif !important;
 	}
 
 	.toc-item:hover {
@@ -172,7 +184,7 @@
 
 	.toc-item.active {
 		color: #21752F !important;
-		font-weight: 600;
+		font-weight: 600 !important;
 		position: relative;
 	}
 

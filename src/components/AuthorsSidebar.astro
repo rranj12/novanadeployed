@@ -33,7 +33,7 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 		const authorsContainer = document.getElementById('authors-container');
 		
 		// Set initial position aligned with Overview or Abstract (same as TOC)
-		const overviewElement = document.getElementById('overview') || document.getElementById('abstract');
+		const overviewElement = document.getElementById('overview') || document.getElementById('abstract') || document.querySelector('.article-content h2');
 		if (overviewElement && authorsContainer) {
 			const overviewRect = overviewElement.getBoundingClientRect();
 			const overviewTop = overviewRect.top + window.scrollY;
