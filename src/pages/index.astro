@@ -93,6 +93,45 @@ const allArticles = [
 			</div>
 		</section>
 
+		<section class="what-we-do">
+			<div class="container">
+				<div class="services-grid">
+					<div class="service-card research">
+						<h3 class="service-title">Research</h3>
+						<p class="service-description">In-depth investment research on emerging technology opportunities spanning artificial intelligence, biotechnology, and other frontier technology industries.</p>
+						<a href="/research" class="service-link">
+							Explore Research
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M7 17L17 7M17 7H7M17 7V17"/>
+							</svg>
+						</a>
+					</div>
+					
+					<div class="service-card markets">
+						<h3 class="service-title">Markets</h3>
+						<p class="service-description">We make class-agnostic, market-neutral trades driven by theses derived from our in-house deep technology research and supported by our unique asset management approach.</p>
+						<a href="/markets" class="service-link">
+							View Markets
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M7 17L17 7M17 7H7M17 7V17"/>
+							</svg>
+						</a>
+					</div>
+					
+					<div class="service-card scientific">
+						<h3 class="service-title">Scientific</h3>
+						<p class="service-description">We build interactive tools and predictive models in-house, introducing quantitative rigor to our investment research and management processes. Documentation and usage instructions are public.</p>
+						<a href="/scientific" class="service-link">
+							Try Tools
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M7 17L17 7M17 7H7M17 7V17"/>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
 		<section class="articles">
 			<div class="container-narrow">
 				<h2>Latest Insights</h2>
@@ -106,3 +145,122 @@ const allArticles = [
 	</main>
 	<Footer />
 </Layout>
+
+<style>
+	/* What We Do Section */
+	.what-we-do {
+		padding: 80px 0;
+		background: linear-gradient(135deg, #f8f9fa 0%, rgba(33, 117, 47, 0.02) 50%, #f8f9fa 100%);
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: 40px;
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+
+	.service-card {
+		background: linear-gradient(135deg, #21752F, #2d8f3f);
+		border-radius: 16px;
+		padding: 40px 32px;
+		text-align: left;
+		transition: all 0.4s ease;
+		box-shadow: 0 8px 25px rgba(33, 117, 47, 0.25);
+		border: none;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.service-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+		transform: scaleX(0);
+		transition: transform 0.4s ease;
+	}
+
+	.service-card:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 20px 40px rgba(33, 117, 47, 0.35);
+	}
+
+	.service-card:hover::before {
+		transform: scaleX(1);
+	}
+
+	.service-title {
+		font-size: 24px;
+		font-weight: 500;
+		color: white;
+		margin-bottom: 16px;
+		font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+	}
+
+	.service-description {
+		font-size: 14px;
+		color: rgba(255, 255, 255, 0.9);
+		line-height: 1.6;
+		margin-bottom: 28px;
+		font-family: 'Inter', system-ui, sans-serif;
+	}
+
+	.service-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: white;
+		text-decoration: none;
+		font-weight: 600;
+		font-family: 'Inter', system-ui, sans-serif;
+		font-size: 12.5px;
+		transition: all 0.3s ease;
+		position: relative;
+		background: rgba(255, 255, 255, 0.15);
+		padding: 6px 12px;
+		border-radius: 12px;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+	}
+
+	.service-link:hover {
+		color: white;
+		transform: translateX(4px);
+		background: rgba(255, 255, 255, 0.25);
+		border-color: rgba(255, 255, 255, 0.3);
+	}
+
+	.service-link svg {
+		transition: transform 0.3s ease;
+	}
+
+	.service-link:hover svg {
+		transform: rotate(45deg);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.what-we-do {
+			padding: 60px 0;
+		}
+
+		.services-grid {
+			grid-template-columns: 1fr;
+			gap: 32px;
+		}
+
+		.service-card {
+			padding: 32px 24px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.service-card {
+			padding: 28px 20px;
+		}
+	}
+</style>
