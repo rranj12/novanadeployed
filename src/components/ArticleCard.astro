@@ -1,5 +1,5 @@
 ---
-const { article } = Astro.props;
+const { article, basePath = '/articles' } = Astro.props;
 const safeTags = Array.isArray(article.tags) ? article.tags : [];
 ---
 
@@ -7,7 +7,7 @@ const safeTags = Array.isArray(article.tags) ? article.tags : [];
 	<div class="article-content">
 		<div class="article-header">
 			<h2 class="article-title">
-				<a href={`/articles/${article.slug}`}>{article.title}</a>
+				<a href={`${basePath}/${article.slug}`}>{article.title}</a>
 			</h2>
 			<div class="article-tags">
 				{safeTags.map((tag: string) => (

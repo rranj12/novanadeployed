@@ -2,12 +2,28 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import AuthorsSidebar from '../../components/AuthorsSidebar.astro';
 import DataCenterMap from '../../components/DataCenterMap.astro';
+
+const authors = [
+  {
+    name: 'Justin Wang',
+    title: 'Co-Founder & Principal Researcher',
+    linkedin: 'https://www.linkedin.com/in/jstwng/',
+    image: '/justin.jpeg'
+  },
+  {
+    name: 'Rishabh Ranjan',
+    title: 'Co-Founder & Principal Researcher',
+    linkedin: 'https://www.linkedin.com/in/rishabhranj/',
+    image: '/rishabh.jpeg'
+  }
+];
 ---
 
 <Layout title="Data Center Growth Predictor" description="Interactive visualization of U.S. data center distribution from 2008-2030">
   <Header currentPath="/scientific" />
-  
   <main class="main">
     <nav class="breadcrumb">
       <div class="container-narrow">
@@ -19,20 +35,26 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
         </a>
       </div>
     </nav>
-
-    <article class="tool">
+    <article class="article">
       <div class="container-narrow">
-        <header class="tool-header">
-          <div class="tool-tags">
+        <header class="article-header">
+          <div class="article-tags">
             <span class="tag">Machine Learning</span>
             <span class="tag">Data Centers</span>
             <span class="tag">Infrastructure</span>
             <span class="tag">Predictive Analytics</span>
           </div>
-          <h1 class="tool-title">Data Center Growth Predictor</h1>
-          <p class="tool-subtitle">Interactive visualization of historical and projected data center distribution across U.S. states from 2008-2030, powered by machine learning models.</p>
-          <div class="tool-meta">
-            <div class="tool-date">
+          <h1 class="article-title">Data Center Growth Predictor</h1>
+          <p class="article-subtitle">Interactive visualization of historical and projected data center distribution across U.S. states from 2008-2030, powered by machine learning models.</p>
+          <div class="article-meta">
+            <div class="authors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Justin Wang, Rishabh Ranjan</span>
+            </div>
+            <div class="article-date">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -41,22 +63,24 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
               </svg>
               <span>January 2025</span>
             </div>
+            <div class="reading-time">
+              <span>5 min read</span>
+            </div>
           </div>
         </header>
-
-        <div class="tool-content">
+        <div class="article-content">
           <section class="content-section">
-            <h2>Interactive Visualization</h2>
+            <h2 id="interactive-visualization">Interactive Visualization</h2>
             <p>Explore how data center distribution has evolved across U.S. states from 2008 to 2030. Our machine learning models predict future distribution patterns based on economic and infrastructural factors including corporate tax rates, electricity prices, and grid reliability.</p>
             
             <DataCenterMap />
           </section>
 
           <section class="content-section">
-            <h2>About This Tool</h2>
+            <h2 id="about-this-tool">About This Tool</h2>
             <p>This interactive map displays the percentage share of total U.S. data centers by state, allowing you to track historical trends and explore our projections through 2030. The underlying predictions are generated using a Multiple Linear Regression model trained on state-level economic and infrastructural data.</p>
             
-            <h3>Key Features</h3>
+            <h3 id="key-features">Key Features</h3>
             <ul>
               <li><strong>Historical Data:</strong> Real data center counts from 2008-2025</li>
               <li><strong>Predictive Modeling:</strong> Machine learning projections through 2030</li>
@@ -64,7 +88,7 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
               <li><strong>State-Level Analysis:</strong> Detailed breakdown by U.S. state</li>
             </ul>
 
-            <h3>Methodology</h3>
+            <h3 id="methodology">Methodology</h3>
             <p>Our predictions are based on a comprehensive analysis of multiple machine learning models, including Multiple Linear Regression, XGBoost, Random Forest, and others. After extensive testing and hyperparameter tuning, the Multiple Linear Regression model demonstrated the best performance with an R² of 0.741 for count predictions.</p>
             
             <p>The model incorporates features such as corporate tax rates, average electricity prices, grid reliability (SAIDI), and engineered temporal and state-specific interaction terms to capture the complex dynamics of data center location decisions.</p>
@@ -72,6 +96,8 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
         </div>
       </div>
     </article>
+    <AuthorsSidebar authors={authors} note="Novana Research Team" />
+    <TableOfContents />
   </main>
   
   <Footer />
@@ -102,16 +128,16 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
     color: #21752F;
   }
 
-  .tool {
+  .article {
     padding: 60px 0;
   }
 
-  .tool-header {
+  .article-header {
     text-align: center;
     margin-bottom: 60px;
   }
 
-  .tool-tags {
+  .article-tags {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -128,7 +154,7 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
     font-weight: 500;
   }
 
-  .tool-title {
+  .article-title {
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 600;
     color: #1a1a1a;
@@ -136,7 +162,7 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
     line-height: 1.1;
   }
 
-  .tool-subtitle {
+  .article-subtitle {
     font-size: 20px;
     color: #666;
     line-height: 1.6;
@@ -144,7 +170,7 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
     margin: 0 auto 32px;
   }
 
-  .tool-meta {
+  .article-meta {
     display: flex;
     justify-content: center;
     gap: 24px;
@@ -152,13 +178,25 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
     color: #999;
   }
 
-  .tool-date {
+  .authors {
     display: flex;
     align-items: center;
     gap: 6px;
   }
 
-  .tool-content {
+  .article-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .reading-time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-content {
     max-width: 800px;
     margin: 0 auto;
   }
@@ -199,15 +237,15 @@ import DataCenterMap from '../../components/DataCenterMap.astro';
   }
 
   @media (max-width: 768px) {
-    .tool {
+    .article {
       padding: 40px 0;
     }
 
-    .tool-header {
+    .article-header {
       margin-bottom: 40px;
     }
 
-    .tool-meta {
+    .article-meta {
       flex-direction: column;
       align-items: center;
     }

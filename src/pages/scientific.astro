@@ -1,52 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import Footer from '../components/Footer.astro';
 
 const scientificTools = [
   {
+    slug: 'data-center-predictor',
     title: 'Data Center Growth Predictor',
-    description: 'Interactive visualization of historical and projected data center distribution across U.S. states from 2008-2030, powered by machine learning models.',
-    href: '/scientific/data-center-predictor',
+    excerpt: 'Interactive visualization of historical and projected data center distribution across U.S. states from 2008-2030, powered by machine learning models.',
     tags: ['Machine Learning', 'Data Centers', 'Infrastructure', 'Predictive Analytics'],
-    date: 'January 2025'
+    authors: 'Justin Wang, Rishabh Ranjan',
+    date: 'January 2025',
+    readingTime: '5 min read'
   }
 ];
 ---
 
-<Layout title="Scientific Tools" description="Explore Novana's scientific tools and interactive analyses">
+<Layout title="Scientific" description="Interactive tools and predictive models that bring our research to life">
   <Header currentPath="/scientific" />
   
   <main class="main">
-    <section class="scientific-hero">
+    <section class="hero">
       <div class="container-narrow">
-        <h1 class="scientific-title">Scientific Tools</h1>
-        <p class="scientific-description">
-          Interactive tools and predictive models that bring our research to life. Explore our machine learning-powered analyses and data visualizations.
-        </p>
+        <div class="hero-content">
+          <h1 class="hero-title">Scientific Tools</h1>
+          <p class="hero-subtitle">Interactive tools and predictive models that bring our research to life. Explore our machine learning-powered analyses and data visualizations.</p>
+        </div>
       </div>
     </section>
 
-    <section class="tools-section">
-      <div class="container">
-        <div class="tools-grid">
+    <section class="articles">
+      <div class="container-narrow">
+        <h2>Latest Tools</h2>
+        <div class="articles-list">
           {scientificTools.map(tool => (
-            <article class="tool-card">
-              <div class="tool-content">
-                <div class="tool-tags">
-                  {tool.tags.map(tag => (
-                    <span class="tag">{tag}</span>
-                  ))}
-                </div>
-                <h2 class="tool-title">
-                  <a href={tool.href} class="tool-link">{tool.title}</a>
-                </h2>
-                <p class="tool-description">{tool.description}</p>
-                <div class="tool-meta">
-                  <span class="tool-date">{tool.date}</span>
-                </div>
-              </div>
-            </article>
+            <ArticleCard article={tool} basePath="/scientific" />
           ))}
         </div>
       </div>
@@ -61,13 +50,17 @@ const scientificTools = [
     min-height: calc(100vh - 70px);
   }
 
-  .scientific-hero {
+  .hero {
     padding: 80px 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     border-bottom: 1px solid #e5e5e5;
   }
 
-  .scientific-title {
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-title {
     font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 500;
     color: #1a1a1a;
@@ -75,17 +68,25 @@ const scientificTools = [
     line-height: 1.1;
   }
 
-  .scientific-description {
+  .hero-subtitle {
     font-size: 20px;
     color: #666;
     line-height: 1.6;
   }
 
-  .tools-section {
+  .articles {
     padding: 80px 0;
   }
 
-  .tools-grid {
+  .articles h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .articles-list {
     display: grid;
     gap: 32px;
     max-width: 800px;
@@ -153,8 +154,8 @@ const scientificTools = [
   }
 
   @media (max-width: 768px) {
-    .scientific-hero,
-    .tools-section {
+    .hero,
+    .articles {
       padding: 60px 0;
     }
 
