@@ -269,6 +269,7 @@ a:hover {
 	gap: var(--spacing-md);
 	color: var(--text-muted);
 	font-size: 14px;
+	font-family: 'Inter', system-ui, sans-serif;
 }
 
 .authors,
