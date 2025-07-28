@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import AuthorsSidebar from '../../components/AuthorsSidebar.astro';
+
+const authors = [
+	{
+		name: 'Justin Wang',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/jstwng/'
+	},
+	{
+		name: 'Rishabh Ranjan',
+		title: 'Co-Founder & Principal Researcher',
+		linkedin: 'https://www.linkedin.com/in/rishabhranj/'
+	}
+];
+---
+
+<Layout title="How FDA Politics Upended Replimune's RP1" description="Analysis of the FDA's surprising rejection of Replimune's RP1 and the implications for future drug approvals">
+	<Header currentPath="/markets" />
+	
+	<main class="main">
+		<nav class="breadcrumb">
+			<div class="container-narrow">
+				<a href="/markets" class="breadcrumb-link">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M19 12H5M12 19l-7-7 7-7"/>
+					</svg>
+					Back to Markets
+				</a>
+			</div>
+		</nav>
+
+		<article class="article">
+			<div class="container-narrow">
+				<header class="article-header">
+					<div class="article-tags">
+						<span class="tag">FDA Regulation</span>
+						<span class="tag">Biotechnology</span>
+						<span class="tag">Clinical Trials</span>
+					</div>
+					
+					<h1 class="article-title">How FDA Politics Upended Replimune's RP1</h1>
+					
+					<p class="article-subtitle">Analysis of the FDA's surprising rejection of Replimune's RP1 and the implications for future drug approvals under new leadership.</p>
+					
+					<div class="article-meta">
+						<div class="authors">
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+								<circle cx="12" cy="7" r="4"></circle>
+							</svg>
+							<span>Rishabh Ranjan, Justin Wang</span>
+						</div>
+						<div class="article-date">
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+								<line x1="16" y1="2" x2="16" y2="6"></line>
+								<line x1="8" y1="2" x2="8" y2="6"></line>
+								<line x1="3" y1="10" x2="21" y2="10"></line>
+							</svg>
+							<span>July 28, 2025</span>
+						</div>
+						<div class="reading-time">
+							<span>10 min read</span>
+						</div>
+					</div>
+				</header>
+
+				<div class="article-content">
+					<section class="abstract">
+						<h2 id="overview">Overview</h2>
+						<p>Replimune (NASDAQ: REPL) received a Complete Response Letter (CRL) from the FDA on July 22, 2025, for their Biologics License Application (BLA) of RP1, despite having Breakthrough Therapy designation and Priority Review status. This rejection reflects a philosophical shift at the FDA under new leadership, particularly Dr. Vinay Prasad, who has taken a stricter stance on single-arm trials and surrogate endpoints. The IGNYTE trial's 33.6% overall response rate and 21.6-month median duration of response were insufficient for approval, as the FDA cited concerns about patient population heterogeneity and the inability to isolate RP1's contribution from combination therapy with nivolumab. This decision signals a higher bar for the Accelerated Approval Pathway and suggests that randomized controlled trials will become increasingly necessary for future drug approvals.</p>
+					</section>
+
+					<section class="content-section">
+						<h2 id="introduction">Introduction</h2>
+						<p>Replimune (NASDAQ: REPL) is a Massachusetts-based biotechnology company focused on developing oncolytic immunotherapy solutions through its proprietary RPx biological platform. This platform is responsible for their clinical pipeline of three novel drugs, including their lead drug candidate, RP1 (vusolimogene oderparepvec). In a surprising turn of events for Replimune Group, the U.S. Food and Drug Administration (FDA) issued a Complete Response Letter (CRL) on July 22, 2025, for the Biologics License Application (BLA) of RP1. The decision means the FDA cannot approve the application in its current form, a significant setback for a therapy that was widely anticipated to receive approval for the treatment of advanced melanoma. We reflect on our own prior valuation of Replimune here. In this piece, Novana Scientific delves into the unanticipated rejection of RP1, unraveling the mystery behind the FDA's fateful decision and exploring its implications for future decisions.</p>
+						<p>RP1 is an oncolytic immunotherapy that uses a specially engineered strain of the herpes simplex virus type 1 (HSV-1). This platform is designed to maximize the death of cancer cells in a way that triggers a broad anti-tumor immune response throughout the body. As mentioned above, this is their first major drug produced by the RPx platform, with RP2 and RP3 under way.</p>
+						<p>It was intended to be used with nivolumab (Opdivo) for patients with advanced melanoma that has progressed after anti-PD-1 treatment. This would have addressed a significant unmet need, as over half of melanoma patients either do not respond to initial anti-PD-1 therapies or develop resistance over time.</p>
+
+						<h2 id="fda-designations">FDA Designations</h2>
+						<p>Perhaps the most positive signal from the FDA throughout the review process that led to widespread surprise of RP1's rejection was its breakthrough therapy designation. This status is intended to expedite the development and review of drugs that are meant to treat a serious condition and have preliminary clinical evidence indicating substantial improvement over available therapy. Historically, receiving this designation is a significant endorsement of a drug's potential. The agency also granted RP1 a priority review, a designation that shortens the FDA's review timeline from the standard 10 months to 6 months. Furthermore, the FDA informed Replimmune that it was not planning to hold an advisory committee (AdCom) meeting. AdComs are often convened to independent expert advice on complex applications – the decision to forgo one is frequently seen as a sign that the agency finds the submitted data to be clear and sufficient. Together, these formal communications from the FDA created a narrative that RP1 is a promising therapy on track for approval, making the eventual CRL all the more unexpected.</p>
+
+						<h2 id="ignyte-trial-design">IGYNTE Single-Arm Trial Design</h2>
+						<p>RP1's BLA was supported by data from the IGNYTE trial, which evaluated RP1 in combination with nivolumab. The results generated significant optimism, supported by compelling data from the single-arm, Phase 2 trial which had enrolled 140 patients with advanced melanoma. Historically, regulators have found a range of 100-200 participants acceptable for single-arm trials in oncology, especially when there is a significant treatment effect. IGNYTE demonstrated a confirmed overall response rate (ORR) of 33.6%, with a notable 15% of patients achieving a complete response (CR), meaning their tumors were completely eliminated. The ORR slightly surpassed that of its direct competitor, lifileucel (Amtagvi), which has an ORR of 31.4%. Furthermore, the treatment's effects were long lasting, with a median duration of response of 21.6 months. This is a critical measure of clinical benefit, especially when compared to the short progression-free survival seen with cytotoxic chemotherapy, which is as low as 1.7 months. RP1 also had a manageable safety profile – The majority of treatment-related adverse events (TRAEs) were mild to moderate (Grade 1 or 2). The most common side effects included fatigue, chills, fever, nausea, and flu-like symptoms. The rate of more severe Grade 3 or higher TRAEs was 12.8%, and no deaths were related to RP1.</p>
+						<p>These findings from the IGNYTE trial were convincing enough for most, including Wall Street, to anticipate its success due to a combination of strong efficacy data that compared favorably against existing treatments. However, the FDA viewed this data through a more rigorous lens, leading to the surprising rejection. This divergence was largely driven by the agency's new leadership, which has taken a harder line on what constitutes sufficient evidence approval. RP1's rejection appears to be, in part, a reflection of a philosophical shift at the FDA and its new leadership, which places a "greater emphasis on randomized controlled trials regardless of the patient population" This shift is linked to Dr. Vinay Prasad, the agency's Director of the Center for Biologics Evaluation and Research, whose known skepticism aligns with the agency's stricter stance in this case. He's explicitly expressed concern over the FDA's practice of granting approval to cancer drugs based on response rates from single-arm studies.</p>
+						<p>The FDA's Complete Response Letter (CRL) detailed specific flaws in the Phase 1/2 IGNYTE trial, which formed the basis of its decision. The agency concluded that the trial was not "an adequate and well-controlled clinical investigation that provides substantial evidence of effectiveness". One key issue highlighted by the FDA was heterogeneity of patient population, simply meaning that the patients enrolled in the single-arm study were too varied for the FDA to draw a clean conclusion. The trial included patients with only superficial tumors that could be early injected, patients with only deep or visceral tumors, and patients with both – making it difficult for the agency to adequately interpret the result and be certain the drug was effective across the board. Moreover, since RP1 was studied in combination with nivolumab, the FDA cited difficulty in determining the "contribution of components". In other words, without a control arm (a group receiving nivolumab alone), it was alone to empirically parse how much of the positive came from RP1 versus nivolumab.</p>
+
+						<h2 id="surrogate-endpoints">Surrogate Endpoints and the Accelerated Approval Pathway</h2>
+						<p>The IGYNYTE trial's design relied heavily on the FDA's Accelerated Approval Pathway, which allows companies to use surrogate endpoints to gain earlier market access for drugs treating serious conditions. A surrogate endpoint is a measure (such as tumor shrinkage) that is thought to predict clinical benefit, like longer survival. The key distinction is that surrogate endpoints themself aren't direct measures of that benefit. In the RP1 trial, the surrogate endpoint was the overall response rate (ORR), or the percentage of patients whose tumors shrank by a certain amount. Replimune's BLA application was formed on its 33% ORR with the understanding that a later confirmatory study would prove the drug helps patients live longer. The FDA has long permitted this approach; however, RP1's rejection suggests a renewed scrutiny. We believe this is also possibly inflicted by Dr. Prasad, especially when it comes from an uncontrolled trial.</p>
+						<p>Dr. Prasad's published academic work provides direct insight into this shir stricter viewpoint. In a 2022 paper, he and his co-authors argued that the Accelerated Approval pathway has become a route for "drugs with less favorable benefit-harm profiles to gain access based on endpoints that have little patient importance. They state that while tumor shrinkage or response is a measure of drug activity, it is "not necessarily a measure of clinical benefit that matters most to patients". In another paper, Dr. Prasad examines the FDA's own validation studies of these surrogate endpoints. His analysis found that of 15 such studies performed by the FDA, the "vast majority... did not find strong correlations between surrogates and overall survival". In fact, only a single study demonstrated a strong correlation. This academic foundation helps explain the FDA's new, more cautious stance, since their new leadership, which ultimately explains RP1's rejection.</p>
+
+						<h2 id="takeaways">Takeaways</h2>
+						<p>Ultimately, the failure was rooted in trial design and data submission. The positive top-line numbers created a perception of success that was shattered by the CRL. We're taking this as a stark warning that seemingly encouraging signals like Breakthrough Therapy designation are no longer a guarantee of approval. Moreover, this rejection makes clear that the single-arm design itself is under intense scrutiny; the FDA is signaling a move away from accepting such studies as significant evidence, especially for combination therapies, and will likely necessitate randomized controlled trials to isolate a drug's effect. Said shift is linked to the new leadership's stricter philosophical views on what constitutes "substantial evidence". Consequently, the bar for the Accelerated Approval Pathway has been raised significantly and relying on surrogate endpoints like ORR from an uncontrolled trial is now a high-risk strategy, as the agency re-emphasizes robust data and endpoints that matter most to patients.</p>
+					</section>
+				</div>
+			</div>
+		</article>
+	</main>
+
+	<TableOfContents />
+	<AuthorsSidebar authors={authors} />
+</Layout> 
