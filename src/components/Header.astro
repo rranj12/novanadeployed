@@ -135,17 +135,6 @@ const { currentPath } = Astro.props;
 		color: var(--text-primary);
 	}
 
-	.nav-link.active::after {
-		content: '';
-		position: absolute;
-		bottom: -8px;
-		left: 0;
-		right: 0;
-		height: 2px;
-		background: var(--text-primary);
-		border-radius: 1px;
-	}
-
 	/* Mobile styles */
 	@media (max-width: 768px) {
 		.mobile-menu-button {
