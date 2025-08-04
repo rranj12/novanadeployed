@@ -66,8 +66,8 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 
 <style>
 	.authors-sidebar {
-		right: calc(20vw - 200px);
-		width: 200px;
+		left: calc(50% + 275px + 50px);
+		width: 180px;
 		max-height: 70vh;
 		overflow-y: auto;
 		z-index: 100;
@@ -130,7 +130,7 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 	}
 
 	.read-about-link:hover {
-		color: #21752F;
+		color: #000000;
 	}
 
 	.contact-note {
@@ -146,25 +146,25 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 	}
 
 	.contact-link {
-		color: #21752F;
+		color: #000000;
 		text-decoration: none;
 		transition: color 0.2s ease;
 	}
 
 	.contact-link:hover {
-		color: #21752F;
+		color: #000000;
 		text-decoration: underline;
 	}
 
 	/* Show sidebar only on larger screens with enough space */
-	@media (min-width: 1200px) {
+	@media (min-width: 1000px) {
 		.authors-sidebar {
 			display: block;
 		}
 	}
 
 	/* Hide on smaller screens */
-	@media (max-width: 1199px) {
+	@media (max-width: 999px) {
 		.authors-sidebar {
 			display: none;
 		}

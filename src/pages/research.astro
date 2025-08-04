@@ -4,65 +4,116 @@ import Header from '../components/Header.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import Footer from '../components/Footer.astro';
 
-const researchArticles = [
+const allArticles = [
+	{
+		slug: 'replimune-valuation-bull-call-spread',
+		title: 'Explaining Our Replimune Valuation and Bull Call Spread',
+		excerpt: "An in-depth analysis of our bull call spread position on Replimune (NASDAQ: REPL) ahead of the FDA's PDUFA decision on RP1, including our valuation methodology and trade execution.",
+		tags: ['Markets', 'Trading Strategy', 'Biotechnology', 'Options Trading'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'August 3rd, 2025',
+		readingTime: '8 min read',
+		category: 'markets'
+	},
+	{
+		slug: 'replimune-fda-politics',
+		title: 'How FDA Politics Upended Replimune\'s RP1',
+		excerpt: "Analysis of the FDA's surprising rejection of Replimune's RP1 and the implications for future drug approvals under new leadership.",
+		tags: ['Markets', 'FDA Regulation', 'Biotechnology'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'July 2028',
+		readingTime: '6 min read',
+		category: 'markets'
+	},
+	{
+		slug: 'black-scholes-pricer',
+		title: 'Black-Scholes Options Pricer',
+		excerpt: 'Interactive options pricing calculator using the Black-Scholes model with real-time Greeks computation for European-style options.',
+		tags: ['Scientific', 'Options', 'Finance'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'January 2025',
+		readingTime: null,
+		category: 'scientific'
+	},
+	{
+		slug: 'data-center-predictor',
+		title: 'Data Center Growth Predictor',
+		excerpt: 'Interactive visualization of historical and projected data center distribution across U.S. states from 2008-2030, powered by machine learning models.',
+		tags: ['Scientific', 'Machine Learning', 'Infrastructure'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'July 21, 2025',
+		readingTime: null,
+		category: 'scientific'
+	},
 	{
 		slug: 'data-center-growth',
 		title: 'Our Thoughts on Data Center Growth',
 		excerpt: 'Novana Research examines the data center: its role in the AI value chain, infrastructure context, and future expansion hotbeds.',
-		tags: ['Data Centers', 'AI', 'Infrastructure'],
+		tags: ['Research','Data Center', 'AI', 'Infrastructure'],
 		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'July 15, 2025',
-		readingTime: '7 min read'
+		date: 'July 2028',
+		readingTime: '7 min read',
+		category: 'research',
+		image: '/ai-value-chain.png',
 	},
 	{
 		slug: 'beyond-silicon-biological-computing',
 		title: 'Beyond Silicon: Inside the Era of Biological Computing',
-		excerpt: 'A deep dive into the rise of biological (wetware) computing, its pioneers, and the future of hybrid AI hardware.',
-		tags: ['Biological Computing', 'Semiconductors', 'AI'],
+		excerpt: 'This piece is a part of Novana Scientific\'s "Concrete Foundations of Compute" series. Exploring the rise of biological (wetware) computing, its pioneers, and the future of hybrid AI hardware.',
+		tags: ['Research', 'Biological Computing', 'Semiconductors', 'AI'],
 		authors: 'Rishabh Ranjan, Justin Wang',
-		date: 'July 14, 2025',
-		readingTime: '7 min read'
+		date: 'July 2028',
+		readingTime: '7 min read',
+		category: 'research'
+	},
+	{
+		slug: 'unicycive-short-sale',
+		title: 'Our Unicycive (NASDAQ: UNCY) Short Sale',
+		excerpt: "Overview of Novana's beta-neutral short sale of Unicycive (UNCY) ahead of its FDA decision, betting the market had mispriced regulatory risk.",
+		tags: ['Markets', 'Biotechnology', 'FDA Regulation'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'July 2028',
+		readingTime: '5 min read',
+		category: 'markets'
 	},
 	{
 		slug: 'trump-tariff-policy-biotech',
 		title: 'What Trump\'s Tariff Policy means for Biotech',
-		excerpt: 'Analysis of how proposed tariff policies could impact the biotechnology sector, from supply chain costs to international market access and competitive dynamics.',
-		tags: ['Trade Policy', 'Biotechnology', 'Tariffs'],
-		authors: 'Rishabh Ranjan, Justin Wang',
-		date: 'June 18, 2025',
-		readingTime: '8 min read'
+		excerpt: 'Analysis of tariff-driven cost pressures in the U.S. biotech supply chain, highlighting emerging opportunities in high-margin therapeutics and diagnostics.',
+		tags: ['Research', 'Biotechnology', 'Tariffs'],
+		authors: 'Justin Wang, Rishabh Ranjan',
+		date: 'July 2028',
+		readingTime: '8 min read',
+		category: 'research'
 	},
 	{
 		slug: 'factor-investing-biotech-equities',
 		title: 'On Factor Investing for U.S. Biotechnology Equities',
 		excerpt: 'We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.',
-		tags: ['Factor Investing', 'Biotechnology', 'Equities'],
+		tags: ['Research', 'Factor Investing', 'Biotechnology'],
 		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'June 13, 2025',
-		readingTime: '10 min read'
-	}
+		date: 'July 2028',
+		readingTime: '10 min read',
+		category: 'research'
+	},
 ];
 ---
 
-<Layout title="Research" description="Deep tech investment research and analysis">
+<Layout title="Research" description="In-depth research on emerging technology opportunities and market trends">
 	<Header currentPath="/research" />
 	
 	<main class="main">
-		<section class="hero">
-			<div class="container-narrow">
-				<div class="hero-content">
-					<h1 class="hero-title">Thematic Research</h1>
-					<p class="hero-subtitle">In-depth investment research and technical analysis on emerging deep technology investment opportunities.</p>
+		<section class="articles-section">
+			<div class="container">
+				<div class="filter-bar">
+					<button class="filter-btn active" data-category="all">All</button>
+					<button class="filter-btn" data-category="research">Research</button>
+					<button class="filter-btn" data-category="markets">Markets</button>
+					<button class="filter-btn" data-category="scientific">Scientific</button>
 				</div>
-			</div>
-		</section>
-
-		<section class="articles">
-			<div class="container-narrow">
-				<h2>Latest Research</h2>
-				<div class="articles-list">
-					{researchArticles.map(article => (
-						<ArticleCard article={article} />
+				<div class="articles-grid">
+					{allArticles.map(article => (
+						<ArticleCard article={article} basePath={article.category === 'scientific' ? '/scientific' : '/articles'} />
 					))}
 				</div>
 			</div>
@@ -70,3 +121,228 @@ const researchArticles = [
 	</main>
 	<Footer />
 </Layout>
+
+<script>
+	// Filter functionality
+	document.addEventListener('DOMContentLoaded', function() {
+		const filterButtons = document.querySelectorAll('.filter-btn');
+		const articleCards = document.querySelectorAll('.article-card');
+
+		function updateBorders() {
+			// Remove all border classes first
+			articleCards.forEach(card => {
+				card.classList.remove('no-right-border', 'no-bottom-border');
+			});
+
+			// Get visible cards
+			const visibleCards = Array.from(articleCards).filter(card => 
+				card.style.display !== 'none'
+			);
+
+			// Apply borders to visible cards
+			visibleCards.forEach((card, index) => {
+				// Remove right border from every 3rd visible item (last column)
+				if ((index + 1) % 3 === 0) {
+					card.classList.add('no-right-border');
+				}
+				
+				// Remove bottom border from last row
+				const totalVisible = visibleCards.length;
+				const lastRowStart = Math.floor((totalVisible - 1) / 3) * 3;
+				if (index >= lastRowStart) {
+					card.classList.add('no-bottom-border');
+				}
+			});
+		}
+
+		filterButtons.forEach(button => {
+			button.addEventListener('click', () => {
+				// Update active button
+				filterButtons.forEach(btn => btn.classList.remove('active'));
+				button.classList.add('active');
+
+				const category = button.dataset.category;
+
+				// Filter articles
+				articleCards.forEach(card => {
+					const articleCategory = card.dataset.category;
+					if (category === 'all') {
+						card.style.display = 'block';
+					} else {
+						if (articleCategory === category) {
+							card.style.display = 'block';
+						} else {
+							card.style.display = 'none';
+						}
+					}
+				});
+
+				// Update borders after filtering
+				updateBorders();
+			});
+		});
+
+		// Initialize borders on page load
+		updateBorders();
+	});
+</script>
+
+<style>
+	.articles-section {
+		background: #fff;
+		padding: var(--spacing-lg) 0;
+	}
+
+	.container {
+		background: #fff;
+		max-width: 100%;
+		padding: 0 60px;
+		margin: 0 auto;
+	}
+
+	.filter-bar {
+		display: flex;
+		gap: 12px;
+		margin-bottom: 32px;
+		justify-content: center;
+	}
+
+	.filter-btn {
+		padding: 8px 20px;
+		border: 1px solid #ddd;
+		background: #fff;
+		color: #666;
+		border-radius: 25px;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: 500;
+		transition: all 0.2s ease;
+		text-decoration: none;
+		display: inline-block;
+	}
+
+	.filter-btn:hover {
+		border-color: #999;
+		color: #333;
+	}
+
+	.filter-btn.active {
+		background: #000;
+		border-color: #000;
+		color: #fff;
+	}
+
+	.articles-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		border: 1px solid #ddd;
+		background: #fff;
+		width: 100%;
+	}
+
+	.articles-grid :global(.article-card) {
+		background: #fff;
+		color: #000;
+		border: none;
+		border-radius: 0;
+		margin: 0;
+		padding: 30px;
+		border-right: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+		transition: background-color 0.2s ease;
+		min-height: 400px;
+		display: flex;
+		flex-direction: column;
+		cursor: pointer;
+	}
+
+	.articles-grid :global(.article-card:hover) {
+		background: #f5f5f5;
+		transform: none;
+		box-shadow: none;
+	}
+
+	.articles-grid :global(.article-card .article-title) {
+		color: #000;
+		font-size: 1.4rem;
+		margin-bottom: 16px;
+		line-height: 1.3;
+	}
+
+	.articles-grid :global(.article-card .article-title a) {
+		color: #000;
+	}
+
+	.articles-grid :global(.article-card .article-title a:hover) {
+		color: #333;
+	}
+
+	.articles-grid :global(.article-excerpt) {
+		color: #666;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		margin-bottom: 16px;
+		flex-grow: 1;
+	}
+
+	.articles-grid :global(.article-tags) {
+		margin-bottom: 16px;
+	}
+
+	.articles-grid :global(.tag) {
+		background: #f0f0f0;
+		color: #000;
+		border: 1px solid #ddd;
+		font-size: 0.75rem;
+		padding: 3px 6px;
+	}
+
+	.articles-grid :global(.tag:hover) {
+		background: #e0e0e0;
+		border-color: #ccc;
+	}
+
+	.articles-grid :global(.article-meta) {
+		color: #666;
+		font-size: 0.8rem;
+		margin-top: auto;
+		padding-top: 16px;
+		border-top: 1px solid #eee;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.articles-grid :global(.article-meta svg) {
+		color: #666;
+	}
+
+	.articles-grid :global(.article-date) {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.articles-grid :global(.reading-time) {
+		font-weight: 500;
+	}
+
+	/* Dynamic border removal classes */
+	.articles-grid :global(.article-card.no-right-border) {
+		border-right: none;
+	}
+
+	.articles-grid :global(.article-card.no-bottom-border) {
+		border-bottom: none;
+	}
+
+	/* Ensure background is white */
+	:global(body) {
+		background: #fff;
+	}
+
+	:global(.main) {
+		background: #fff;
+	}
+</style>

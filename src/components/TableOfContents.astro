@@ -90,7 +90,7 @@
 				const tocItem = document.querySelector(`[data-target="${activeHeading.id}"]`);
 				if (tocItem) {
 					tocItem.classList.add('active');
-					tocItem.style.color = '#21752F'; // Force green color
+					tocItem.style.color = '#000000'; // Force green color
 					tocItem.style.fontWeight = 'bold'; // Make current section bold
 				}
 			}
@@ -120,8 +120,9 @@
 
 <style>
 	.table-of-contents {
-		left: calc(20vw - 200px);
-		width: 200px;
+		position: fixed;
+		left: calc(50% - 275px - 225px);
+		width: 180px;
 		z-index: 100;
 		max-height: 70vh;
 		overflow-y: auto;
@@ -179,11 +180,11 @@
 	}
 
 	.toc-item:hover {
-		color: #21752F;
+		color: #000000;
 	}
 
 	.toc-item.active {
-		color: #21752F !important;
+		color: #000000 !important;
 		font-weight: 600 !important;
 		position: relative;
 	}
@@ -195,17 +196,17 @@
 		top: 0;
 		bottom: 0;
 		width: 3px;
-		background: #21752F;
+		background: #000000;
 		border-radius: 2px;
 	}
 
 	.toc-item.active.toc-h3 {
 		font-weight: 500;
-		color: #21752F !important;
+		color: #000000 !important;
 	}
 
 	/* Hide on smaller screens */
-	@media (max-width: 1200px) {
+	@media (max-width: 1000px) {
 		.table-of-contents {
 			display: none;
 		}

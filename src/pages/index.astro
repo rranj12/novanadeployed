@@ -1,174 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import ArticleCard from '../components/ArticleCard.astro';
 import Footer from '../components/Footer.astro';
 
-const allArticles = [
-	{
-		slug: 'replimune-valuation-bull-call-spread',
-		title: 'Explaining Our Replimune Valuation and Bull Call Spread',
-		excerpt: "An in-depth analysis of our bull call spread position on Replimune (NASDAQ: REPL) ahead of the FDA's PDUFA decision on RP1, including our valuation methodology and trade execution.",
-		tags: ['Markets', 'Trading Strategy', 'Biotechnology', 'Options Trading'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'August 3rd, 2025',
-		readingTime: '8 min read',
-		category: 'markets'
-	},
-	{
-		slug: 'replimune-fda-politics',
-		title: 'How FDA Politics Upended Replimune\'s RP1',
-		excerpt: "Analysis of the FDA's surprising rejection of Replimune's RP1 and the implications for future drug approvals under new leadership.",
-		tags: ['Markets', 'FDA Regulation', 'Biotechnology'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'July 2028',
-		readingTime: '6 min read',
-		category: 'markets'
-	},
-	{
-		slug: 'black-scholes-pricer',
-		title: 'Black-Scholes Options Pricer',
-		excerpt: 'Interactive options pricing calculator using the Black-Scholes model with real-time Greeks computation for European-style options.',
-		tags: ['Scientific', 'Options', 'Finance'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'January 2025',
-		readingTime: null,
-		category: 'scientific'
-	},
-	{
-		slug: 'data-center-predictor',
-		title: 'Data Center Growth Predictor',
-		excerpt: 'Interactive visualization of historical and projected data center distribution across U.S. states from 2008-2030, powered by machine learning models.',
-		tags: ['Scientific', 'Machine Learning', 'Infrastructure'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'July 21, 2025',
-		readingTime: null,
-		category: 'scientific'
-	},
-	{
-		slug: 'data-center-growth',
-		title: 'Our Thoughts on Data Center Growth',
-		excerpt: 'Novana Research examines the data center: its role in the AI value chain, infrastructure context, and future expansion hotbeds.',
-		tags: ['Research','Data Center', 'AI', 'Infrastructure'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'July 2028',
-		readingTime: '7 min read',
-		category: 'research',
-		image: '/ai-value-chain.png',
-	},
-	{
-		slug: 'beyond-silicon-biological-computing',
-		title: 'Beyond Silicon: Inside the Era of Biological Computing',
-		excerpt: 'This piece is a part of Novana Scientific\'s "Concrete Foundations of Compute" series. Exploring the rise of biological (wetware) computing, its pioneers, and the future of hybrid AI hardware.',
-		tags: ['Research', 'Biological Computing', 'Semiconductors', 'AI'],
-		authors: 'Rishabh Ranjan, Justin Wang',
-		date: 'July 2028',
-		readingTime: '7 min read',
-		category: 'research'
-	},
-	{
-		slug: 'unicycive-short-sale',
-		title: 'Our Unicycive (NASDAQ: UNCY) Short Sale',
-		excerpt: "Overview of Novana's beta-neutral short sale of Unicycive (UNCY) ahead of its FDA decision, betting the market had mispriced regulatory risk.",
-		tags: ['Markets', 'Biotechnology', 'FDA Regulation'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'July 2028',
-		readingTime: '5 min read',
-		category: 'markets'
-	},
-	{
-		slug: 'trump-tariff-policy-biotech',
-		title: 'What Trump\'s Tariff Policy means for Biotech',
-		excerpt: 'Analysis of tariff-driven cost pressures in the U.S. biotech supply chain, highlighting emerging opportunities in high-margin therapeutics and diagnostics.',
-		tags: ['Research', 'Biotechnology', 'Tariffs'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'July 2028',
-		readingTime: '8 min read',
-		category: 'research'
-	},
-	{
-		slug: 'factor-investing-biotech-equities',
-		title: 'On Factor Investing for U.S. Biotechnology Equities',
-		excerpt: 'We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.',
-		tags: ['Research', 'Factor Investing', 'Biotechnology'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'July 2028',
-		readingTime: '10 min read',
-		category: 'research'
-	},
-];
+// Read all ASCII art frames
+import fs from 'fs';
+import path from 'path';
+
+let asciiFrames = [];
+try {
+	// Load frames frame_00.txt through frame_11.txt
+	for (let i = 0; i < 20; i++) {
+		const frameNumber = i.toString().padStart(2, '0');
+		const framePath = path.join(process.cwd(), 'frames5', `frame_${frameNumber}.txt`);
+		const rawAscii = fs.readFileSync(framePath, 'utf-8');
+		
+		// Process ASCII to make darker characters bold
+		const processedAscii = rawAscii.replace(/[+*#%@=]/g, (char) => {
+			return `<span class="bold-char">${char}</span>`;
+		});
+		
+		asciiFrames.push(processedAscii);
+	}
+} catch (error) {
+	console.error('Could not read ASCII frames:', error);
+	// Fallback to single frame if frames folder doesn't exist
+	try {
+		const rawAscii = fs.readFileSync(path.join(process.cwd(), 'ascii.txt'), 'utf-8');
+		const processedAscii = rawAscii.replace(/[+*#%@=]/g, (char) => {
+			return `<span class="bold-char">${char}</span>`;
+		});
+		asciiFrames.push(processedAscii);
+	} catch (fallbackError) {
+		console.error('Could not read fallback ascii.txt:', fallbackError);
+	}
+}
 ---
 
 <Layout title="Thematic Deep Technology Insights and Market Analysis" description="Professional analysis of emerging technology opportunities and market trends">
 	<Header currentPath="/" />
 	
 	<main class="main">
-		<section class="hero hero-video">
-			<video 
-				autoplay 
-				muted 
-				loop 
-				playsinline
-				class="hero-background-video"
-				id="hero-video"
-			>
-				<source src="/background-video-compressed.mp4" type="video/mp4">
-			</video>
-			<div class="hero-overlay"></div>
-			<div class="container">
+		<section class="hero">
+			<div class="ascii-background">
+				<pre class="ascii-art" id="ascii-art"></pre>
+			</div>
+			<div class="hero-container">
 				<div class="hero-content">
-					<h1 class="hero-title">We're betting on deep technology innovation and adoption, from the <em>birthplace</em> of Silicon Valley.</h1>
+					<h1 class="hero-title">We're betting on deep technology innovation and adoption, from the birthplace of Silicon Valley.</h1>
 					<p class="hero-subtitle">Novana's Stanford-based team produces in-house technology analyses, investment research briefs, and market trend writeups across edge computing, biotechnology, artificial intelligence, and other frontier technology industries.</p>
-				</div>
-			</div>
-		</section>
-
-		<section class="what-we-do">
-			<div class="container">
-				<div class="services-grid">
-					<div class="service-card research">
-						<h3 class="service-title">Research</h3>
-						<p class="service-description">In-depth investment research on emerging technology opportunities spanning artificial intelligence, biotechnology, and other frontier technology industries.</p>
-						<a href="/research" class="service-link">
-							Explore Research
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<path d="M7 17L17 7M17 7H7M17 7V17"/>
-							</svg>
-						</a>
-					</div>
-					
-					<div class="service-card markets">
-						<h3 class="service-title">Markets</h3>
-						<p class="service-description">We make class-agnostic, market-neutral trades driven by theses derived from our in-house deep technology research and supported by our unique asset management approach.</p>
-						<a href="/markets" class="service-link">
-							View Markets
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<path d="M7 17L17 7M17 7H7M17 7V17"/>
-							</svg>
-						</a>
-					</div>
-					
-					<div class="service-card scientific">
-						<h3 class="service-title">Scientific</h3>
-						<p class="service-description">We build interactive tools and predictive models in-house, introducing quantitative rigor to our investment research and management processes. Documentation and usage instructions are public.</p>
-						<a href="/scientific" class="service-link">
-							Try Tools
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<path d="M7 17L17 7M17 7H7M17 7V17"/>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="articles">
-			<div class="container-narrow">
-				<h2>Latest Insights</h2>
-				<div class="articles-list">
-					{allArticles.map(article => (
-						<ArticleCard article={article} basePath={article.category === 'scientific' ? '/scientific' : '/articles'} />
-					))}
 				</div>
 			</div>
 		</section>
@@ -176,121 +56,137 @@ const allArticles = [
 	<Footer />
 </Layout>
 
+<script define:vars={{ asciiFrames }}>
+	// ASCII Animation
+	document.addEventListener('DOMContentLoaded', function() {
+		const asciiElement = document.getElementById('ascii-art');
+		let currentFrame = 0;
+		
+		console.log('ASCII frames loaded:', asciiFrames ? asciiFrames.length : 0);
+		
+		// Set initial frame
+		if (asciiFrames && asciiFrames.length > 0) {
+			asciiElement.innerHTML = asciiFrames[0];
+			console.log('Set initial frame');
+			
+			// Only animate if we have multiple frames
+			if (asciiFrames.length > 1) {
+				console.log('Starting animation with', asciiFrames.length, 'frames');
+				setInterval(() => {
+					currentFrame = (currentFrame + 1) % asciiFrames.length;
+					asciiElement.innerHTML = asciiFrames[currentFrame];
+					console.log('Frame:', currentFrame);
+				}, 200); // Slightly slower for testing
+			}
+		} else {
+			console.error('No ASCII frames available');
+			asciiElement.innerHTML = 'No animation frames loaded';
+		}
+	});
+</script>
+
 <style>
-	/* What We Do Section */
-	.what-we-do {
-		padding: 80px 0;
-		background: linear-gradient(135deg, #f8f9fa 0%, rgba(33, 117, 47, 0.02) 50%, #f8f9fa 100%);
-	}
-
-	.services-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: 40px;
-		max-width: 1100px;
-		margin: 0 auto;
-	}
-
-	.service-card {
-		background: linear-gradient(135deg, #21752F, #2d8f3f);
-		border-radius: 16px;
-		padding: 40px 32px;
-		text-align: left;
-		transition: all 0.4s ease;
-		box-shadow: 0 8px 25px rgba(33, 117, 47, 0.25);
-		border: none;
+	.hero {
 		position: relative;
+		min-height: calc(140vh - 80px);
+		display: flex;
+		align-items: center;
 		overflow: hidden;
 	}
-
-	.service-card::before {
-		content: '';
+	
+	.ascii-background {
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 4px;
-		background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-		transform: scaleX(0);
-		transition: transform 0.4s ease;
+		top: 37%;
+		left: 51%;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+		opacity: 10.0;
+		pointer-events: none;
 	}
-
-	.service-card:hover {
-		transform: translateY(-8px);
-		box-shadow: 0 20px 40px rgba(33, 117, 47, 0.35);
+	
+	.ascii-art {
+		font-family: "Courier New", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Liberation Mono", Menlo, monospace;
+		/* Keep the font size that works well */
+		font-size: 5px;
+		line-height: 1;
+		color: #000000;
+		white-space: pre;
+		margin: 0;
+		display: block;
+		letter-spacing: 0;
+		word-spacing: 0;
+		font-weight: normal;
+		font-variant-ligatures: none;
+		text-rendering: optimizeSpeed;
+		transform: scaleX(0.75);
+		transform-origin: center;
 	}
-
-	.service-card:hover::before {
-		transform: scaleX(1);
+	
+	.bold-char {
+		font-weight: bold;
+		color: #000000;
 	}
-
-	.service-title {
-		font-size: 24px;
-		font-weight: 500;
-		color: white;
-		margin-bottom: 16px;
-		font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
-	}
-
-	.service-description {
-		font-size: 14px;
-		color: rgba(255, 255, 255, 0.9);
-		line-height: 1.6;
-		margin-bottom: 28px;
-		font-family: 'Inter', system-ui, sans-serif;
-	}
-
-	.service-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		color: white;
-		text-decoration: none;
-		font-weight: 600;
-		font-family: 'Inter', system-ui, sans-serif;
-		font-size: 12.5px;
-		transition: all 0.3s ease;
+	
+	.hero-container {
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 var(--spacing-lg);
 		position: relative;
-		background: rgba(255, 255, 255, 0.15);
-		padding: 6px 12px;
-		border-radius: 12px;
-		border: 1px solid rgba(255, 255, 255, 0.2);
+		z-index: 10;
 	}
-
-	.service-link:hover {
-		color: white;
-		transform: translateX(4px);
-		background: rgba(255, 255, 255, 0.25);
-		border-color: rgba(255, 255, 255, 0.3);
+	
+	.hero-content {
+		max-width: 800px;
+		margin-left: 18%;
+		position: absolute;
+		top: calc(37% + 280px);
+		transform: translateY(0);
 	}
-
-	.service-link svg {
-		transition: transform 0.3s ease;
+	
+	.hero-title {
+		font-size: 3rem;
+		font-weight: 700;
+		line-height: 1.1;
+		margin-bottom: var(--spacing-xl);
+		color: var(--text-primary);
 	}
-
-	.service-link:hover svg {
-		transform: rotate(45deg);
+	
+	.hero-subtitle {
+		font-size: 1.3rem;
+		line-height: 1.6;
+		color: var(--text-secondary);
+		margin: 0;
 	}
-
-	/* Responsive Design */
+	
+	/* Fine-tune for very large screens */
+	@media (min-width: 1800px) {
+		.ascii-art {
+			font-size: 5px;
+			transform: scaleX(calc(0.05 * 100vw / 2040));
+		}
+	}
+	
+	/* Fine-tune for smaller desktop screens */
+	@media (max-width: 1200px) and (min-width: 769px) {
+		.ascii-art {
+			font-size: 5px;
+			transform: scaleX(calc(0.05 * 100vw / 2040));
+		}
+	}
+	
+	/* Mobile devices - completely different layout */
 	@media (max-width: 768px) {
-		.what-we-do {
-			padding: 60px 0;
+		.hero-title {
+			font-size: 2rem;
 		}
-
-		.services-grid {
-			grid-template-columns: 1fr;
-			gap: 32px;
+		
+		.hero-subtitle {
+			font-size: 1rem;
 		}
-
-		.service-card {
-			padding: 32px 24px;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.service-card {
-			padding: 28px 20px;
+		
+		.ascii-background {
+			display: none;
 		}
 	}
 </style>

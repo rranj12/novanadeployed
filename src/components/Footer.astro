@@ -3,11 +3,11 @@
 ---
 
 <footer class="site-footer">
-	<div class="container-narrow">
+	<div class="container">
 		<div class="footer-content">
 			<div class="copyright">
 				<p>© 2025 Novana Insights. All rights reserved.</p>
-				<p>This analysis is intended for institutional investors and qualified professionals. Views expressed do not constitute investment advice.</p>
+				<p class="disclaimer">This analysis is intended for institutional investors and qualified professionals. Views expressed do not constitute investment advice.</p>
 			</div>
 		</div>
 	</div>
@@ -15,43 +15,53 @@
 
 <style>
 	.site-footer {
-		margin-top: 80px;
-		padding: 80px 0;
-		background: #21752F;
+		margin-top: var(--spacing-3xl);
+		padding: var(--spacing-xl) 0;
+		background: var(--bg-white);
+		border-top: 1px solid var(--border-color);
 	}
 
 	.footer-content {
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		justify-content: flex-start;
+		align-items: flex-start;
 	}
 
 	.copyright {
-		color: white;
+		color: var(--text-muted);
 		font-size: 14px;
 		line-height: 1.5;
-		text-align: center;
+		text-align: left;
+		margin-left: 16%;
 	}
 
 	.copyright p {
 		margin: 0;
+		font-weight: 500;
 	}
 
-	.copyright p:first-child {
-		margin-bottom: 4px;
-		font-family: var(--font-family);
-		font-size: 16px;
-	}
-
-	.copyright p:last-child {
-		font-family: 'Inter', system-ui, sans-serif;
-		font-size: 12.5px;
+	.disclaimer {
+		font-size: 12px;
+		font-weight: 400 !important;
+		margin-top: 4px !important;
+		max-width: 500px;
+		line-height: 1.4;
+		text-align: left;
 	}
 
 	@media (max-width: 768px) {
 		.site-footer {
-			margin-top: 60px;
-			padding: 60px 0;
+			margin-top: var(--spacing-2xl);
+			padding: var(--spacing-lg) 0;
+		}
+
+		.footer-content {
+			flex-direction: column;
+			gap: var(--spacing-md);
+		}
+
+		.copyright {
+			text-align: left;
 		}
 	}
 </style> 

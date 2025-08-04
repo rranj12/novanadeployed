@@ -20,8 +20,6 @@ const { currentPath } = Astro.props;
 			<div class="nav-links" id="nav-links">
 				<a href="/" class={currentPath === '/' ? 'nav-link active' : 'nav-link'}>Home</a>
 				<a href="/research" class={currentPath === '/research' ? 'nav-link active' : 'nav-link'}>Research</a>
-				<a href="/markets" class={currentPath === '/markets' ? 'nav-link active' : 'nav-link'}>Markets</a>
-				<a href="/scientific" class={currentPath === '/scientific' ? 'nav-link active' : 'nav-link'}>Scientific</a>
 				<a href="/about" class={currentPath === '/about' ? 'nav-link active' : 'nav-link'}>About</a>
 			</div>
 		</nav>
@@ -63,26 +61,27 @@ const { currentPath } = Astro.props;
 		position: sticky;
 		top: 0;
 		z-index: 100;
-		backdrop-filter: blur(10px);
+		border-bottom: 1px solid var(--border-color);
 	}
 
 	.nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 70px;
+		height: 80px;
 	}
 
 	.logo {
 		text-decoration: none;
-		color: #1a1a1a;
+		color: var(--text-primary);
 	}
 
 	.logo-text {
-		font-size: 24px;
-		font-weight: 500;
-		color: #1a1a1a;
+		font-size: 20px;
+		font-weight: 700;
+		color: var(--text-primary);
 		line-height: 1.0;
+		letter-spacing: -0.01em;
 	}
 
 	.mobile-menu-button {
@@ -99,7 +98,7 @@ const { currentPath } = Astro.props;
 	.hamburger-line {
 		width: 24px;
 		height: 2px;
-		background: #1a1a1a;
+		background: var(--text-primary);
 		transition: all 0.3s ease;
 		border-radius: 1px;
 	}
@@ -123,18 +122,17 @@ const { currentPath } = Astro.props;
 	}
 
 	.nav-link {
-		color: #666;
+		color: var(--text-secondary);
 		text-decoration: none;
 		font-weight: 500;
 		transition: color 0.2s ease;
 		position: relative;
-		font-family: 'Inter', system-ui, sans-serif;
-		font-size: 14px;
+		font-size: 15px;
 	}
 
 	.nav-link:hover,
 	.nav-link.active {
-		color: #21752F;
+		color: var(--text-primary);
 	}
 
 	.nav-link.active::after {
@@ -144,7 +142,7 @@ const { currentPath } = Astro.props;
 		left: 0;
 		right: 0;
 		height: 2px;
-		background: #21752F;
+		background: var(--text-primary);
 		border-radius: 1px;
 	}
 
@@ -156,18 +154,19 @@ const { currentPath } = Astro.props;
 		
 		.nav-links {
 			position: fixed;
-			top: 70px;
+			top: 80px;
 			right: 0;
-			width: 200px;
-			background: #21752F;
+			width: 240px;
+			background: white;
 			flex-direction: column;
 			gap: 0;
-			padding: 15px 0;
+			padding: 20px 0;
 			transform: translateX(100%);
 			opacity: 0;
 			visibility: hidden;
 			transition: all 0.3s ease;
-			box-shadow: -8px 4px 20px rgba(0, 0, 0, 0.15), -2px 0 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+			box-shadow: -8px 4px 20px rgba(0, 0, 0, 0.15);
+			border-left: 1px solid var(--border-color);
 		}
 		
 		.nav-links.active {
@@ -177,20 +176,18 @@ const { currentPath } = Astro.props;
 		}
 		
 		.nav-link {
-			padding: 8px 20px;
-			margin-right: 8px;
-			border-bottom: none;
-			font-size: 14px;
-			color: white;
-			text-align: right;
+			padding: 12px 24px;
+			font-size: 16px;
+			color: var(--text-primary);
+			text-align: left;
 			display: block;
-			width: calc(100% - 8px);
+			width: 100%;
 		}
 		
 		.nav-link:hover,
 		.nav-link.active {
-			color: white;
-			background: none;
+			color: var(--text-secondary);
+			background: var(--bg-light);
 		}
 		
 		.nav-link.active::after {
@@ -198,7 +195,7 @@ const { currentPath } = Astro.props;
 		}
 		
 		.logo-text {
-			font-size: 20px;
+			font-size: 18px;
 		}
 	}
 </style>
