@@ -41,17 +41,19 @@ try {
 	<Header currentPath="/" />
 	
 	<main class="main">
-		<section class="hero">
-			<div class="ascii-background">
-				<pre class="ascii-art" id="ascii-art"></pre>
-			</div>
-			<div class="hero-container">
-				<div class="hero-content">
-					<h1 class="hero-title">We're betting on deep technology innovation and adoption, from the birthplace of Silicon Valley.</h1>
-					<p class="hero-subtitle">Novana's Stanford-based team produces in-house technology analyses, investment research briefs, and market trend writeups across edge computing, biotechnology, artificial intelligence, and other frontier technology industries.</p>
+		<div class="page-container">
+			<section class="hero">
+				<div class="ascii-background">
+					<pre class="ascii-art" id="ascii-art"></pre>
 				</div>
-			</div>
-		</section>
+				<div class="hero-container">
+					<div class="hero-content">
+						<h1 class="hero-title">We're betting on deep technology innovation and adoption, from the birthplace of Silicon Valley.</h1>
+						<p class="hero-subtitle">Novana's Stanford-based team produces in-house technology analyses, investment research briefs, and market trend writeups across edge computing, biotechnology, artificial intelligence, and other frontier technology industries.</p>
+					</div>
+				</div>
+			</section>
+		</div>
 	</main>
 	<Footer />
 </Layout>
@@ -86,6 +88,29 @@ try {
 </script>
 
 <style>
+	/* Global body styling for wide screens */
+	:global(body) {
+		background: #fff;
+		margin: 0;
+		padding: 0;
+	}
+
+	.page-container {
+		max-width: 1440px;
+		margin: 0 auto;
+		background: #fff;
+		position: relative;
+		min-height: 100vh;
+	}
+
+	/* Add subtle borders for screens wider than MacBook */
+	@media (min-width: 1441px) {
+		.page-container {
+			border-left: 1px solid #e5e5e5;
+			border-right: 1px solid #e5e5e5;
+		}
+	}
+
 	.hero {
 		position: relative;
 		min-height: calc(140vh - 80px);
