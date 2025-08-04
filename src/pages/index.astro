@@ -14,12 +14,13 @@ import Footer from '../components/Footer.astro';
 			</div>
 			<div class="hero-container">
 				<div class="hero-content">
-					<h1 class="hero-title">We're betting on deep technology innovation and adoption, from the birthplace of Silicon Valley.</h1>
+					<h1 class="hero-title">We're betting on deep technology innovation and adoption from the birthplace of Silicon Valley.</h1>
 					<p class="hero-subtitle">Novana's Stanford-based team produces in-house technology analyses, investment research briefs, and market trend writeups across edge computing, biotechnology, artificial intelligence, and other frontier technology industries.</p>
 				</div>
 			</div>
 		</section>
 	</main>
+	<Footer />
 </Layout>
 
 <script>
@@ -36,7 +37,7 @@ import Footer from '../components/Footer.astro';
 			
 			// Animation parameters
 			this.time = 0;
-			this.waveSpeed = 0.01; // Increased from 0.005
+			this.waveSpeed = 0.007; // Increased from 0.005
 			
 			// Performance monitoring
 			this.frameCount = 0;
@@ -52,21 +53,26 @@ import Footer from '../components/Footer.astro';
 		resizeCanvas() {
 			const devicePixelRatio = window.devicePixelRatio || 1;
 			
-			// Set logical size
-			this.canvas.style.width = window.innerWidth + 'px';
-			this.canvas.style.height = window.innerHeight + 'px';
+			// Get hero section dimensions instead of window dimensions
+			const heroSection = document.querySelector('.hero');
+			const heroWidth = heroSection ? heroSection.offsetWidth : window.innerWidth;
+			const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+			
+			// Set logical size to hero dimensions
+			this.canvas.style.width = heroWidth + 'px';
+			this.canvas.style.height = heroHeight + 'px';
 			
 			// Set actual canvas size accounting for device pixel ratio
-			this.canvas.width = window.innerWidth * devicePixelRatio;
-			this.canvas.height = window.innerHeight * devicePixelRatio;
+			this.canvas.width = heroWidth * devicePixelRatio;
+			this.canvas.height = heroHeight * devicePixelRatio;
 			
 			// Scale the context to match device pixel ratio
 			this.ctx.scale(devicePixelRatio, devicePixelRatio);
 			
-			console.log(`Canvas: ${window.innerWidth}x${window.innerHeight} logical, ${this.canvas.width}x${this.canvas.height} physical, DPR: ${devicePixelRatio}`);
+			console.log(`Canvas: ${heroWidth}x${heroHeight} logical, ${this.canvas.width}x${this.canvas.height} physical, DPR: ${devicePixelRatio}`);
 			
 			// Regenerate points when window size changes significantly for consistent coverage
-			const newArea = window.innerWidth * window.innerHeight; // Use logical size for area calculation
+			const newArea = heroWidth * heroHeight; // Use hero dimensions for area calculation
 			const oldArea = this.lastArea || newArea;
 			const areaChange = Math.abs(newArea - oldArea) / oldArea;
 			
@@ -86,9 +92,12 @@ import Footer from '../components/Footer.astro';
 		generateFlowingPoints() {
 			const points = [];
 			
-			// Calculate spacing based on logical screen size to maintain visual density
-			const screenWidth = window.innerWidth; // Use logical size, not physical canvas size
-			const screenHeight = window.innerHeight;
+			// Get hero section dimensions
+			const heroSection = document.querySelector('.hero');
+			const screenWidth = heroSection ? heroSection.offsetWidth : window.innerWidth;
+			const screenHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+			
+			// Calculate spacing based on hero section size to maintain visual density
 			const screenDiagonal = Math.sqrt(screenWidth*screenWidth + screenHeight*screenHeight);
 			const referenceDiagonal = Math.sqrt(1920*1920 + 1080*1080); // Reference: 1920x1080
 			const scaleFactor = screenDiagonal / referenceDiagonal;
@@ -100,7 +109,7 @@ import Footer from '../components/Footer.astro';
 			const mainSpacing = baseSpacing * scaleFactor;
 			const secondarySpacing = mainSpacing * 1.8; // Increased from 1.5
 			
-			console.log(`Screen: ${screenWidth}x${screenHeight} logical, Scale factor: ${scaleFactor.toFixed(2)}, Grid: ${gridSize}, Spacing: ${mainSpacing.toFixed(2)}`);
+			console.log(`Hero: ${screenWidth}x${screenHeight} logical, Scale factor: ${scaleFactor.toFixed(2)}, Grid: ${gridSize}, Spacing: ${mainSpacing.toFixed(2)}`);
 			
 			// Create wave surfaces - reduced density for better performance
 			const waveAmplitude = 2.0;
@@ -194,9 +203,13 @@ import Footer from '../components/Footer.astro';
 		
 		// Project 3D to 2D screen coordinates
 		project3DTo2D(x, y, z) {
-			const scale = Math.min(window.innerWidth, window.innerHeight) * 0.15; // Use logical dimensions
-			const centerX = window.innerWidth / 2; // Use logical dimensions
-			const centerY = window.innerHeight / 2;
+			const heroSection = document.querySelector('.hero');
+			const heroWidth = heroSection ? heroSection.offsetWidth : window.innerWidth;
+			const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+			
+			const scale = Math.min(heroWidth, heroHeight) * 0.15; // Use hero dimensions
+			const centerX = heroWidth / 2; // Use hero dimensions
+			const centerY = heroHeight / 2;
 			
 			// Perspective projection - no rotation to prevent gaps
 			const distance = 8;
@@ -211,8 +224,12 @@ import Footer from '../components/Footer.astro';
 		
 		// Draw point with wave surface appearance - enhanced shadows and contrast
 		drawPoint(x, y, z, intensity = 1, pointType = 'normal') {
+			const heroSection = document.querySelector('.hero');
+			const heroWidth = heroSection ? heroSection.offsetWidth : window.innerWidth;
+			const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+			
 			// More aggressive culling for performance
-			if (x < -10 || x >= window.innerWidth + 10 || y < -10 || y >= window.innerHeight + 10) return;
+			if (x < -10 || x >= heroWidth + 10 || y < -10 || y >= heroHeight + 10) return; // Use hero dimensions
 			
 			// Simplified point size calculation
 			let baseSize = 0.7; // Slightly smaller for performance
@@ -254,9 +271,14 @@ import Footer from '../components/Footer.astro';
 				this.lastTime = currentTime;
 			}
 			
+			// Get hero section dimensions
+			const heroSection = document.querySelector('.hero');
+			const heroWidth = heroSection ? heroSection.offsetWidth : window.innerWidth;
+			const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
+			
 			// Clear canvas with white background
 			this.ctx.fillStyle = '#ffffff';
-			this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight); // Use logical dimensions
+			this.ctx.fillRect(0, 0, heroWidth, heroHeight); // Use hero dimensions
 			
 			// Apply wave motion to all points - NO ROTATION
 			const wavePoints = this.pointCloud.map(point => {
@@ -298,8 +320,8 @@ import Footer from '../components/Footer.astro';
 				};
 			}).filter(point => {
 				// Very aggressive culling for performance
-				return point.x > -30 && point.x < window.innerWidth + 30 && 
-				       point.y > -30 && point.y < window.innerHeight + 30;
+				return point.x > -30 && point.x < heroWidth + 30 && 
+				       point.y > -30 && point.y < heroHeight + 30;
 			}).sort((a, b) => a.z - b.z);
 			
 			// Draw all points with simplified intensity calculation
@@ -330,18 +352,25 @@ import Footer from '../components/Footer.astro';
 </script>
 
 <style>
+	.main {
+		margin: 0;
+		padding: 0;
+	}
+	
 	.hero {
 		position: relative;
-		min-height: calc(100vh - 80px);
+		height: calc(100vh - 80px); /* Use height instead of min-height for exact sizing */
 		overflow: hidden;
+		margin: 0;
+		padding: 0;
 	}
 	
 	.tesseract-container {
-		position: fixed;
+		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 100%;
 		z-index: 1;
 		pointer-events: none;
 	}
@@ -365,7 +394,7 @@ import Footer from '../components/Footer.astro';
 	.hero-content {
 		max-width: 800px;
 		margin-left: 16.5%;
-		margin-top: 23vh; /* Use margin-top instead of absolute positioning - adjust this value to move text up/down */
+		margin-top: 29vh; /* Use margin-top instead of absolute positioning - adjust this value to move text up/down */
 		position: relative; /* Change from absolute to relative */
 	}
 	
