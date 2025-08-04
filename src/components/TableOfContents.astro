@@ -79,19 +79,24 @@
 				}
 			});
 
-			// Update active class
+			// Update active class and dynamic styling
 			document.querySelectorAll('.toc-item').forEach(item => {
 				item.classList.remove('active');
-				item.style.color = '#888'; // Reset color
-				item.style.fontWeight = 'normal'; // Reset font weight
+				// Reset to default styling - let CSS handle it
+				item.style.color = '';
+				item.style.fontWeight = '';
 			});
 
 			if (activeHeading) {
 				const tocItem = document.querySelector(`[data-target="${activeHeading.id}"]`);
 				if (tocItem) {
 					tocItem.classList.add('active');
-					tocItem.style.color = '#000000'; // Force green color
-					tocItem.style.fontWeight = 'bold'; // Make current section bold
+					// Get current theme colors from CSS custom properties
+					const computedStyle = getComputedStyle(document.documentElement);
+					const primaryColor = computedStyle.getPropertyValue('--text-primary').trim();
+					
+					tocItem.style.color = primaryColor;
+					tocItem.style.fontWeight = 'bold';
 				}
 			}
 		}
@@ -153,7 +158,7 @@
 		display: block;
 		padding: 0;
 		margin: 0;
-		color: #888;
+		color: var(--text-muted);
 		text-decoration: none;
 		font-size: 14px !important;
 		line-height: 1.4;
@@ -161,12 +166,13 @@
 		cursor: pointer;
 		position: relative;
 		font-family: 'Inter', system-ui, sans-serif !important;
+		font-weight: normal;
 	}
 
 	.toc-h2 {
 		font-weight: 500;
 		margin: 0;
-		color: #666;
+		color: var(--text-muted);
 		font-size: 14px !important;
 		font-family: 'Inter', system-ui, sans-serif !important;
 	}
@@ -174,17 +180,17 @@
 	.toc-h3 {
 		padding-left: 16px;
 		font-size: 14px !important;
-		color: #999;
+		color: var(--text-muted);
 		margin: 0;
 		font-family: 'Inter', system-ui, sans-serif !important;
 	}
 
 	.toc-item:hover {
-		color: #000000;
+		color: var(--text-secondary);
 	}
 
 	.toc-item.active {
-		color: #000000 !important;
+		color: var(--text-primary) !important;
 		font-weight: 600 !important;
 		position: relative;
 	}
@@ -196,13 +202,13 @@
 		top: 0;
 		bottom: 0;
 		width: 3px;
-		background: #000000;
+		background: var(--text-primary);
 		border-radius: 2px;
 	}
 
 	.toc-item.active.toc-h3 {
 		font-weight: 500;
-		color: #000000 !important;
+		color: var(--text-primary) !important;
 	}
 
 	/* Hide on smaller screens */
@@ -222,11 +228,11 @@
 	}
 
 	.table-of-contents::-webkit-scrollbar-thumb {
-		background: #ddd;
+		background: var(--border-color);
 		border-radius: 1px;
 	}
 
 	.table-of-contents::-webkit-scrollbar-thumb:hover {
-		background: #bbb;
+		background: var(--text-muted);
 	}
 </style> 

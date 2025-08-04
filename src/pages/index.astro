@@ -48,6 +48,16 @@ import Footer from '../components/Footer.astro';
 			
 			// Handle window resize
 			window.addEventListener('resize', () => this.resizeCanvas());
+			
+			// Listen for theme changes
+			const observer = new MutationObserver((mutations) => {
+				mutations.forEach((mutation) => {
+					if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+						// Theme changed, canvas will update on next frame
+					}
+				});
+			});
+			observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 		}
 		
 		resizeCanvas() {
@@ -249,8 +259,17 @@ import Footer from '../components/Footer.astro';
 			
 			const finalIntensity = baseIntensity * depthFactor * foldShadow;
 			
-			// Much wider contrast range for dramatic shadows
-			const darkness = Math.floor((1 - finalIntensity) * 250) + 5; // Extended range: 5 to 255
+			// Theme-aware point colors
+			const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+			let darkness;
+			
+			if (isDark) {
+				// In dark mode, use light colors (inverse of light mode)
+				darkness = Math.floor(finalIntensity * 200) + 55; // Range: 55 to 255 (light colors)
+			} else {
+				// In light mode, use dark colors
+				darkness = Math.floor((1 - finalIntensity) * 250) + 5; // Range: 5 to 255 (dark colors)
+			}
 			
 			this.ctx.fillStyle = `rgb(${darkness}, ${darkness}, ${darkness})`;
 			this.ctx.globalAlpha = 0.6;
@@ -276,8 +295,9 @@ import Footer from '../components/Footer.astro';
 			const heroWidth = heroSection ? heroSection.offsetWidth : window.innerWidth;
 			const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
 			
-			// Clear canvas with white background
-			this.ctx.fillStyle = '#ffffff';
+			// Clear canvas with theme-aware background
+			const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+			this.ctx.fillStyle = isDark ? '#0f0f0f' : '#ffffff';
 			this.ctx.fillRect(0, 0, heroWidth, heroHeight); // Use hero dimensions
 			
 			// Apply wave motion to all points - NO ROTATION
@@ -409,7 +429,7 @@ import Footer from '../components/Footer.astro';
 	.hero-subtitle {
 		font-size: 1.3rem;
 		line-height: 1.6;
-		color: #000000;
+		color: var(--text-secondary);
 		margin: 0;
 	}
 	

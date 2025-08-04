@@ -26,6 +26,20 @@
 	--spacing-3xl: 64px;
 }
 
+/* Dark Mode Variables */
+[data-theme="dark"] {
+	--primary-color: #ffffff;
+	--primary-hover: #e5e5e5;
+	--text-primary: #ffffff;
+	--text-secondary: #b8b8b8;
+	--text-muted: #888888;
+	--text-light: #666666;
+	--border-color: #333333;
+	--bg-light: #1a1a1a;
+	--bg-white: #0f0f0f;
+	--bg-dark: #161616;
+}
+
 /* Base Reset */
 *, *::before, *::after {
 	box-sizing: border-box;
@@ -264,7 +278,7 @@ a:hover {
 
 /* Article Card Component */
 .article-card {
-	background: white;
+	background: var(--bg-white);
 	border: 1px solid var(--border-color);
 	border-radius: 8px;
 	padding: var(--spacing-lg);

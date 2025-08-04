@@ -83,7 +83,7 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 	.authors-title {
 		font-size: 14px;
 		font-weight: 600;
-		color: #1a1a1a;
+		color: var(--text-primary);
 		padding-bottom: 8px;
 		font-family: 'Inter', system-ui, sans-serif;
 	}
@@ -103,7 +103,7 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 	.author-name {
 		font-size: 14px;
 		font-weight: 500;
-		color: #666;
+		color: var(--text-secondary);
 		margin: 0;
 		line-height: 1.4;
 		font-family: 'Inter', system-ui, sans-serif;
@@ -111,7 +111,7 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 
 	.author-role {
 		font-size: 14px;
-		color: #999;
+		color: var(--text-muted);
 		margin: 0;
 		line-height: 1.2;
 		font-style: italic;
@@ -120,7 +120,7 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 
 	.read-about-link {
 		font-size: 14px;
-		color: #999;
+		color: var(--text-muted);
 		text-decoration: none;
 		transition: color 0.2s ease;
 		display: flex;
@@ -130,7 +130,7 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 	}
 
 	.read-about-link:hover {
-		color: #000000;
+		color: var(--text-primary);
 	}
 
 	.contact-note {
@@ -139,20 +139,20 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 
 	.contact-note p {
 		font-size: 14px;
-		color: #666;
+		color: var(--text-secondary);
 		line-height: 1.4;
 		margin: 0;
 		font-family: 'Inter', system-ui, sans-serif;
 	}
 
 	.contact-link {
-		color: #000000;
+		color: var(--text-primary);
 		text-decoration: none;
 		transition: color 0.2s ease;
 	}
 
 	.contact-link:hover {
-		color: #000000;
+		color: var(--text-primary);
 		text-decoration: underline;
 	}
 
@@ -180,11 +180,11 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 	}
 
 	.authors-sidebar::-webkit-scrollbar-thumb {
-		background: #ddd;
+		background: var(--border-color);
 		border-radius: 1px;
 	}
 
 	.authors-sidebar::-webkit-scrollbar-thumb:hover {
-		background: #bbb;
+		background: var(--text-muted);
 	}
 </style> 
