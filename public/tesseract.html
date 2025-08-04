@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4D Tesseract Point Cloud</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: monospace;
+        }
+        
+        canvas {
+            display: block;
+        }
+        
+        .info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 12px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        4D Tesseract Projection<br>
+        16 vertices, 32 edges<br>
+        Rotating in XW and YZ planes
+    </div>
+    
+    <script type="module">
+        import * as THREE from 'https://unpkg.com/three@0.158.0/build/three.module.js';
+
+        class Tesseract4D {
+            constructor() {
+                // Initialize Three.js scene
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.setClearColor(0x000000, 1);
+                document.body.appendChild(this.renderer.domElement);
+                
+                // 4D rotation angles
+                this.angleXW = 0;
+                this.angleYZ = 0;
+                
+                // Distance for 4D projection
+                this.projectionDistance = 3;
+                
+                this.initializeTesseract();
+                this.setupCamera();
+                this.animate();
+                
+                // Handle window resize
+                window.addEventListener('resize', () => this.onWindowResize());
+            }
+            
+            /**
+             * Generate all 16 vertices of a 4D hypercube
+             * Each vertex has coordinates (±1, ±1, ±1, ±1)
+             */
+            generateTesseractVertices() {
+                const vertices = [];
+                
+                // Generate all combinations of ±1 for 4 dimensions
+                for (let i = 0; i < 16; i++) {
+                    const x = (i & 1) ? 1 : -1;
+                    const y = (i & 2) ? 1 : -1;
+                    const z = (i & 4) ? 1 : -1;
+                    const w = (i & 8) ? 1 : -1;
+                    
+                    vertices.push(new THREE.Vector4(x, y, z, w));
+                }
+                
+                return vertices;
+            }
+            
+            /**
+             * Generate edges connecting vertices that differ by exactly 1 bit (Hamming distance = 1)
+             * This creates the proper tesseract edge structure
+             */
+            generateTesseractEdges() {
+                const edges = [];
+                
+                for (let i = 0; i < 16; i++) {
+                    for (let j = i + 1; j < 16; j++) {
+                        // Calculate Hamming distance (number of differing bits)
+                        const xor = i ^ j;
+                        const hammingDistance = this.popCount(xor);
+                        
+                        // Connect vertices that differ by exactly 1 dimension
+                        if (hammingDistance === 1) {
+                            edges.push([i, j]);
+                        }
+                    }
+                }
+                
+                return edges;
+            }
+            
+            /**
+             * Count number of 1s in binary representation (population count)
+             */
+            popCount(n) {
+                let count = 0;
+                while (n) {
+                    count += n & 1;
+                    n >>= 1;
+                }
+                return count;
+            }
+            
+            /**
+             * 4D rotation matrix for XW plane
+             */
+            rotateXW(vertices, angle) {
+                const cos = Math.cos(angle);
+                const sin = Math.sin(angle);
+                
+                return vertices.map(v => new THREE.Vector4(
+                    v.x * cos - v.w * sin,  // New X
+                    v.y,                    // Y unchanged
+                    v.z,                    // Z unchanged
+                    v.x * sin + v.w * cos   // New W
+                ));
+            }
+            
+            /**
+             * 4D rotation matrix for YZ plane
+             */
+            rotateYZ(vertices, angle) {
+                const cos = Math.cos(angle);
+                const sin = Math.sin(angle);
+                
+                return vertices.map(v => new THREE.Vector4(
+                    v.x,                    // X unchanged
+                    v.y * cos - v.z * sin,  // New Y
+                    v.y * sin + v.z * cos,  // New Z
+                    v.w                     // W unchanged
+                ));
+            }
+            
+            /**
+             * Project 4D points to 3D using perspective division
+             * Treats W as distance from 3D camera
+             */
+            project4DTo3D(vertices4D) {
+                return vertices4D.map(v => {
+                    // Perspective division: divide by (distance - w)
+                    const perspectiveFactor = this.projectionDistance - v.w;
+                    
+                    // Avoid division by zero
+                    const factor = perspectiveFactor > 0.1 ? perspectiveFactor : 0.1;
+                    
+                    return new THREE.Vector3(
+                        v.x / factor * this.projectionDistance,
+                        v.y / factor * this.projectionDistance,
+                        v.z / factor * this.projectionDistance
+                    );
+                });
+            }
+            
+            /**
+             * Initialize the tesseract geometry and materials
+             */
+            initializeTesseract() {
+                // Generate initial 4D vertices and edges
+                this.vertices4D = this.generateTesseractVertices();
+                this.edges = this.generateTesseractEdges();
+                
+                // Create points geometry
+                this.pointsGeometry = new THREE.BufferGeometry();
+                this.pointsPositions = new Float32Array(16 * 3); // 16 vertices × 3 coordinates
+                this.pointsGeometry.setAttribute('position', new THREE.BufferAttribute(this.pointsPositions, 3));
+                
+                // Create points material with flickering
+                this.pointsMaterial = new THREE.PointsMaterial({
+                    color: 0xffffff,
+                    size: 0.05,
+                    transparent: true,
+                    opacity: 0.8,
+                    sizeAttenuation: false
+                });
+                
+                this.pointCloud = new THREE.Points(this.pointsGeometry, this.pointsMaterial);
+                this.scene.add(this.pointCloud);
+                
+                // Create lines geometry for edges
+                this.linesGeometry = new THREE.BufferGeometry();
+                this.linesPositions = new Float32Array(this.edges.length * 2 * 3); // Each edge has 2 vertices × 3 coordinates
+                this.linesGeometry.setAttribute('position', new THREE.BufferAttribute(this.linesPositions, 3));
+                
+                // Create lines material
+                this.linesMaterial = new THREE.LineBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: 0.3
+                });
+                
+                this.wireframe = new THREE.LineSegments(this.linesGeometry, this.linesMaterial);
+                this.scene.add(this.wireframe);
+            }
+            
+            /**
+             * Update tesseract rotation and projection
+             */
+            updateTesseract() {
+                // Apply 4D rotations
+                let rotatedVertices = this.rotateXW(this.vertices4D, this.angleXW);
+                rotatedVertices = this.rotateYZ(rotatedVertices, this.angleYZ);
+                
+                // Project to 3D
+                const vertices3D = this.project4DTo3D(rotatedVertices);
+                
+                // Update point positions
+                for (let i = 0; i < vertices3D.length; i++) {
+                    const vertex = vertices3D[i];
+                    this.pointsPositions[i * 3] = vertex.x;
+                    this.pointsPositions[i * 3 + 1] = vertex.y;
+                    this.pointsPositions[i * 3 + 2] = vertex.z;
+                }
+                this.pointsGeometry.attributes.position.needsUpdate = true;
+                
+                // Update line positions
+                let lineIndex = 0;
+                for (const [startIdx, endIdx] of this.edges) {
+                    const start = vertices3D[startIdx];
+                    const end = vertices3D[endIdx];
+                    
+                    // Start vertex
+                    this.linesPositions[lineIndex * 6] = start.x;
+                    this.linesPositions[lineIndex * 6 + 1] = start.y;
+                    this.linesPositions[lineIndex * 6 + 2] = start.z;
+                    
+                    // End vertex
+                    this.linesPositions[lineIndex * 6 + 3] = end.x;
+                    this.linesPositions[lineIndex * 6 + 4] = end.y;
+                    this.linesPositions[lineIndex * 6 + 5] = end.z;
+                    
+                    lineIndex++;
+                }
+                this.linesGeometry.attributes.position.needsUpdate = true;
+                
+                // Flickering effect for points
+                const time = Date.now() * 0.01;
+                this.pointsMaterial.opacity = 0.6 + Math.sin(time) * 0.2;
+                
+                // Subtle flickering for lines
+                this.linesMaterial.opacity = 0.25 + Math.sin(time * 0.7) * 0.1;
+            }
+            
+            /**
+             * Setup camera position
+             */
+            setupCamera() {
+                this.camera.position.z = 5;
+                this.camera.lookAt(0, 0, 0);
+            }
+            
+            /**
+             * Animation loop
+             */
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                
+                // Update rotation angles
+                this.angleXW += 0.008;
+                this.angleYZ += 0.006;
+                
+                // Update tesseract
+                this.updateTesseract();
+                
+                // Render scene
+                this.renderer.render(this.scene, this.camera);
+            }
+            
+            /**
+             * Handle window resize
+             */
+            onWindowResize() {
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        }
+        
+        // Initialize the tesseract visualization
+        new Tesseract4D();
+    </script>
+</body>
+</html> 

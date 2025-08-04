@@ -2,39 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-
-// Read all ASCII art frames
-import fs from 'fs';
-import path from 'path';
-
-let asciiFrames = [];
-try {
-	// Load frames frame_00.txt through frame_11.txt
-	for (let i = 0; i < 20; i++) {
-		const frameNumber = i.toString().padStart(2, '0');
-		const framePath = path.join(process.cwd(), 'frames5', `frame_${frameNumber}.txt`);
-		const rawAscii = fs.readFileSync(framePath, 'utf-8');
-		
-		// Process ASCII to make darker characters bold
-		const processedAscii = rawAscii.replace(/[+*#%@=]/g, (char) => {
-			return `<span class="bold-char">${char}</span>`;
-		});
-		
-		asciiFrames.push(processedAscii);
-	}
-} catch (error) {
-	console.error('Could not read ASCII frames:', error);
-	// Fallback to single frame if frames folder doesn't exist
-	try {
-		const rawAscii = fs.readFileSync(path.join(process.cwd(), 'ascii.txt'), 'utf-8');
-		const processedAscii = rawAscii.replace(/[+*#%@=]/g, (char) => {
-			return `<span class="bold-char">${char}</span>`;
-		});
-		asciiFrames.push(processedAscii);
-	} catch (fallbackError) {
-		console.error('Could not read fallback ascii.txt:', fallbackError);
-	}
-}
 ---
 
 <Layout title="Thematic Deep Technology Insights and Market Analysis" description="Professional analysis of emerging technology opportunities and market trends">
@@ -42,8 +9,8 @@ try {
 	
 	<main class="main">
 		<section class="hero">
-			<div class="ascii-background">
-				<pre class="ascii-art" id="ascii-art"></pre>
+			<div class="tesseract-container">
+				<canvas id="tesseract-canvas"></canvas>
 			</div>
 			<div class="hero-container">
 				<div class="hero-content">
@@ -53,77 +20,336 @@ try {
 			</div>
 		</section>
 	</main>
-	<Footer />
 </Layout>
 
-<script define:vars={{ asciiFrames }}>
-	// ASCII Animation
-	document.addEventListener('DOMContentLoaded', function() {
-		const asciiElement = document.getElementById('ascii-art');
-		let currentFrame = 0;
-		
-		console.log('ASCII frames loaded:', asciiFrames ? asciiFrames.length : 0);
-		
-		// Set initial frame
-		if (asciiFrames && asciiFrames.length > 0) {
-			asciiElement.innerHTML = asciiFrames[0];
-			console.log('Set initial frame');
+<script>
+	class FlowingPointCloud {
+		constructor() {
+			this.canvas = document.getElementById('tesseract-canvas');
+			this.ctx = this.canvas.getContext('2d');
 			
-			// Only animate if we have multiple frames
-			if (asciiFrames.length > 1) {
-				console.log('Starting animation with', asciiFrames.length, 'frames');
-				setInterval(() => {
-					currentFrame = (currentFrame + 1) % asciiFrames.length;
-					asciiElement.innerHTML = asciiFrames[currentFrame];
-					console.log('Frame:', currentFrame);
-				}, 200); // Slightly slower for testing
-			}
-		} else {
-			console.error('No ASCII frames available');
-			asciiElement.innerHTML = 'No animation frames loaded';
+			// Full page canvas
+			this.resizeCanvas();
+			
+			// Generate flowing point cloud
+			this.pointCloud = this.generateFlowingPoints();
+			
+			// Animation parameters
+			this.time = 0;
+			this.waveSpeed = 0.01; // Increased from 0.005
+			
+			// Performance monitoring
+			this.frameCount = 0;
+			this.lastTime = performance.now();
+			
+			this.setupCanvas();
+			this.animate();
+			
+			// Handle window resize
+			window.addEventListener('resize', () => this.resizeCanvas());
 		}
+		
+		resizeCanvas() {
+			const devicePixelRatio = window.devicePixelRatio || 1;
+			
+			// Set logical size
+			this.canvas.style.width = window.innerWidth + 'px';
+			this.canvas.style.height = window.innerHeight + 'px';
+			
+			// Set actual canvas size accounting for device pixel ratio
+			this.canvas.width = window.innerWidth * devicePixelRatio;
+			this.canvas.height = window.innerHeight * devicePixelRatio;
+			
+			// Scale the context to match device pixel ratio
+			this.ctx.scale(devicePixelRatio, devicePixelRatio);
+			
+			console.log(`Canvas: ${window.innerWidth}x${window.innerHeight} logical, ${this.canvas.width}x${this.canvas.height} physical, DPR: ${devicePixelRatio}`);
+			
+			// Regenerate points when window size changes significantly for consistent coverage
+			const newArea = window.innerWidth * window.innerHeight; // Use logical size for area calculation
+			const oldArea = this.lastArea || newArea;
+			const areaChange = Math.abs(newArea - oldArea) / oldArea;
+			
+			if (areaChange > 0.2) { // Regenerate if area changed by more than 20%
+				console.log('Significant size change detected, regenerating points for consistent coverage...');
+				this.pointCloud = this.generateFlowingPoints();
+				this.lastArea = newArea;
+			}
+		}
+		
+		setupCanvas() {
+			this.ctx.imageSmoothingEnabled = true;
+			this.ctx.imageSmoothingQuality = 'high';
+		}
+		
+		// Generate flowing, organic point cloud
+		generateFlowingPoints() {
+			const points = [];
+			
+			// Calculate spacing based on logical screen size to maintain visual density
+			const screenWidth = window.innerWidth; // Use logical size, not physical canvas size
+			const screenHeight = window.innerHeight;
+			const screenDiagonal = Math.sqrt(screenWidth*screenWidth + screenHeight*screenHeight);
+			const referenceDiagonal = Math.sqrt(1920*1920 + 1080*1080); // Reference: 1920x1080
+			const scaleFactor = screenDiagonal / referenceDiagonal;
+			
+			// Reduced density for better performance - larger spacing
+			const baseGridSize = 80; // Reduced from 120
+			const gridSize = Math.floor(baseGridSize * scaleFactor);
+			const baseSpacing = 1.0; // Increased from 0.8
+			const mainSpacing = baseSpacing * scaleFactor;
+			const secondarySpacing = mainSpacing * 1.8; // Increased from 1.5
+			
+			console.log(`Screen: ${screenWidth}x${screenHeight} logical, Scale factor: ${scaleFactor.toFixed(2)}, Grid: ${gridSize}, Spacing: ${mainSpacing.toFixed(2)}`);
+			
+			// Create wave surfaces - reduced density for better performance
+			const waveAmplitude = 2.0;
+			
+			// Main wave surface - reduced density for performance
+			for (let x = -gridSize; x <= gridSize; x += mainSpacing) {
+				for (let y = -gridSize; y <= gridSize; y += mainSpacing) {
+					// Create wave height based on position
+					const distance = Math.sqrt(x*x + y*y);
+					const baseZ = Math.sin(distance * 0.15) * waveAmplitude * Math.exp(-distance * 0.015);
+					
+					// Add multiple wave components for richer pattern
+					const wave1 = Math.sin(x * 0.1) * 0.6;
+					const wave2 = Math.cos(y * 0.08) * 0.5;
+					const wave3 = Math.sin((x + y) * 0.05) * 0.4;
+					const wave4 = Math.cos((x - y) * 0.06) * 0.3;
+					const wave5 = Math.sin(x * 0.12 + y * 0.07) * 0.35;
+					const wave6 = Math.cos(distance * 0.08) * 0.25;
+					
+					const z = baseZ + wave1 + wave2 + wave3 + wave4 + wave5 + wave6;
+					
+					points.push({
+						baseX: x * 0.12,
+						baseY: y * 0.12,
+						baseZ: z,
+						gridX: x,
+						gridY: y,
+						amplitude: 0.8
+					});
+				}
+			}
+			
+			// Add secondary wave surface - reduced density for performance
+			for (let x = -gridSize; x <= gridSize; x += secondarySpacing) {
+				for (let y = -gridSize; y <= gridSize; y += secondarySpacing) {
+					const distance = Math.sqrt(x*x + y*y);
+					const baseZ = Math.cos(distance * 0.12 + Math.PI/4) * waveAmplitude * 0.8 * Math.exp(-distance * 0.012);
+					
+					// Additional wave components for secondary surface
+					const wave1 = Math.cos(x * 0.09) * 0.5;
+					const wave2 = Math.sin(y * 0.06) * 0.4;
+					const wave3 = Math.sin((x * 2 + y) * 0.04) * 0.3;
+					const wave4 = Math.cos((x + y * 2) * 0.05) * 0.25;
+					
+					const z = baseZ + wave1 + wave2 + wave3 + wave4 + 1.2;
+					
+					points.push({
+						baseX: x * 0.12,
+						baseY: y * 0.12,
+						baseZ: z,
+						gridX: x,
+						gridY: y,
+						amplitude: 0.6,
+						isSecondary: true
+					});
+				}
+			}
+			
+			// Add wave disturbances - reduced count for performance
+			const disturbanceCount = Math.floor(6 * Math.min(scaleFactor, 1.0)); // Reduced from 12
+			const disturbanceSpacing = secondarySpacing * 1.5; // Increased spacing
+			
+			for (let i = 0; i < disturbanceCount; i++) {
+				const centerX = (Math.random() - 0.5) * gridSize * 1.5;
+				const centerY = (Math.random() - 0.5) * gridSize * 1.5;
+				const radius = (20 + Math.random() * 15) * scaleFactor; // Slightly smaller radius
+				
+				for (let x = centerX - radius; x <= centerX + radius; x += disturbanceSpacing) {
+					for (let y = centerY - radius; y <= centerY + radius; y += disturbanceSpacing) {
+						const dist = Math.sqrt((x - centerX)**2 + (y - centerY)**2);
+						if (dist <= radius) {
+							const ripple = Math.cos(dist * 0.3) * (1 - dist/radius) * 1.0;
+							
+							points.push({
+								baseX: x * 0.12,
+								baseY: y * 0.12,
+								baseZ: ripple,
+								gridX: x,
+								gridY: y,
+								amplitude: 0.5,
+								disturbance: i
+							});
+						}
+					}
+				}
+			}
+			
+			console.log(`Generated ${points.length} wave surface points (optimized for performance)`);
+			return points;
+		}
+		
+		// Project 3D to 2D screen coordinates
+		project3DTo2D(x, y, z) {
+			const scale = Math.min(window.innerWidth, window.innerHeight) * 0.15; // Use logical dimensions
+			const centerX = window.innerWidth / 2; // Use logical dimensions
+			const centerY = window.innerHeight / 2;
+			
+			// Perspective projection - no rotation to prevent gaps
+			const distance = 8;
+			const projectedScale = scale / (1 + z / distance);
+			
+			return [
+				centerX + x * projectedScale,
+				centerY - y * projectedScale,
+				z
+			];
+		}
+		
+		// Draw point with wave surface appearance - enhanced shadows and contrast
+		drawPoint(x, y, z, intensity = 1, pointType = 'normal') {
+			// More aggressive culling for performance
+			if (x < -10 || x >= window.innerWidth + 10 || y < -10 || y >= window.innerHeight + 10) return;
+			
+			// Simplified point size calculation
+			let baseSize = 0.7; // Slightly smaller for performance
+			if (pointType === 'secondary') baseSize = 0.5;
+			if (pointType === 'disturbance') baseSize = 0.6;
+			
+			const depthSize = Math.max(0.2, baseSize + (5 - z) * 0.08);
+			
+			// Enhanced shadow calculation for dramatic fold contrast
+			const baseIntensity = intensity * 0.85; // Slightly reduced base for more shadow range
+			
+			// More dramatic depth-based shadows - deeper valleys get much darker
+			const depthFactor = Math.max(0.15, Math.min(1.0, 0.9 - z / 8)); // Increased depth sensitivity
+			
+			// Secondary shadow based on wave position for fold enhancement
+			const foldShadow = Math.max(0.6, 1.0 - Math.abs(z) * 0.3); // Deeper folds get darker
+			
+			const finalIntensity = baseIntensity * depthFactor * foldShadow;
+			
+			// Much wider contrast range for dramatic shadows
+			const darkness = Math.floor((1 - finalIntensity) * 250) + 5; // Extended range: 5 to 255
+			
+			this.ctx.fillStyle = `rgb(${darkness}, ${darkness}, ${darkness})`;
+			this.ctx.globalAlpha = 0.6;
+			
+			// Draw point - no stroke for performance
+			this.ctx.beginPath();
+			this.ctx.arc(x, y, depthSize, 0, Math.PI * 2);
+			this.ctx.fill();
+		}
+		
+		update() {
+			// Performance monitoring
+			this.frameCount++;
+			const currentTime = performance.now();
+			if (currentTime - this.lastTime >= 1000) {
+				console.log(`FPS: ${this.frameCount}, Points: ${this.pointCloud.length}`);
+				this.frameCount = 0;
+				this.lastTime = currentTime;
+			}
+			
+			// Clear canvas with white background
+			this.ctx.fillStyle = '#ffffff';
+			this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight); // Use logical dimensions
+			
+			// Apply wave motion to all points - NO ROTATION
+			const wavePoints = this.pointCloud.map(point => {
+				// Create traveling wave motion with more wave components
+				const wavePhase = this.time * 3;
+				
+				// Multiple wave components for richer motion
+				const wave1 = Math.sin(point.gridX * 0.3 + wavePhase) * 0.3;
+				const wave2 = Math.cos(point.gridY * 0.25 + wavePhase * 0.8) * 0.25;
+				const wave3 = Math.sin((point.gridX + point.gridY) * 0.2 + wavePhase * 1.2) * 0.2;
+				const wave4 = Math.cos((point.gridX - point.gridY) * 0.15 + wavePhase * 0.6) * 0.15;
+				const wave5 = Math.sin(point.gridX * 0.35 + point.gridY * 0.18 + wavePhase * 1.5) * 0.18;
+				const wave6 = Math.cos(point.gridY * 0.28 - point.gridX * 0.12 + wavePhase * 0.9) * 0.12;
+				const wave7 = Math.sin((point.gridX * 2 + point.gridY) * 0.08 + wavePhase * 2.0) * 0.1;
+				
+				// Combine base position with enhanced wave motion
+				const flowX = point.baseX;
+				const flowY = point.baseY;
+				const flowZ = point.baseZ + wave1 + wave2 + wave3 + wave4 + wave5 + wave6 + wave7;
+				
+				let pointType = 'normal';
+				if (point.isSecondary) pointType = 'secondary';
+				if (point.disturbance !== undefined) pointType = 'disturbance';
+				
+				return {
+					x: flowX,
+					y: flowY,
+					z: flowZ,
+					pointType: pointType
+				};
+			});
+			
+			// Project to 2D with aggressive culling for performance
+			const projectedPoints = wavePoints.map(point => {
+				const [x, y, z] = this.project3DTo2D(point.x, point.y, point.z);
+				return {
+					x, y, z,
+					pointType: point.pointType
+				};
+			}).filter(point => {
+				// Very aggressive culling for performance
+				return point.x > -30 && point.x < window.innerWidth + 30 && 
+				       point.y > -30 && point.y < window.innerHeight + 30;
+			}).sort((a, b) => a.z - b.z);
+			
+			// Draw all points with simplified intensity calculation
+			for (const point of projectedPoints) {
+				// Simplified pulse calculation for performance
+				const pulse = 0.7 + Math.sin(this.time * 2 + point.x * 0.005 + point.y * 0.005) * 0.3;
+				
+				this.drawPoint(point.x, point.y, point.z, pulse, point.pointType);
+			}
+			
+			// Reset alpha
+			this.ctx.globalAlpha = 1;
+			
+			// Update time
+			this.time += this.waveSpeed;
+		}
+		
+		animate() {
+			this.update();
+			requestAnimationFrame(() => this.animate());
+		}
+	}
+	
+	// Initialize when page loads
+	document.addEventListener('DOMContentLoaded', () => {
+		new FlowingPointCloud();
 	});
 </script>
 
 <style>
 	.hero {
 		position: relative;
-		min-height: calc(140vh - 80px);
-		display: flex;
-		align-items: center;
+		min-height: calc(100vh - 80px);
 		overflow: hidden;
 	}
 	
-	.ascii-background {
-		position: absolute;
-		top: 37%;
-		left: 51%;
-		transform: translate(-50%, -50%);
+	.tesseract-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
 		z-index: 1;
-		opacity: 10.0;
 		pointer-events: none;
 	}
 	
-	.ascii-art {
-		font-family: "Courier New", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Liberation Mono", Menlo, monospace;
-		font-size: 5px;
-		line-height: 1;
-		color: #000000;
-		white-space: pre;
-		margin: 0;
+	#tesseract-canvas {
+		width: 100%;
+		height: 100%;
 		display: block;
-		letter-spacing: 0;
-		word-spacing: 0;
-		font-weight: bold;
-		font-variant-ligatures: none;
-		text-rendering: optimizeSpeed;
-		transform: scaleX(0.75);
-		transform-origin: center;
-	}
-	
-	.bold-char {
-		font-weight: bold;
-		color: #000000;
 	}
 	
 	.hero-container {
@@ -133,14 +359,14 @@ try {
 		padding: 0 var(--spacing-lg);
 		position: relative;
 		z-index: 10;
+		height: 100%; /* Add this so percentage-based positioning works */
 	}
 	
 	.hero-content {
 		max-width: 800px;
 		margin-left: 16.5%;
-		position: absolute;
-		top: calc(37% + 280px);
-		transform: translateY(0);
+		margin-top: 23vh; /* Use margin-top instead of absolute positioning - adjust this value to move text up/down */
+		position: relative; /* Change from absolute to relative */
 	}
 	
 	.hero-title {
@@ -154,24 +380,8 @@ try {
 	.hero-subtitle {
 		font-size: 1.3rem;
 		line-height: 1.6;
-		color: var(--text-secondary);
+		color: #000000;
 		margin: 0;
-	}
-	
-	/* Fine-tune for very large screens */
-	@media (min-width: 1800px) {
-		.ascii-art {
-			font-size: 5px;
-			transform: scaleX(calc(0.05 * 100vw / 2040));
-		}
-	}
-	
-	/* Fine-tune for smaller desktop screens */
-	@media (max-width: 1200px) and (min-width: 769px) {
-		.ascii-art {
-			font-size: 5px;
-			transform: scaleX(calc(0.05 * 100vw / 2040));
-		}
 	}
 	
 	/* Mobile devices - completely different layout */
@@ -184,7 +394,7 @@ try {
 			font-size: 1rem;
 		}
 		
-		.ascii-background {
+		.tesseract-container {
 			display: none;
 		}
 	}
