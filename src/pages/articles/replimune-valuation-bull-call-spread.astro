@@ -44,21 +44,19 @@ const authors = [
 
     <article class="article">
       <div class="container-narrow">
-              <header class="article-header">
-          <div class="tags">
+        <header class="article-header">
+          <div class="article-tags">
             {tags.map((tag) => (
               <span class="tag">{tag}</span>
             ))}
           </div>
-          <h1>{title}</h1>
+          <h1 class="article-title">{title}</h1>
           <p class="article-subtitle">{description}</p>
           <div class="article-meta">
             <span class="date">{date}</span>
             <span class="reading-time">{readingTime}</span>
           </div>
         </header>
-
-      <div class="article-layout">
         <div class="article-content">
           <section class="abstract">
             <h2>Summary</h2>
@@ -180,11 +178,6 @@ const authors = [
             <p>The FDA issued a CRL for RP1's BLA, which drove Replimune's day-over-day share price down 78%. Novana's bull call spread position expired out-of-the-money, leading to a net loss of $1,595.00 (0.158% of our total assets under management). We unpack our post-event analysis of Replimune's regulatory failure here.</p>
           </section>
         </div>
-
-        <aside class="article-sidebar">
-          <TableOfContents />
-          <AuthorsSidebar authors={authors} />
-        </aside>
       </div>
     </article>
   </main>
