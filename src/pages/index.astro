@@ -60,19 +60,19 @@ import Footer from '../components/Footer.astro';
 						
 						<div class="venn-text">
 							<div class="venn-description" id="domain-text">
-								<p>We're researchers at heart, with competent domains spanning cancer metabolism, ultrasound drug uncaging, spatial omics, ophthalmology diagnostics, and artificial intelligence</p>
+								<p>We're researchers at heart, with competent domains spanning cancer metabolism, ultrasound drug uncaging, spatial omics, ophthalmology diagnostics, and artificial intelligence.</p>
 							</div>
 							
 							<div class="venn-description" id="investment-text">
-								<p>Our investment management framework is the result of past professional experiences in long-only fundamental equities, enterprise-grade systematic investment strategy design, and buy-side equities trading</p>
+								<p>Our investment management framework is the result of past professional experiences in long-only fundamental equities, enterprise-grade systematic investment strategy design, and buy-side equities trading.</p>
 							</div>
 							
 							<div class="venn-description" id="relationships-text">
-								<p>We maintain deep, durable relationships across the Bay Area and East Coast, including those with scientific researchers, technical student-founders, venture investors, and asset management executives</p>
+								<p>We maintain deep, durable relationships across the Bay Area and East Coast, including those with scientific researchers, technical student-founders, venture investors, and asset management executives.</p>
 							</div>
 							
 							<div class="venn-description" id="stanford-text">
-								<p>We have unparalleled access to Stanford's research faculty, student founders, and startup ecosystem, allowing us to source scientific innovations well before they enter venture or public market pipelines</p>
+								<p>We have unparalleled access to Stanford's research faculty, student founders, and startup ecosystem, allowing us to source scientific innovations well before they enter venture or public market pipelines.</p>
 							</div>
 						</div>
 					</div>
@@ -433,7 +433,70 @@ import Footer from '../components/Footer.astro';
 	// Initialize when page loads
 	document.addEventListener('DOMContentLoaded', () => {
 		new FlowingPointCloud();
+		
+		// Initialize cyclical description animation
+		initDescriptionCycle();
 	});
+	
+	function initDescriptionCycle() {
+		const descriptions = [
+			document.getElementById('domain-text'),
+			document.getElementById('investment-text'),
+			document.getElementById('relationships-text'),
+			document.getElementById('stanford-text')
+		];
+		
+		const circles = [
+			document.getElementById('domain-circle'),
+			document.getElementById('investment-circle'),
+			document.getElementById('relationships-circle'),
+			document.getElementById('stanford-circle')
+		];
+		
+		if (!descriptions[0] || !circles[0]) return;
+		
+		let currentIndex = 0;
+		
+		function showDescription(index) {
+			// First, mark current active description as exiting
+			const currentActive = descriptions.find(desc => desc && desc.classList.contains('active'));
+			if (currentActive) {
+				currentActive.classList.remove('active');
+				currentActive.classList.add('exiting');
+			}
+			
+			// Reset all other descriptions and circles
+			descriptions.forEach((desc, i) => {
+				if (desc && desc !== currentActive) {
+					desc.classList.remove('active', 'exiting');
+				}
+				if (circles[i]) {
+					circles[i].style.opacity = '0.7';
+					circles[i].style.strokeWidth = '1';
+				}
+			});
+			
+			// Activate new description and circle after a brief delay for smooth transition
+			setTimeout(() => {
+				if (descriptions[index]) {
+					descriptions[index].classList.remove('exiting');
+					descriptions[index].classList.add('active');
+				}
+				if (circles[index]) {
+					circles[index].style.opacity = '1';
+					circles[index].style.strokeWidth = '3';
+				}
+			}, 500); // Longer delay for smoother transition flow
+		}
+		
+		// Start the cycle
+		showDescription(currentIndex);
+		
+		setInterval(() => {
+			currentIndex = (currentIndex + 1) % descriptions.length;
+			showDescription(currentIndex);
+		}, 5000); // Change every 5 seconds
+	}
 </script>
 
 <style>
@@ -724,26 +787,35 @@ import Footer from '../components/Footer.astro';
 	.venn-text {
 		flex: 0 0 480px; /* Much smaller fixed width */
 		position: relative;
-		min-height: 200px;
+		min-height: 400px; /* Increased from 200px for better animation space */
+		overflow: hidden; /* Hide text that goes beyond container boundaries */
+		clip-path: inset(40px 0 0 0); /* Clip from 150px down - same level as Venn diagram top */
 	}
 
 	.venn-description {
 		position: absolute;
-		top: 0;
+		top: 40px; /* Move descriptions down within the container */
 		left: 0;
 		width: 100%;
 		background: rgba(0, 0, 0, 0.8);
 		padding: var(--spacing-2xl);
-		border-radius: 12px;
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-		transition: opacity 0.5s ease-in-out;
+		transition: transform 2.5s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 1.5s ease;
 		opacity: 0;
+		transform: translateY(100%); /* Start completely below the container */
 		backdrop-filter: blur(8px);
 		text-align: left;
 	}
 
 	.venn-description.active {
 		opacity: 1;
+		transform: translateY(0); /* Slide to normal position */
+	}
+
+	/* Create a smooth scroll-like exit */
+	.venn-description.exiting {
+		opacity: 0;
+		transform: translateY(-100%); /* Continue scrolling upward out of view */
+		transition: transform 4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 2s ease;
 	}
 
 	.venn-description p {
