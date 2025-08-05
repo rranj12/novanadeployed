@@ -75,6 +75,16 @@
 	fill: #ffffff !important; /* White text on black center circle */
 }
 
+/* Dark mode Venn text descriptions */
+[data-theme="dark"] .venn-description {
+	background: rgba(255, 255, 255, 0.9) !important;
+	color: #000000 !important;
+}
+
+[data-theme="dark"] .venn-description p {
+	color: #333333 !important;
+}
+
 /* Base Reset */
 *, *::before, *::after {
 	box-sizing: border-box;

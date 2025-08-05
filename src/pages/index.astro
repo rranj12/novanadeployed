@@ -30,30 +30,52 @@ import Footer from '../components/Footer.astro';
 				
 				<!-- Venn Diagram -->
 				<div class="venn-diagram">
-					<svg viewBox="0 0 560 420" class="venn-svg">
-						<!-- Top left circle -->
-						<circle cx="195" cy="135" r="99" class="venn-circle" />
-						<text x="190" y="125" class="venn-label">DOMAIN</text>
-						<text x="190" y="140" class="venn-label">KNOWLEDGE</text>
+					<div class="venn-content">
+						<div class="venn-visual">
+							<svg viewBox="0 0 380 420" class="venn-svg">
+								<!-- Top left circle -->
+								<circle cx="110" cy="135" r="99" class="venn-circle" id="domain-circle" />
+								<text x="105" y="125" class="venn-label">DOMAIN</text>
+								<text x="105" y="140" class="venn-label">KNOWLEDGE</text>
+								
+								<!-- Top right circle -->
+								<circle cx="280" cy="135" r="99" class="venn-circle" id="investment-circle" />
+								<text x="285" y="125" class="venn-label">INVESTMENT</text>
+								<text x="285" y="140" class="venn-label">EXPERTISE</text>
+								
+								<!-- Bottom left circle -->
+								<circle cx="110" cy="305" r="99" class="venn-circle" id="stanford-circle" />
+								<text x="105" y="305" class="venn-label">STANFORD-</text>
+								<text x="105" y="320" class="venn-label">BASED</text>
+								
+								<!-- Bottom right circle -->
+								<circle cx="280" cy="305" r="99" class="venn-circle" id="relationships-circle" />
+								<text x="285" y="315" class="venn-label">RELATIONSHIPS</text>
+								
+								<!-- Center circle -->
+								<circle cx="195" cy="210" r="60" class="venn-center" />
+								<text x="195" y="212" class="venn-center-label">NOVANA</text>
+							</svg>
+						</div>
 						
-						<!-- Top right circle -->
-						<circle cx="365" cy="135" r="99" class="venn-circle" />
-						<text x="370" y="125" class="venn-label">INVESTMENT</text>
-						<text x="370" y="140" class="venn-label">EXPERTISE</text>
-						
-						<!-- Bottom left circle -->
-						<circle cx="195" cy="305" r="99" class="venn-circle" />
-						<text x="190" y="305" class="venn-label">STANFORD-</text>
-						<text x="190" y="320" class="venn-label">BASED</text>
-						
-						<!-- Bottom right circle -->
-						<circle cx="365" cy="305" r="99" class="venn-circle" />
-						<text x="370" y="315" class="venn-label">RELATIONSHIPS</text>
-						
-						<!-- Center circle -->
-						<circle cx="280" cy="210" r="60" class="venn-center" />
-						<text x="280" y="212" class="venn-center-label">NOVANA</text>
-					</svg>
+						<div class="venn-text">
+							<div class="venn-description active" id="domain-text">
+								<p>We're researchers at heart, with competent domains spanning cancer metabolism, ultrasound drug uncaging, spatial omics, ophthalmology diagnostics, and artificial intelligence</p>
+							</div>
+							
+							<div class="venn-description" id="investment-text">
+								<p>Our investment management framework is the result of past professional experiences in long-only fundamental equities, enterprise-grade systematic investment strategy design, and buy-side equities trading</p>
+							</div>
+							
+							<div class="venn-description" id="relationships-text">
+								<p>We maintain deep, durable relationships across the Bay Area and East Coast, including those with scientific researchers, technical student-founders, venture investors, and asset management executives</p>
+							</div>
+							
+							<div class="venn-description" id="stanford-text">
+								<p>We have unparalleled access to Stanford's research faculty, student founders, and startup ecosystem, allowing us to source scientific innovations well before they enter venture or public market pipelines</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -411,7 +433,395 @@ import Footer from '../components/Footer.astro';
 	// Initialize when page loads
 	document.addEventListener('DOMContentLoaded', () => {
 		new FlowingPointCloud();
+		
+		// Initialize Venn diagram scroll interactions
+		initVennScrollInteractions();
 	});
+	
+	function initVennScrollInteractions() {
+		const ctaSection = document.querySelector('.team-cta-section');
+		if (!ctaSection) return;
+		
+		const circles = [
+			{ element: document.getElementById('domain-circle'), text: document.getElementById('domain-text') },
+			{ element: document.getElementById('investment-circle'), text: document.getElementById('investment-text') },
+			{ element: document.getElementById('relationships-circle'), text: document.getElementById('relationships-text') },
+			{ element: document.getElementById('stanford-circle'), text: document.getElementById('stanford-text') }
+		];
+		
+		let isLocked = false;
+		let currentDescriptionIndex = -1;
+		let scrollResistance = 0;
+		let accumulatedDelta = 0; // Track actual scroll distance
+		let lockScrollPosition = 0;
+		let hasUserScrolled = false; // Track if user has actually scrolled
+		let pageLoadTime = Date.now(); // Track when page loaded
+		const SCROLL_RESISTANCE_THRESHOLD = 15; // Back to original sensitivity
+		const DELTA_THRESHOLD = 150; // Much lower threshold for better UX
+		
+		// Ensure page starts at top on load/refresh
+		window.scrollTo(0, 0);
+		
+		// Lock scroll by preventing all scroll events - NO body positioning
+		function lockScroll() {
+			if (isLocked) return;
+			
+			// Just store current position - don't change body styles
+			lockScrollPosition = window.pageYOffset;
+			
+			isLocked = true;
+			currentDescriptionIndex = -1;
+			scrollResistance = 0;
+			accumulatedDelta = 0;
+			resetAllDescriptions();
+			
+			console.log('Scroll locked at position:', lockScrollPosition);
+		}
+		
+		// Unlock scroll by simply allowing events again - NO repositioning
+		function unlockScroll() {
+			if (!isLocked) return;
+			
+			// Simply unlock - no body style changes, no repositioning
+			isLocked = false;
+			currentDescriptionIndex = -1;
+			scrollResistance = 0;
+			accumulatedDelta = 0;
+			resetAllDescriptions();
+			
+			console.log('Scroll unlocked - continuing naturally with no repositioning');
+		}
+		
+		function resetAllDescriptions() {
+			circles.forEach((circle) => {
+				if (circle.element && circle.text) {
+					circle.element.style.opacity = '0.7';
+					circle.element.style.strokeWidth = '1';
+					circle.text.classList.remove('active');
+				}
+			});
+		}
+		
+		function showDescription(index) {
+			if (index < 0 || index >= circles.length) {
+				resetAllDescriptions();
+				return;
+			}
+			
+			resetAllDescriptions();
+			
+			const activeCircle = circles[index];
+			if (activeCircle.element && activeCircle.text) {
+				activeCircle.element.style.opacity = '1';
+				activeCircle.element.style.strokeWidth = '3';
+				activeCircle.text.classList.add('active');
+			}
+			
+			currentDescriptionIndex = index;
+			console.log(`Showing description ${index + 1} of ${circles.length}`);
+		}
+		
+		// Use Intersection Observer to detect when CTA section enters viewport
+		const observerOptions = {
+			root: null,
+			rootMargin: '0px',
+			threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0] // More granular thresholds
+		};
+		
+		let hasEnteredFromTop = false;
+		let hasEnteredFromBottom = false;
+		let lastScrollTop = window.pageYOffset;
+		
+		// Function to check if bottom of CTA section is at bottom of viewport
+		function shouldLockAtBottom() {
+			const ctaRect = ctaSection.getBoundingClientRect();
+			const ctaBottom = ctaRect.bottom;
+			const viewportHeight = window.innerHeight;
+			
+			// Lock when bottom of CTA section is very close to bottom of viewport (within 50px)
+			return Math.abs(ctaBottom - viewportHeight) <= 50;
+		}
+		
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				const currentScrollTop = window.pageYOffset;
+				const scrollingDown = currentScrollTop > lastScrollTop;
+				const scrollingUp = currentScrollTop < lastScrollTop;
+				lastScrollTop = currentScrollTop;
+				
+				// Mark that user has scrolled if they're not at the very top
+				if (currentScrollTop > 10) {
+					hasUserScrolled = true;
+				}
+				
+				// Prevent auto-locking on page load - require user interaction and time delay
+				const timeSinceLoad = Date.now() - pageLoadTime;
+				const canLock = hasUserScrolled && timeSinceLoad > 1000; // 1 second delay + user must have scrolled
+				
+				// Only proceed if section is significantly visible AND user has actually scrolled
+				if (entry.isIntersecting && entry.intersectionRatio > 0.3 && canLock) {
+					if (scrollingDown && !hasEnteredFromTop && !isLocked) {
+						// User scrolled down into section - check if bottom aligns with viewport bottom
+						if (shouldLockAtBottom()) {
+							hasEnteredFromTop = true;
+							hasEnteredFromBottom = false;
+							lockScroll();
+						}
+					} else if (scrollingUp && !hasEnteredFromBottom && !isLocked) {
+						// User scrolled up into section - lock immediately
+						hasEnteredFromBottom = true;
+						hasEnteredFromTop = false;
+						lockScroll();
+					}
+				}
+				
+				// Section is completely out of view - reset flags
+				if (!entry.isIntersecting && entry.intersectionRatio === 0) {
+					if (scrollingDown) {
+						// Section scrolled out from top
+						hasEnteredFromTop = false;
+					} else if (scrollingUp) {
+						// Section scrolled out from bottom
+						hasEnteredFromBottom = false;
+					}
+				}
+			});
+		}, observerOptions);
+		
+		observer.observe(ctaSection);
+		
+		// Add additional scroll listener to catch the exact bottom alignment moment
+		function handleScrollForLocking() {
+			if (isLocked) return;
+			
+			const currentScrollTop = window.pageYOffset;
+			const scrollingDown = currentScrollTop > lastScrollTop;
+			
+			// Mark that user has scrolled
+			if (currentScrollTop > 10) {
+				hasUserScrolled = true;
+			}
+			
+			// Prevent auto-locking on page load
+			const timeSinceLoad = Date.now() - pageLoadTime;
+			const canLock = hasUserScrolled && timeSinceLoad > 1000;
+			
+			if (scrollingDown && !hasEnteredFromTop && shouldLockAtBottom() && canLock) {
+				const ctaRect = ctaSection.getBoundingClientRect();
+				// Only lock if section is actually visible
+				if (ctaRect.top < window.innerHeight && ctaRect.bottom > 0) {
+					hasEnteredFromTop = true;
+					hasEnteredFromBottom = false;
+					lockScroll();
+				}
+			}
+			
+			lastScrollTop = currentScrollTop;
+		}
+		
+		window.addEventListener('scroll', handleScrollForLocking, { passive: true });
+		
+		// Prevent ALL scrolling when locked - this is the key to preventing jumps
+		function preventScrollWhenLocked(e) {
+			if (isLocked) {
+				e.preventDefault();
+				e.stopPropagation();
+				window.scrollTo(0, lockScrollPosition); // Keep at exact position
+				return false;
+			}
+		}
+		
+		// Add comprehensive scroll prevention
+		window.addEventListener('scroll', preventScrollWhenLocked, { passive: false });
+		window.addEventListener('touchmove', preventScrollWhenLocked, { passive: false });
+		
+		// Handle wheel events when locked
+		function handleWheel(e) {
+			if (!isLocked) return;
+			
+			e.preventDefault();
+			e.stopPropagation();
+			
+			if (e.deltaY > 0) {
+				// Scrolling down
+				scrollResistance++;
+				accumulatedDelta += Math.abs(e.deltaY);
+				console.log(`Scroll down resistance: ${scrollResistance}/${SCROLL_RESISTANCE_THRESHOLD}, delta: ${accumulatedDelta}/${DELTA_THRESHOLD}`);
+				
+				// Require BOTH sufficient events AND sufficient scroll distance
+				if (scrollResistance >= SCROLL_RESISTANCE_THRESHOLD && accumulatedDelta >= DELTA_THRESHOLD) {
+					const nextIndex = currentDescriptionIndex + 1;
+					
+					if (nextIndex < circles.length) {
+						showDescription(nextIndex);
+						scrollResistance = 0;
+						accumulatedDelta = 0;
+						console.log(`Advanced to description ${nextIndex + 1}`);
+					} else {
+						// All descriptions shown - simply unlock and let user continue naturally
+						unlockScroll();
+						console.log('All descriptions shown - unlocked for continued scrolling');
+					}
+				}
+			} else if (e.deltaY < 0) {
+				// Scrolling up
+				scrollResistance++;
+				accumulatedDelta += Math.abs(e.deltaY);
+				console.log(`Scroll up resistance: ${scrollResistance}/${SCROLL_RESISTANCE_THRESHOLD}, delta: ${accumulatedDelta}/${DELTA_THRESHOLD}`);
+				
+				// Require BOTH sufficient events AND sufficient scroll distance
+				if (scrollResistance >= SCROLL_RESISTANCE_THRESHOLD && accumulatedDelta >= DELTA_THRESHOLD) {
+					const prevIndex = currentDescriptionIndex - 1;
+					
+					if (prevIndex >= -1) {
+						showDescription(prevIndex); // -1 will reset all descriptions
+						scrollResistance = 0;
+						accumulatedDelta = 0;
+						console.log(`Reversed to description ${prevIndex >= 0 ? prevIndex + 1 : 'none'}`);
+						
+						// If we've gone back past the first description, unlock upward
+						if (prevIndex < 0) {
+							unlockScroll();
+							console.log('Reversed past first description - unlocked for upward scroll');
+						}
+					}
+				}
+			}
+		}
+		
+		// Handle touch events for mobile
+		let touchStartY = 0;
+		let touchMoveCount = 0;
+		let touchAccumulatedDelta = 0;
+		let lastTouchDirection = 0; // 1 for down, -1 for up
+		
+		function handleTouchStart(e) {
+			if (!isLocked) return;
+			touchStartY = e.touches[0].clientY;
+			touchMoveCount = 0;
+			touchAccumulatedDelta = 0;
+			lastTouchDirection = 0;
+		}
+		
+		function handleTouchMove(e) {
+			if (!isLocked) return;
+			
+			e.preventDefault();
+			e.stopPropagation();
+			
+			const touchY = e.touches[0].clientY;
+			const deltaY = touchStartY - touchY;
+			
+			// Only process significant movements
+			if (Math.abs(deltaY) > 30) {
+				const currentDirection = deltaY > 0 ? 1 : -1; // 1 for down, -1 for up
+				
+				// Reset count if direction changed
+				if (lastTouchDirection !== 0 && lastTouchDirection !== currentDirection) {
+					touchMoveCount = 0;
+					touchAccumulatedDelta = 0;
+				}
+				
+				lastTouchDirection = currentDirection;
+				touchMoveCount++;
+				touchAccumulatedDelta += Math.abs(deltaY);
+				
+				console.log(`Touch ${currentDirection > 0 ? 'down' : 'up'} resistance: ${touchMoveCount}/${SCROLL_RESISTANCE_THRESHOLD}, delta: ${touchAccumulatedDelta}/${DELTA_THRESHOLD}`);
+				
+				// Require BOTH sufficient touch events AND sufficient movement distance
+				if (touchMoveCount >= SCROLL_RESISTANCE_THRESHOLD && touchAccumulatedDelta >= DELTA_THRESHOLD) {
+					if (currentDirection > 0) {
+						// Downward swipe
+						const nextIndex = currentDescriptionIndex + 1;
+						
+						if (nextIndex < circles.length) {
+							showDescription(nextIndex);
+							touchMoveCount = 0;
+							touchAccumulatedDelta = 0;
+							touchStartY = touchY;
+							console.log(`Touch advanced to description ${nextIndex + 1}`);
+						} else {
+							// All descriptions shown - simply unlock and let user continue naturally
+							unlockScroll();
+							console.log('All descriptions shown - touch unlocked');
+						}
+					} else {
+						// Upward swipe
+						const prevIndex = currentDescriptionIndex - 1;
+						
+						if (prevIndex >= -1) {
+							showDescription(prevIndex);
+							touchMoveCount = 0;
+							touchAccumulatedDelta = 0;
+							touchStartY = touchY;
+							console.log(`Touch reversed to description ${prevIndex >= 0 ? prevIndex + 1 : 'none'}`);
+							
+							if (prevIndex < 0) {
+								unlockScroll();
+								console.log('Touch reversed past first - unlocked upward');
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		function handleTouchEnd(e) {
+			touchMoveCount = 0;
+			touchAccumulatedDelta = 0;
+			lastTouchDirection = 0;
+		}
+		
+		// Keyboard support (for accessibility)
+		function handleKeyDown(e) {
+			if (!isLocked) return;
+			
+			if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+				e.preventDefault();
+				const nextIndex = currentDescriptionIndex + 1;
+				if (nextIndex < circles.length) {
+					showDescription(nextIndex);
+				} else {
+					unlockScroll();
+				}
+			} else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+				e.preventDefault();
+				const prevIndex = currentDescriptionIndex - 1;
+				if (prevIndex >= -1) {
+					showDescription(prevIndex);
+					if (prevIndex < 0) {
+						unlockScroll();
+					}
+				}
+			} else if (e.key === 'Escape') {
+				e.preventDefault();
+				unlockScroll();
+			}
+		}
+		
+		// Add event listeners
+		window.addEventListener('wheel', handleWheel, { passive: false });
+		window.addEventListener('touchstart', handleTouchStart, { passive: false });
+		window.addEventListener('touchmove', handleTouchMove, { passive: false });
+		window.addEventListener('touchend', handleTouchEnd, { passive: false });
+		window.addEventListener('keydown', handleKeyDown, { passive: false });
+		
+		// Cleanup function (for development)
+		window.cleanupVennScrollInteractions = () => {
+			observer.disconnect();
+			window.removeEventListener('scroll', handleScrollForLocking);
+			window.removeEventListener('scroll', preventScrollWhenLocked);
+			window.removeEventListener('touchmove', preventScrollWhenLocked);
+			window.removeEventListener('wheel', handleWheel);
+			window.removeEventListener('touchstart', handleTouchStart);
+			window.removeEventListener('touchmove', handleTouchMove);
+			window.removeEventListener('touchend', handleTouchEnd);
+			window.removeEventListener('keydown', handleKeyDown);
+			if (isLocked) {
+				unlockScroll();
+			}
+		};
+	}
 </script>
 
 <style>
@@ -550,13 +960,13 @@ import Footer from '../components/Footer.astro';
 	.team-cta-section {
 		background: #000000; /* Pure black */
 		color: #ffffff; /* Pure white text */
-		padding: var(--spacing-3xl) 0;
+		padding: var(--spacing-lg) 0; /* Much smaller padding */
 	}
 	
 	.team-cta-container {
 		max-width: 1200px;
 		margin: 0 auto;
-		padding: 0 var(--spacing-lg);
+		padding: var(--spacing-3xl) var(--spacing-lg); /* Even more vertical padding */
 		text-align: center;
 	}
 	
@@ -615,7 +1025,26 @@ import Footer from '../components/Footer.astro';
 		
 		.venn-diagram {
 			margin-top: var(--spacing-lg);
-			max-width: 420px; /* 40% larger than previous 300px */
+			max-width: 420px; /* Back to original mobile size */
+			margin-left: 0; /* Keep left aligned on mobile */
+		}
+		
+		.venn-content {
+			flex-direction: column;
+			gap: var(--spacing-md);
+		}
+		
+		.venn-visual, .venn-text {
+			flex: none;
+			width: 100%;
+		}
+		
+		.venn-description {
+			padding: var(--spacing-sm);
+		}
+		
+		.venn-description p {
+			font-size: 0.85rem;
 		}
 		
 		.venn-label {
@@ -637,7 +1066,17 @@ import Footer from '../components/Footer.astro';
 		}
 		
 		.venn-diagram {
-			max-width: 350px; /* 40% larger than previous 250px */
+			max-width: 350px; /* Back to original small phone size */
+			margin-left: 0; /* Keep left aligned */
+		}
+		
+		.venn-description {
+			padding: var(--spacing-xs);
+		}
+		
+		.venn-description p {
+			font-size: 0.8rem;
+			line-height: 1.4;
 		}
 		
 		.venn-label {
@@ -651,14 +1090,55 @@ import Footer from '../components/Footer.astro';
 
 	/* Venn Diagram Styles */
 	.venn-diagram {
-		margin-top: var(--spacing-2xl);
-		width: 100%;
-		max-width: 560px; /* 40% larger than 400px */
-		margin-left: auto;
+		margin-top: var(--spacing-sm);
+		width: fit-content; /* Exactly the width of content */
+		margin-left: 0;
 		margin-right: auto;
+		display: block;
+	}
+
+	.venn-content {
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
+		gap: 5px;
+		width: fit-content; /* No excess width */
+	}
+
+	.venn-visual {
+		flex: 0 0 360px; /* Much smaller diagram - reduced from 560px */
+		position: relative;
+	}
+
+	.venn-text {
+		flex: 0 0 480px; /* Much smaller fixed width */
+		position: relative;
+		min-height: 200px;
+	}
+
+	.venn-description {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		background: rgba(0, 0, 0, 0.8);
+		padding: var(--spacing-2xl);
+		border-radius: 12px;
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+		transition: opacity 0.5s ease-in-out;
+		opacity: 0;
+		backdrop-filter: blur(8px);
+		text-align: left;
+	}
+
+	.venn-description.active {
+		opacity: 1;
+	}
+
+	.venn-description p {
+		font-size: 1.2rem;
+		line-height: 1.7;
+		color: #ffffff;
+		margin: 0;
 	}
 
 	.venn-svg {
