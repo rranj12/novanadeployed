@@ -30,6 +30,8 @@ const authors = [
 				<header class="article-header">
 					<h1 class="article-title">About</h1>
 					<p class="article-blurb">We are in the midst of a major technological revolution — artificial intelligence will fundamentally change the ways in which humans live and our society functions. At Novana, we believe that strides in artificial intelligence will enable previously nascent industries to thrive. Furthermore, we believe that Silicon Valley is the geographic hub that will house it all: the San Francisco Bay Area is where researchers turn founders, scientific innovation finds financial backing, and East meets West.</p>
+					
+					<p class="article-blurb">Novana marries scientific domain knowledge and end-to-end investment management expertise, critically analyzing emerging technologies so as to produce empirically sound findings for those looking to investment in the future. Our Stanford-based team produces in-house technology analyses, investment research briefs, and market trend writeups across edge computing, biotechnology, artificial intelligence, and other frontier technology industries. </p>
 				</header>
 			</article>
 		</div>
@@ -101,8 +103,12 @@ const authors = [
 		line-height: 1.6;
 		color: var(--text-secondary);
 		max-width: 900px;
-		margin: 0 auto;
+		margin: 0 auto var(--spacing-lg) auto; /* Add bottom margin for spacing between paragraphs */
 		font-weight: 400;
+	}
+
+	.article-blurb:last-of-type {
+		margin-bottom: 0; /* Remove bottom margin from the last paragraph */
 	}
 
 	.team-section {
