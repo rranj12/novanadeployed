@@ -25,8 +25,36 @@ import Footer from '../components/Footer.astro';
 	<section class="team-cta-section">
 		<div class="team-cta-container">
 			<div class="team-cta-content">
-				<p class="team-cta-text">We bring together scientific domain knowledge and end-to-end investment management expertise to produce empirically sound findings for those looking to investment in the future.</p>
+				<p class="team-cta-text">We bring together scientific domain knowledge and end-to-end investment management expertise to produce empirically sound findings for those looking to invest in the future.</p>
 				<a href="/about" class="team-cta-button">Meet the Team</a>
+				
+				<!-- Venn Diagram -->
+				<div class="venn-diagram">
+					<svg viewBox="0 0 560 420" class="venn-svg">
+						<!-- Top left circle -->
+						<circle cx="195" cy="135" r="99" class="venn-circle" />
+						<text x="190" y="125" class="venn-label">DOMAIN</text>
+						<text x="190" y="140" class="venn-label">KNOWLEDGE</text>
+						
+						<!-- Top right circle -->
+						<circle cx="365" cy="135" r="99" class="venn-circle" />
+						<text x="370" y="125" class="venn-label">INVESTMENT</text>
+						<text x="370" y="140" class="venn-label">EXPERTISE</text>
+						
+						<!-- Bottom left circle -->
+						<circle cx="195" cy="305" r="99" class="venn-circle" />
+						<text x="190" y="305" class="venn-label">STANFORD-</text>
+						<text x="190" y="320" class="venn-label">BASED</text>
+						
+						<!-- Bottom right circle -->
+						<circle cx="365" cy="305" r="99" class="venn-circle" />
+						<text x="370" y="315" class="venn-label">RELATIONSHIPS</text>
+						
+						<!-- Center circle -->
+						<circle cx="280" cy="210" r="60" class="venn-center" />
+						<text x="280" y="212" class="venn-center-label">NOVANA</text>
+					</svg>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -569,6 +597,19 @@ import Footer from '../components/Footer.astro';
 			padding: 14px var(--spacing-lg);
 			font-size: 0.9rem;
 		}
+		
+		.venn-diagram {
+			margin-top: var(--spacing-lg);
+			max-width: 420px; /* 40% larger than previous 300px */
+		}
+		
+		.venn-label {
+			font-size: 12px; /* Proportionally smaller for mobile, but same for all labels */
+		}
+		
+		.venn-center-label {
+			font-size: 12px; /* Same as other labels on mobile */
+		}
 	}
 	
 	@media (max-width: 480px) {
@@ -579,5 +620,71 @@ import Footer from '../components/Footer.astro';
 		.team-cta-text {
 			font-size: 1.1rem;
 		}
+		
+		.venn-diagram {
+			max-width: 350px; /* 40% larger than previous 250px */
+		}
+		
+		.venn-label {
+			font-size: 11px; /* Proportionally larger for small phones */
+		}
+		
+		.venn-center-label {
+			font-size: 14px; /* Proportionally larger for small phones */
+		}
+	}
+
+	/* Venn Diagram Styles */
+	.venn-diagram {
+		margin-top: var(--spacing-2xl);
+		width: 100%;
+		max-width: 560px; /* 40% larger than 400px */
+		margin-left: auto;
+		margin-right: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.venn-svg {
+		width: 100%;
+		height: auto;
+	}
+
+	.venn-circle {
+		fill: none; /* Transparent fill */
+		stroke: #ffffff; /* White border on black background */
+		stroke-width: 1; /* Match button border width */
+		opacity: 0.7;
+		transition: opacity 0.3s ease;
+	}
+
+	.venn-circle:hover {
+		opacity: 1;
+	}
+
+	.venn-label {
+		font-size: 15px; /* Same size as center label */
+		font-weight: 600;
+		fill: #ffffff; /* White text on black background */
+		text-anchor: middle;
+		dominant-baseline: middle;
+		pointer-events: none;
+	}
+
+	.venn-center {
+		fill: #ffffff; /* White fill for center circle */
+		stroke: #ffffff; /* White border */
+		stroke-width: 1; /* Match button and outer circles */
+		opacity: 1; /* Fully opaque */
+	}
+
+	.venn-center-label {
+		font-size: 15px; /* Same as other labels */
+		font-weight: 600; /* Same weight as other labels */
+		fill: #000000; /* Black text on white center circle */
+		text-anchor: middle;
+		dominant-baseline: middle;
+		pointer-events: none;
 	}
 </style>

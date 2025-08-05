@@ -57,6 +57,24 @@
 	border-color: #000000 !important;
 }
 
+/* Dark mode Venn diagram styles */
+[data-theme="dark"] .venn-circle {
+	stroke: #000000 !important; /* Black border on white background */
+}
+
+[data-theme="dark"] .venn-label {
+	fill: #000000 !important; /* Black text on white background */
+}
+
+[data-theme="dark"] .venn-center {
+	fill: #000000 !important; /* Black fill for center circle */
+	stroke: #000000 !important; /* Black border */
+}
+
+[data-theme="dark"] .venn-center-label {
+	fill: #ffffff !important; /* White text on black center circle */
+}
+
 /* Base Reset */
 *, *::before, *::after {
 	box-sizing: border-box;
