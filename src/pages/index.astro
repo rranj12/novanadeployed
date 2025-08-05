@@ -429,8 +429,8 @@ import Footer from '../components/Footer.astro';
 	.hero-content {
 		max-width: 800px;
 		margin-left: 16.5%;
-		margin-top: 29vh; /* Use margin-top instead of absolute positioning - adjust this value to move text up/down */
-		position: relative; /* Change from absolute to relative */
+		margin-top: 29vh;
+		position: relative;
 	}
 	
 	.hero-title {
@@ -448,58 +448,73 @@ import Footer from '../components/Footer.astro';
 		margin: 0;
 	}
 	
-	/* Mobile devices - completely different layout */
+	/* Mobile devices - optimized layout */
 	@media (max-width: 768px) {
 		.hero {
-			height: auto; /* Allow natural height on mobile */
-			min-height: 100vh; /* Ensure full screen coverage */
-			padding: var(--spacing-xl) 0;
+			height: calc(100vh - 80px);
+			padding: 0;
+			display: flex;
+			align-items: center;
 		}
 		
 		.hero-container {
-			padding: 0 var(--spacing-md); /* Reduce side padding */
+			padding: 0 var(--spacing-md);
+			width: 100%;
 		}
 		
 		.hero-content {
-			max-width: 100%; /* Use full width */
-			margin-left: 0; /* Remove left margin */
-			margin-top: var(--spacing-2xl); /* Reduce top margin */
-			text-align: left; /* Left align instead of center */
+			max-width: 90%;
+			margin-left: 5%;
+			margin-top: 20vh;
+			text-align: left;
+			padding: 0;
 		}
 		
 		.hero-title {
-			font-size: 2.2rem; /* Slightly larger than before */
+			font-size: 2rem;
 			line-height: 1.2;
 			margin-bottom: var(--spacing-lg);
 		}
 		
 		.hero-subtitle {
-			font-size: 1.1rem; /* Slightly larger than before */
+			font-size: 1.1rem;
 			line-height: 1.5;
 		}
 		
-		/* Keep animation on mobile but reduce density for performance */
+		/* Keep animation but optimize for mobile performance */
 		.tesseract-container {
-			display: block; /* Show animation on mobile */
+			display: block;
 		}
 		
 		.main {
-			background: var(--bg-white); /* Ensure proper background */
+			background: var(--bg-white);
 		}
 	}
 	
 	/* Small phones */
 	@media (max-width: 480px) {
+		.hero {
+			padding: var(--spacing-lg) 0;
+		}
+		
 		.hero-title {
-			font-size: 1.8rem;
+			font-size: 1.6rem;
+			margin-bottom: var(--spacing-md);
 		}
 		
 		.hero-subtitle {
 			font-size: 1rem;
+			line-height: 1.4;
 		}
 		
 		.hero-container {
 			padding: 0 var(--spacing-sm);
+		}
+		
+		.hero-content {
+			max-width: 95%;
+			margin-left: 2.5%;
+			padding: 0;
 		}
 	}
 	
