@@ -226,8 +226,18 @@ const authors = [
 	}
 
 	@media (max-width: 768px) {
+		.container {
+			padding: 0 var(--spacing-md);
+		}
+		
+		.article {
+			padding: var(--spacing-2xl) 0 var(--spacing-md) 0;
+			text-align: left; /* Left align instead of center */
+		}
+		
 		.article-title {
 			font-size: 2rem; /* Maintain proportional scaling */
+			text-align: left; /* Left align title */
 		}
 
 		.section-title {
@@ -236,25 +246,73 @@ const authors = [
 
 		.article-blurb {
 			font-size: 1rem; /* Maintain proportional scaling */
+			padding: 0 var(--spacing-sm); /* Add side padding */
+			text-align: left; /* Left align text */
+		}
+
+		.team-section {
+			padding: var(--spacing-lg) 0 var(--spacing-xl);
 		}
 
 		.team-grid {
 			grid-template-columns: 1fr;
-			gap: var(--spacing-2xl);
+			gap: var(--spacing-xl); /* Reduced gap */
+			max-width: 100%; /* Use full width */
+		}
+
+		.team-member {
+			max-width: 100%; /* Use full width */
+			padding: var(--spacing-lg);
+			min-height: auto; /* Remove fixed height */
 		}
 
 		.member-image img {
-			max-width: 240px;
+			max-width: 200px; /* Smaller on mobile */
 			height: auto;
 		}
 
 		.member-name {
-			font-size: 1.3rem; /* Slightly smaller than before but proportional */
+			font-size: 1.2rem; /* Slightly smaller */
 		}
 
+		.member-title {
+			font-size: 0.9rem;
+		}
+
+		.member-social {
+			gap: var(--spacing-sm);
+		}
+	}
+	
+	/* Small phones */
+	@media (max-width: 480px) {
+		.container {
+			padding: 0 var(--spacing-sm);
+		}
+		
+		.article-title {
+			font-size: 1.8rem;
+		}
+		
+		.article-blurb {
+			font-size: 0.9rem;
+			padding: 0;
+		}
+		
 		.team-member {
-			padding: var(--spacing-lg);
-			min-height: 320px; /* Smaller on mobile */
+			padding: var(--spacing-md);
+		}
+		
+		.member-image img {
+			max-width: 160px;
+		}
+		
+		.member-name {
+			font-size: 1.1rem;
+		}
+		
+		.member-title {
+			font-size: 0.85rem;
 		}
 	}
 </style>

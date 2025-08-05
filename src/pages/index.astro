@@ -112,14 +112,18 @@ import Footer from '../components/Footer.astro';
 			const referenceDiagonal = Math.sqrt(1920*1920 + 1080*1080); // Reference: 1920x1080
 			const scaleFactor = screenDiagonal / referenceDiagonal;
 			
+			// Detect mobile device for performance optimization
+			const isMobile = window.innerWidth <= 768;
+			const mobileReduction = isMobile ? 0.5 : 1.0; // Reduce density by 50% on mobile
+			
 			// Reduced density for better performance - larger spacing
-			const baseGridSize = 80; // Reduced from 120
+			const baseGridSize = 80 * mobileReduction; // Further reduced on mobile
 			const gridSize = Math.floor(baseGridSize * scaleFactor);
-			const baseSpacing = 1.0; // Increased from 0.8
+			const baseSpacing = (1.0 / mobileReduction); // Increased spacing on mobile
 			const mainSpacing = baseSpacing * scaleFactor;
 			const secondarySpacing = mainSpacing * 1.8; // Increased from 1.5
 			
-			console.log(`Hero: ${screenWidth}x${screenHeight} logical, Scale factor: ${scaleFactor.toFixed(2)}, Grid: ${gridSize}, Spacing: ${mainSpacing.toFixed(2)}`);
+			console.log(`Hero: ${screenWidth}x${screenHeight} logical, Scale factor: ${scaleFactor.toFixed(2)}, Mobile: ${isMobile}, Grid: ${gridSize}, Spacing: ${mainSpacing.toFixed(2)}`);
 			
 			// Create wave surfaces - reduced density for better performance
 			const waveAmplitude = 2.0;
@@ -178,8 +182,8 @@ import Footer from '../components/Footer.astro';
 				}
 			}
 			
-			// Add wave disturbances - reduced count for performance
-			const disturbanceCount = Math.floor(6 * Math.min(scaleFactor, 1.0)); // Reduced from 12
+			// Add wave disturbances - reduced count for performance, especially on mobile
+			const disturbanceCount = Math.floor(6 * Math.min(scaleFactor, 1.0) * mobileReduction); // Reduced on mobile
 			const disturbanceSpacing = secondarySpacing * 1.5; // Increased spacing
 			
 			for (let i = 0; i < disturbanceCount; i++) {
@@ -207,7 +211,7 @@ import Footer from '../components/Footer.astro';
 				}
 			}
 			
-			console.log(`Generated ${points.length} wave surface points (optimized for performance)`);
+			console.log(`Generated ${points.length} wave surface points (optimized for performance${isMobile ? ', mobile' : ''})`);
 			return points;
 		}
 		
@@ -435,16 +439,56 @@ import Footer from '../components/Footer.astro';
 	
 	/* Mobile devices - completely different layout */
 	@media (max-width: 768px) {
+		.hero {
+			height: auto; /* Allow natural height on mobile */
+			min-height: 100vh; /* Ensure full screen coverage */
+			padding: var(--spacing-xl) 0;
+		}
+		
+		.hero-container {
+			padding: 0 var(--spacing-md); /* Reduce side padding */
+		}
+		
+		.hero-content {
+			max-width: 100%; /* Use full width */
+			margin-left: 0; /* Remove left margin */
+			margin-top: var(--spacing-2xl); /* Reduce top margin */
+			text-align: left; /* Left align instead of center */
+		}
+		
 		.hero-title {
-			font-size: 2rem;
+			font-size: 2.2rem; /* Slightly larger than before */
+			line-height: 1.2;
+			margin-bottom: var(--spacing-lg);
+		}
+		
+		.hero-subtitle {
+			font-size: 1.1rem; /* Slightly larger than before */
+			line-height: 1.5;
+		}
+		
+		/* Keep animation on mobile but reduce density for performance */
+		.tesseract-container {
+			display: block; /* Show animation on mobile */
+		}
+		
+		.main {
+			background: var(--bg-white); /* Ensure proper background */
+		}
+	}
+	
+	/* Small phones */
+	@media (max-width: 480px) {
+		.hero-title {
+			font-size: 1.8rem;
 		}
 		
 		.hero-subtitle {
 			font-size: 1rem;
 		}
 		
-		.tesseract-container {
-			display: none;
+		.hero-container {
+			padding: 0 var(--spacing-sm);
 		}
 	}
 </style>

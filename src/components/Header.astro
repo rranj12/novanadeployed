@@ -231,45 +231,61 @@ const { currentPath } = Astro.props;
 
 	/* Mobile styles */
 	@media (max-width: 768px) {
+		.nav {
+			padding: 0 var(--spacing-md); /* Add padding for mobile */
+		}
+		
 		.mobile-menu-button {
 			display: flex;
+			min-height: 44px; /* Better touch target */
+			min-width: 44px;
+			padding: 12px;
 		}
 		
 		.nav-links {
 			position: fixed;
 			top: 80px;
 			right: 0;
-			width: 240px;
+			left: 0; /* Full width on mobile */
+			width: 100%; /* Full width */
 			background: var(--bg-white);
 			flex-direction: column;
 			gap: 0;
-			padding: 20px 0;
-			transform: translateX(100%);
+			padding: var(--spacing-lg) 0;
+			transform: translateY(-100%); /* Slide down instead of right */
 			opacity: 0;
 			visibility: hidden;
 			transition: all 0.3s ease;
-			box-shadow: -8px 4px 20px rgba(0, 0, 0, 0.15);
-			border-left: 1px solid var(--border-color);
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+			border-bottom: 1px solid var(--border-color);
+			max-height: calc(100vh - 80px); /* Prevent overflow */
+			overflow-y: auto;
 		}
 		
 		.nav-links.active {
-			transform: translateX(0);
+			transform: translateY(0); /* Slide down */
 			opacity: 1;
 			visibility: visible;
 		}
 		
 		.nav-link {
-			padding: 12px 24px;
-			font-size: 16px;
+			padding: 16px var(--spacing-lg); /* Larger touch targets */
+			font-size: 18px; /* Larger text for readability */
 			color: var(--text-primary);
-			text-align: left;
+			text-align: left; /* Left align on mobile */
 			display: block;
 			width: 100%;
+			min-height: 48px; /* Better touch target */
+			border-bottom: 1px solid var(--border-color);
+		}
+		
+		.nav-link:last-of-type {
+			border-bottom: none;
 		}
 		
 		.nav-link:hover,
 		.nav-link.active {
-			color: var(--text-secondary);
+			color: var(--text-primary);
 			background: var(--bg-light);
 		}
 		
@@ -278,12 +294,35 @@ const { currentPath } = Astro.props;
 		}
 		
 		.theme-toggle {
-			margin: 12px 24px;
-			justify-content: flex-start;
+			margin: var(--spacing-md) var(--spacing-lg);
+			justify-content: flex-start; /* Left align theme toggle */
+			min-height: 48px;
+			padding: 12px;
+			border-top: 1px solid var(--border-color);
 		}
 		
 		.logo-text {
 			font-size: 18px;
+		}
+	}
+	
+	/* Small phones */
+	@media (max-width: 480px) {
+		.nav {
+			padding: 0 var(--spacing-sm);
+		}
+		
+		.nav-link {
+			padding: 14px var(--spacing-md);
+			font-size: 16px;
+		}
+		
+		.theme-toggle {
+			margin: var(--spacing-md);
+		}
+		
+		.logo-text {
+			font-size: 16px;
 		}
 	}
 </style>
