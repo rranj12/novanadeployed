@@ -40,6 +40,23 @@
 	--bg-dark: #161616;
 }
 
+/* Dark mode team CTA styles - moved to global to ensure proper theme switching */
+[data-theme="dark"] .team-cta-section {
+	background: #ffffff !important; /* Pure white in dark mode */
+	color: #000000 !important; /* Pure black text in dark mode */
+}
+
+[data-theme="dark"] .team-cta-button {
+	color: #000000 !important; /* Black text on white background */
+	border-color: #000000 !important; /* Black border on white background */
+}
+
+[data-theme="dark"] .team-cta-button:hover {
+	background: #000000 !important; /* Black background on hover in dark mode */
+	color: #ffffff !important; /* White text on hover in dark mode */
+	border-color: #000000 !important;
+}
+
 /* Base Reset */
 *, *::before, *::after {
 	box-sizing: border-box;

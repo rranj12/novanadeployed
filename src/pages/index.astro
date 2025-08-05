@@ -20,6 +20,17 @@ import Footer from '../components/Footer.astro';
 			</div>
 		</section>
 	</main>
+	
+	<!-- Team Section -->
+	<section class="team-cta-section">
+		<div class="team-cta-container">
+			<div class="team-cta-content">
+				<p class="team-cta-text">We bring together scientific domain knowledge and end-to-end investment management expertise to produce empirically sound findings for those looking to investment in the future.</p>
+				<a href="/about" class="team-cta-button">Meet the Team</a>
+			</div>
+		</div>
+	</section>
+	
 	<Footer />
 </Layout>
 
@@ -489,6 +500,84 @@ import Footer from '../components/Footer.astro';
 		
 		.hero-container {
 			padding: 0 var(--spacing-sm);
+		}
+	}
+	
+	/* Team CTA Section */
+	.team-cta-section {
+		background: #000000; /* Pure black */
+		color: #ffffff; /* Pure white text */
+		padding: var(--spacing-3xl) 0;
+	}
+	
+	.team-cta-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 var(--spacing-lg);
+		text-align: center;
+	}
+	
+	.team-cta-content {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+	
+	.team-cta-text {
+		font-size: 1.3rem; /* Match hero subtitle font size */
+		line-height: 1.6; /* Match hero subtitle line height */
+		margin: 0 0 var(--spacing-xl) 0;
+		font-weight: 400;
+		color: inherit; /* Use inherited color from section */
+	}
+	
+	.team-cta-button {
+		display: inline-flex;
+		align-items: center;
+		padding: 8px 20px; /* Match filter button padding */
+		background: transparent; /* Transparent background like filter buttons */
+		color: #ffffff; /* White text on black background */
+		text-decoration: none;
+		border-radius: 25px; /* Match filter button border radius */
+		font-weight: 500; /* Match filter button font weight */
+		font-size: 14px; /* Match filter button font size */
+		transition: all 0.2s ease;
+		border: 1px solid #ffffff; /* White border on black background */
+	}
+	
+	.team-cta-button:hover {
+		background: #ffffff; /* White background on hover */
+		color: #000000; /* Black text on hover */
+		border-color: #ffffff;
+	}
+	
+	/* Mobile styles for team CTA */
+	@media (max-width: 768px) {
+		.team-cta-section {
+			padding: var(--spacing-2xl) 0;
+		}
+		
+		.team-cta-container {
+			padding: 0 var(--spacing-md);
+		}
+		
+		.team-cta-text {
+			font-size: 1.1rem; /* Match mobile hero subtitle font size */
+			line-height: 1.5; /* Match mobile hero subtitle line height */
+		}
+		
+		.team-cta-button {
+			padding: 14px var(--spacing-lg);
+			font-size: 0.9rem;
+		}
+	}
+	
+	@media (max-width: 480px) {
+		.team-cta-container {
+			padding: 0 var(--spacing-sm);
+		}
+		
+		.team-cta-text {
+			font-size: 1.1rem;
 		}
 	}
 </style>
