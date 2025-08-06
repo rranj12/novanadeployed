@@ -31,8 +31,77 @@
 		<slot />
 		
 		<script>
+			// Favicon theme handler with persistent state
+			function updateFavicon() {
+				const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+				const favicon16 = document.querySelector('link[rel="icon"][sizes="16x16"]');
+				const favicon32 = document.querySelector('link[rel="icon"][sizes="32x32"]');
+				const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]');
+				
+				// Store current state to prevent unnecessary switches
+				const currentState = sessionStorage.getItem('favicon-theme');
+				const newState = isDark ? 'dark' : 'light';
+				
+				// Only update if state has actually changed
+				if (currentState !== newState) {
+					sessionStorage.setItem('favicon-theme', newState);
+					
+					if (isDark) {
+						// Use inverted versions for dark mode
+						if (favicon16) favicon16.href = '/favicon-16x16-dark.png';
+						if (favicon32) favicon32.href = '/favicon-32x32-dark.png';
+						if (appleTouchIcon) appleTouchIcon.href = '/favicon-32x32-dark.png';
+					} else {
+						// Use original versions for light mode
+						if (favicon16) favicon16.href = '/favicon-16x16.png';
+						if (favicon32) favicon32.href = '/favicon-32x32.png';
+						if (appleTouchIcon) appleTouchIcon.href = '/favicon-32x32.png';
+					}
+				}
+			}
+			
+			// Initialize favicon immediately based on stored theme or current theme
+			function initFavicon() {
+				// Check for stored theme first, then current theme
+				const storedTheme = sessionStorage.getItem('favicon-theme');
+				const currentTheme = document.documentElement.getAttribute('data-theme');
+				const isDark = storedTheme === 'dark' || (storedTheme === null && currentTheme === 'dark');
+				
+				const favicon16 = document.querySelector('link[rel="icon"][sizes="16x16"]');
+				const favicon32 = document.querySelector('link[rel="icon"][sizes="32x32"]');
+				const appleTouchIcon = document.querySelector('link[rel="apple-touch-icon"]');
+				
+				if (isDark) {
+					if (favicon16) favicon16.href = '/favicon-16x16-dark.png';
+					if (favicon32) favicon32.href = '/favicon-32x32-dark.png';
+					if (appleTouchIcon) appleTouchIcon.href = '/favicon-32x32-dark.png';
+				} else {
+					if (favicon16) favicon16.href = '/favicon-16x16.png';
+					if (favicon32) favicon32.href = '/favicon-32x32.png';
+					if (appleTouchIcon) appleTouchIcon.href = '/favicon-32x32.png';
+				}
+				
+				sessionStorage.setItem('favicon-theme', isDark ? 'dark' : 'light');
+			}
+			
+			// Initialize favicon before DOM is ready to prevent flicker
+			initFavicon();
+			
 			// Page transition handler
 			document.addEventListener('DOMContentLoaded', function() {
+				// Update favicon on page load (but only if theme actually changed)
+				updateFavicon();
+				
+				// Watch for theme changes
+				const observer = new MutationObserver((mutations) => {
+					mutations.forEach((mutation) => {
+						if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+							updateFavicon();
+						}
+					});
+				});
+				observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+				
 				// Handle page enter animation - fade out the overlay
 				const enterOverlay = document.querySelector('.page-enter-overlay');
 				if (enterOverlay) {
