@@ -14,7 +14,92 @@
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cardo:wght@400;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
+		<!-- Page enter overlay for smooth transitions -->
+		<div class="page-enter-overlay" style="
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: var(--bg-white);
+			z-index: 9999;
+			opacity: 1;
+			transition: opacity 0.6s ease;
+			pointer-events: none;
+		"></div>
+		
 		<slot />
+		
+		<script>
+			// Page transition handler
+			document.addEventListener('DOMContentLoaded', function() {
+				// Handle page enter animation - fade out the overlay
+				const enterOverlay = document.querySelector('.page-enter-overlay');
+				if (enterOverlay) {
+					// Small delay to ensure page is rendered
+					setTimeout(() => {
+						enterOverlay.style.opacity = '0';
+						// Remove overlay after fade completes
+						setTimeout(() => {
+							enterOverlay.remove();
+						}, 600);
+					}, 50);
+				}
+				
+				// Function to create smooth page transitions
+				function createTransition(targetUrl) {
+					// Create a transition overlay
+					const overlay = document.createElement('div');
+					overlay.style.cssText = `
+						position: fixed;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: var(--bg-white);
+						z-index: 9999;
+						opacity: 0;
+						transition: opacity 0.3s ease;
+						pointer-events: none;
+					`;
+					document.body.appendChild(overlay);
+					
+					// Start fade out
+					requestAnimationFrame(() => {
+						overlay.style.opacity = '1';
+					});
+					
+					// Navigate after fade completes
+					setTimeout(() => {
+						window.location.href = targetUrl;
+					}, 300);
+				}
+				
+				// Get all internal navigation links
+				const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="../"]');
+				
+				links.forEach(link => {
+					// Skip if link has download attribute, target="_blank", or is external
+					if (link.hasAttribute('download') || 
+						link.getAttribute('target') === '_blank' || 
+						link.hostname !== window.location.hostname) {
+						return;
+					}
+					
+					link.addEventListener('click', function(e) {
+						const href = this.getAttribute('href');
+						
+						// Skip if it's the same page
+						if (href === window.location.pathname) {
+							return;
+						}
+						
+						e.preventDefault();
+						createTransition(href);
+					});
+				});
+			});
+		</script>
 	</body>
 </html>
 
