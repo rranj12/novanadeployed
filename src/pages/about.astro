@@ -28,7 +28,20 @@ const authors = [
 		<div class="container">
 			<article class="article">
 				<header class="article-header">
-					<h1 class="article-title">About</h1>
+					<div class="novana-definition">
+						<h1 class="novana-word">No·va·na</h1>
+						<div class="pronunciation-noun-line">
+							<span class="pronunciation">/ noʊ'va:nə /</span>
+							<span class="word-type">noun</span>
+						</div>
+						
+						<p class="definition">a coined term combining the Latin root <em>nov-</em> ("new") and the Greek root <em>-ana</em> ("again"), symbolizing renewal through innovation or the reinvention of existing ideas using new tools, technologies, or perspectives. Used to describe platforms, systems, or philosophies centered on iterative progress and fresh thinking.</p>
+						
+						<blockquote class="usage-quote">
+							Ex. "<em>Novana embodies a new approach to investment research.</em>"
+						</blockquote>
+					</div>
+					
 					<p class="article-blurb">We are in the midst of a major technological revolution — artificial intelligence will fundamentally change the ways in which humans live and our society functions. At Novana, we believe that strides in artificial intelligence will enable previously nascent industries to thrive. Furthermore, we believe that Silicon Valley is the geographic hub that will house it all: the San Francisco Bay Area is where researchers turn founders, scientific innovation finds financial backing, and East meets West.</p>
 					
 					<p class="article-blurb">Novana marries scientific domain knowledge and end-to-end investment management expertise, critically analyzing emerging technologies so as to produce empirically sound findings for those looking to investment in the future. Our Stanford-based team produces in-house technology analyses, investment research briefs, and market trend writeups across edge computing, biotechnology, artificial intelligence, and other frontier technology industries. </p>
@@ -96,6 +109,66 @@ const authors = [
 		color: var(--text-primary);
 		margin-bottom: var(--spacing-xl);
 		line-height: 1.1;
+	}
+
+	/* Novana Definition Styles */
+	.novana-definition {
+		margin-bottom: var(--spacing-3xl);
+		text-align: left;
+		max-width: 900px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.novana-word {
+		font-family: 'Cardo', serif;
+		font-size: 3rem;
+		font-weight: 700;
+		color: var(--text-primary);
+		margin-bottom: var(--spacing-xs);
+		line-height: 1;
+		letter-spacing: 0.05em;
+	}
+
+	.pronunciation-noun-line {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-lg); /* Increased space between pronunciation and noun */
+		margin-bottom: var(--spacing-md);
+	}
+
+	.pronunciation {
+		font-size: 1.1rem;
+		color: var(--text-primary);
+		font-style: italic;
+	}
+
+	.word-type {
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: var(--text-primary);
+	}
+
+	.definition {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--text-primary);
+		margin-bottom: var(--spacing-md);
+	}
+
+	.definition em {
+		font-style: italic;
+		color: var(--text-primary);
+	}
+
+	.usage-quote {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--text-primary);
+		font-style: italic;
+		margin: var(--spacing-md) 0 var(--spacing-3xl) 0; /* Added larger bottom margin */
+		padding-bottom: var(--spacing-2xl);
+		border-bottom: 1px solid var(--text-primary);
 	}
 
 	.article-blurb {
@@ -238,6 +311,29 @@ const authors = [
 		.article-title {
 			font-size: 2rem; /* Maintain proportional scaling */
 			text-align: left; /* Left align title */
+		}
+
+		/* Mobile styles for Novana definition */
+		.novana-word {
+			font-size: 2.2rem;
+		}
+
+		.pronunciation {
+			font-size: 1rem;
+		}
+
+		.word-type {
+			font-size: 1rem;
+		}
+
+		.definition {
+			font-size: 1rem;
+			line-height: 1.6;
+		}
+
+		.usage-quote {
+			font-size: 1rem;
+			padding-left: var(--spacing-md);
 		}
 
 		.section-title {
