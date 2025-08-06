@@ -97,6 +97,8 @@
 html {
 	font-family: var(--font-family);
 	scroll-behavior: smooth;
+	/* Enhanced smooth scrolling */
+	scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -107,6 +109,47 @@ body {
 	font-size: 16px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	/* Enhanced scrolling for webkit browsers */
+	-webkit-overflow-scrolling: touch;
+	/* Smoother scrolling on supported browsers */
+	overscroll-behavior: contain;
+}
+
+/* Smooth scrolling for all scrollable elements */
+* {
+	scroll-behavior: smooth;
+}
+
+/* Enhanced scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--border-color);
+	border-radius: 4px;
+	transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--text-muted);
+}
+
+/* Dark mode scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+	background: var(--bg-dark);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+	background: var(--border-color);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+	background: var(--text-muted);
 }
 
 /* Ensure dark mode background is immediate and persistent */
@@ -513,6 +556,18 @@ a:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+	/* Enhanced mobile scrolling */
+	body {
+		-webkit-overflow-scrolling: touch;
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+	}
+	
+	/* Smooth momentum scrolling for all scrollable containers */
+	.main, .container, .container-narrow {
+		-webkit-overflow-scrolling: touch;
+	}
+	
 	.container, .container-narrow {
 		padding: 0 var(--spacing-md);
 	}
