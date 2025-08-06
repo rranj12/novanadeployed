@@ -520,14 +520,18 @@ const latestArticles = [
 				currentActive.classList.add('exiting');
 			}
 			
-			// Reset all other descriptions and circles
+			// Fade out all circles first for smoother transition
+			circles.forEach((circle, i) => {
+				if (circle) {
+					circle.style.opacity = '0.3';
+					circle.style.strokeWidth = '1';
+				}
+			});
+			
+			// Reset all other descriptions
 			descriptions.forEach((desc, i) => {
 				if (desc && desc !== currentActive) {
 					desc.classList.remove('active', 'exiting');
-				}
-				if (circles[i]) {
-					circles[i].style.opacity = '0.7';
-					circles[i].style.strokeWidth = '1';
 				}
 			});
 			
@@ -537,6 +541,16 @@ const latestArticles = [
 					descriptions[index].classList.remove('exiting');
 					descriptions[index].classList.add('active');
 				}
+				
+				// Fade in all inactive circles to normal state
+				circles.forEach((circle, i) => {
+					if (circle && i !== index) {
+						circle.style.opacity = '0.7';
+						circle.style.strokeWidth = '1';
+					}
+				});
+				
+				// Fade in active circle to bold state
 				if (circles[index]) {
 					circles[index].style.opacity = '1';
 					circles[index].style.strokeWidth = '3';
@@ -921,7 +935,7 @@ const latestArticles = [
 		stroke: #ffffff; /* White border on black background */
 		stroke-width: 1; /* Match button border width */
 		opacity: 0.7;
-		transition: opacity 0.3s ease;
+		transition: opacity 0.8s ease, stroke-width 0.8s ease;
 	}
 
 	.venn-circle:hover {
