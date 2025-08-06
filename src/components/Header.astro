@@ -6,7 +6,7 @@ const { currentPath } = Astro.props;
 	<div class="container">
 		<nav class="nav">
 			<a href="/" class="logo">
-				<span class="logo-text">Novana Insights</span>
+				<img src="/whiteFull.png" alt="Novana Insights" class="logo-image" />
 			</a>
 			
 			<!-- Mobile menu button -->
@@ -111,6 +111,17 @@ const { currentPath } = Astro.props;
 		border-bottom: 1px solid var(--border-color);
 	}
 
+	/* Pure black header in dark mode */
+	[data-theme="dark"] .header {
+		background: #000000 !important;
+		border-bottom-color: #333333;
+	}
+
+	/* Pure black mobile nav in dark mode */
+	[data-theme="dark"] .nav-links {
+		background: #000000 !important;
+	}
+
 	.nav {
 		display: flex;
 		align-items: center;
@@ -121,14 +132,24 @@ const { currentPath } = Astro.props;
 	.logo {
 		text-decoration: none;
 		color: var(--text-primary);
+		display: flex;
+		align-items: center;
 	}
 
-	.logo-text {
-		font-size: 20px;
-		font-weight: 700;
-		color: var(--text-primary);
-		line-height: 1.0;
-		letter-spacing: -0.01em;
+	.logo-image {
+		height: 42px;
+		width: auto;
+		transition: filter 0.3s ease;
+	}
+
+	/* Dark mode inversion for the logo */
+	[data-theme="dark"] .logo .logo-image {
+		filter: invert(1) !important;
+	}
+
+	/* Ensure logo works in dark mode even with specificity issues */
+	html[data-theme="dark"] .logo-image {
+		filter: invert(1) !important;
 	}
 
 	.mobile-menu-button {
@@ -301,8 +322,8 @@ const { currentPath } = Astro.props;
 			border-top: 1px solid var(--border-color);
 		}
 		
-		.logo-text {
-			font-size: 18px;
+		.logo-image {
+			height: 36px; /* Slightly smaller on mobile */
 		}
 	}
 	
@@ -321,8 +342,8 @@ const { currentPath } = Astro.props;
 			margin: var(--spacing-md);
 		}
 		
-		.logo-text {
-			font-size: 16px;
+		.logo-image {
+			height: 32px; /* Even smaller on small phones */
 		}
 	}
 </style>
