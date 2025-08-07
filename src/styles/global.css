@@ -44,6 +44,35 @@
 	--bg-dark: #161616;
 }
 
+/* Smooth theme transitions for elements that change during theme switching */
+html,
+body,
+.header,
+.nav-links,
+.hero,
+.main,
+.article,
+.article-card,
+.site-footer,
+.team-cta-section,
+.latest-research-section,
+.btn,
+.tag,
+.filter-btn,
+h1, h2, h3, h4, h5, h6,
+p,
+a {
+	transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* SVG elements for Venn diagram */
+.venn-circle,
+.venn-label,
+.venn-center,
+.venn-center-label {
+	transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
 /* Dark mode team CTA styles - moved to global to ensure proper theme switching */
 [data-theme="dark"] .team-cta-section {
 	background: #ffffff !important; /* Pure white in dark mode */
