@@ -99,6 +99,8 @@ html {
 	scroll-behavior: smooth;
 	/* Enhanced smooth scrolling */
 	scroll-padding-top: var(--header-height);
+	/* Prevent horizontal overflow */
+	overflow-x: hidden;
 }
 
 body {
@@ -113,6 +115,8 @@ body {
 	-webkit-overflow-scrolling: touch;
 	/* Smoother scrolling on supported browsers */
 	overscroll-behavior: contain;
+	/* Prevent horizontal overflow */
+	overflow-x: hidden;
 }
 
 /* Smooth scrolling for all scrollable elements */
