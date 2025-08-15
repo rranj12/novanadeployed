@@ -2,42 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ArticleCard from '../components/ArticleCard.astro';
 
-// Latest 3 articles for the homepage
-const latestArticles = [
-	{
-		slug: 'factor-investing-biotech-equities',
-		title: 'On Factor Investing for U.S. Biotechnology Equities',
-		excerpt: 'We backtest three factor investing-frameworks for U.S. biotech equities against a 15 year period, finding that none produced statistically significant alpha.',
-		tags: ['Research', 'Factor Investing', 'Biotechnology'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'June 13, 2025',
-		readingTime: '10 min read',
-		category: 'research'
-	},
-	{
-		slug: 'data-center-growth',
-		title: 'Our Thoughts on Data Center Growth',
-		excerpt: 'Novana Research examines the data center: its role in the AI value chain, infrastructure context, and future expansion hotbeds.',
-		tags: ['Research','Data Center', 'AI', 'Infrastructure'],
-		authors: 'Justin Wang, Rishabh Ranjan',
-		date: 'July 15, 2025',
-		readingTime: '7 min read',
-		category: 'research',
-		image: '/ai-value-chain.png',
-	},
-	{
-		slug: 'beyond-silicon-biological-computing',
-		title: 'Beyond Silicon: Inside the Era of Biological Computing',
-		excerpt: 'This piece is a part of Novana Scientific\'s "Concrete Foundations of Compute" series. Exploring the rise of biological (wetware) computing, its pioneers, and the future of hybrid AI hardware.',
-		tags: ['Research', 'Biological Computing', 'Semiconductors', 'AI'],
-		authors: 'Rishabh Ranjan, Justin Wang',
-		date: 'July 14, 2028',
-		readingTime: '7 min read',
-		category: 'research'
-	}
-];
+
 ---
 
 <Layout title="Home" description="Deep technology innovation and investing.">
@@ -117,21 +83,7 @@ const latestArticles = [
 		</div>
 	</section>
 	
-	<!-- Latest Research Section -->
-	<section class="latest-research-section">
-		<div class="container">
-			<div class="latest-research-content">
-				<h2 class="latest-research-title">Latest Research</h2>
-				<a href="/research" class="latest-research-button">View All Research</a>
-				
-				<div class="articles-grid">
-					{latestArticles.map(article => (
-						<ArticleCard article={article} basePath={article.category === 'scientific' ? '/scientific' : '/articles'} />
-					))}
-				</div>
-			</div>
-		</div>
-	</section>
+
 	
 	<Footer />
 </Layout>
@@ -489,8 +441,7 @@ const latestArticles = [
 		// Initialize cyclical description animation
 		initDescriptionCycle();
 		
-		// Initialize border management for latest research grid
-		initLatestResearchBorders();
+
 	});
 	
 	function initDescriptionCycle() {
@@ -567,36 +518,7 @@ const latestArticles = [
 		}, 6500); // Change every 5 seconds
 	}
 	
-	function initLatestResearchBorders() {
-		const articleCards = document.querySelectorAll('.latest-research-section .article-card');
-		
-		function updateBorders() {
-			// Remove all border classes first
-			articleCards.forEach(card => {
-				card.classList.remove('no-right-border', 'no-bottom-border');
-			});
 
-			// Get visible cards (all are visible in this case)
-			const visibleCards = Array.from(articleCards);
-
-			// Apply borders to visible cards
-			visibleCards.forEach((card, index) => {
-				// Remove right border from every 3rd visible item (last column)
-				if ((index + 1) % 3 === 0) {
-					card.classList.add('no-right-border');
-				}
-				
-				// Remove bottom border from last row
-				const totalVisible = visibleCards.length;
-				const lastRowStart = Math.floor((totalVisible - 1) / 3) * 3;
-				if (index >= lastRowStart) {
-					card.classList.add('no-bottom-border');
-				}
-			});
-		}
-		
-		updateBorders();
-	}
 </script>
 
 <style>
@@ -967,277 +889,7 @@ const latestArticles = [
 		pointer-events: none;
 	}
 
-	/* Latest Research Section */
-	.latest-research-section {
-		background: var(--bg-white); /* White background in light mode */
-		color: var(--text-primary); /* Dark text in light mode */
-		padding: var(--spacing-lg) 0;
-		padding-bottom: var(--spacing-xl);
-	}
 
-	.container {
-		background: var(--bg-white);
-		max-width: 1180px;
-		padding: 0 60px;
-		margin: 0 auto;
-	}
 
-	.latest-research-content {
-		text-align: center;
-	}
 
-	.latest-research-title {
-		font-size: 2.5rem;
-		font-weight: 700;
-		line-height: 1.1;
-		margin-bottom: var(--spacing-xl);
-		color: var(--text-primary);
-		text-align: center;
-	}
-
-	.latest-research-button {
-		display: inline-flex;
-		align-items: center;
-		padding: 8px 20px;
-		background: transparent;
-		color: var(--text-primary);
-		text-decoration: none;
-		border-radius: 25px;
-		font-weight: 500;
-		font-size: 14px;
-		transition: all 0.2s ease;
-		border: 1px solid var(--text-primary);
-		margin-bottom: var(--spacing-xl);
-	}
-
-	.latest-research-button:hover {
-		background: var(--text-primary);
-		color: var(--bg-white);
-		border-color: var(--text-primary);
-	}
-
-	.articles-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0;
-		border: 1px solid var(--border-color);
-		background: var(--bg-white);
-		width: 100%;
-		align-items: stretch;
-		margin-bottom: var(--spacing-xl);
-	}
-
-	.articles-grid :global(.article-card) {
-		background: var(--bg-white);
-		color: var(--text-primary);
-		border: none;
-		border-radius: 0;
-		margin: 0;
-		padding: 30px;
-		border-right: 1px solid var(--border-color);
-		border-bottom: 1px solid var(--border-color);
-		transition: background-color 0.2s ease;
-		min-height: 400px;
-		display: flex;
-		flex-direction: column;
-		cursor: pointer;
-		height: 100%;
-		position: relative;
-	}
-
-	.articles-grid :global(.article-card:hover) {
-		background: var(--bg-light);
-		transform: none;
-		box-shadow: none;
-	}
-
-	.articles-grid :global(.article-card .article-title) {
-		color: var(--text-primary);
-		font-size: 1.4rem;
-		line-height: 1.3;
-	}
-
-	.articles-grid :global(.article-card .article-title a) {
-		color: var(--text-primary);
-		text-decoration: none;
-	}
-
-	.articles-grid :global(.article-card .article-title a:hover) {
-		color: var(--text-secondary);
-	}
-
-	.articles-grid :global(.article-excerpt) {
-		color: var(--text-secondary);
-		font-size: 0.9rem;
-		line-height: 1.5;
-	}
-
-	.articles-grid :global(.tag) {
-		background: var(--bg-light);
-		color: var(--text-primary);
-		border: 1px solid var(--border-color);
-		font-size: 0.75rem;
-		padding: 3px 6px;
-	}
-
-	.articles-grid :global(.tag:hover) {
-		background: var(--text-primary);
-		color: var(--bg-white);
-		border-color: var(--text-primary);
-	}
-
-	.articles-grid :global(.article-meta) {
-		color: var(--text-secondary);
-		font-size: 0.8rem;
-		padding-top: 16px;
-		border-top: 1px solid var(--border-color);
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 12px;
-	}
-
-	.articles-grid :global(.article-meta svg) {
-		color: var(--text-secondary);
-	}
-
-	.articles-grid :global(.article-date) {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-	}
-
-	.articles-grid :global(.reading-time) {
-		font-weight: 500;
-	}
-
-	/* Dynamic border removal classes */
-	.articles-grid :global(.article-card.no-right-border) {
-		border-right: none;
-	}
-
-	.articles-grid :global(.article-card.no-bottom-border) {
-		border-bottom: none;
-	}
-
-	/* Dark mode styles for latest research section */
-	[data-theme="dark"] .latest-research-section {
-		background: var(--bg-white) !important; /* Black background in dark mode */
-		color: var(--text-primary) !important; /* Light text in dark mode */
-	}
-
-	[data-theme="dark"] .research-card {
-		background: var(--bg-light) !important;
-		border-color: var(--border-color) !important;
-	}
-
-	[data-theme="dark"] .research-card:hover {
-		box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1) !important;
-	}
-
-	[data-theme="dark"] .research-category {
-		background: var(--primary-color) !important;
-		color: var(--bg-white) !important;
-	}
-
-	[data-theme="dark"] .research-card-link {
-		background: var(--primary-color) !important;
-		color: var(--bg-white) !important;
-	}
-
-	[data-theme="dark"] .research-card-link:hover {
-		background: var(--primary-hover) !important;
-	}
-
-	[data-theme="dark"] .research-view-all-btn {
-		background: var(--primary-color) !important;
-		color: var(--bg-white) !important;
-	}
-
-	[data-theme="dark"] .research-view-all-btn:hover {
-		background: var(--primary-hover) !important;
-	}
-
-	/* Mobile styles for latest research */
-	@media (max-width: 768px) {
-		.container {
-			max-width: 100%;
-			padding: 0 var(--spacing-md);
-		}
-		
-		.latest-research-section {
-			padding: var(--spacing-md) 0 var(--spacing-2xl);
-		}
-
-		.latest-research-title {
-			font-size: 2rem;
-			margin-bottom: var(--spacing-lg);
-		}
-
-		.latest-research-button {
-			font-size: 0.9rem;
-			padding: 14px var(--spacing-lg);
-		}
-
-		.articles-grid {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-md);
-			border: none;
-			padding-bottom: var(--spacing-2xl);
-		}
-
-		.articles-grid :global(.article-card) {
-			border: 1px solid var(--border-color);
-			border-radius: 8px;
-			padding: var(--spacing-lg);
-			margin-bottom: 0;
-		}
-
-		.articles-grid :global(.article-card:hover) {
-			transform: none;
-		}
-
-		.articles-grid :global(.article-card .article-title) {
-			font-size: 1.2rem;
-		}
-
-		.articles-grid :global(.article-excerpt) {
-			font-size: 0.85rem;
-		}
-
-		.articles-grid :global(.article-meta) {
-			font-size: 0.75rem;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: var(--spacing-xs);
-		}
-
-		.articles-grid :global(.tag) {
-			font-size: 0.7rem;
-			padding: 2px 6px;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.container {
-			padding: 0 var(--spacing-sm);
-		}
-
-		.latest-research-title {
-			font-size: 1.8rem;
-		}
-
-		.latest-research-button {
-			font-size: 12px;
-			padding: 6px 16px;
-		}
-
-		.articles-grid :global(.article-card) {
-			padding: var(--spacing-md);
-		}
-
-		.articles-grid :global(.article-card .article-title) {
-			font-size: 1.1rem;
-		}
-	}
 </style>
