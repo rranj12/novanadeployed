@@ -18,6 +18,17 @@ const authors = [
 ];
 ---
 
+<script>
+	// Check authentication for article content
+	if (typeof window !== 'undefined') {
+		const isAuth = localStorage.getItem('novana-auth') === 'true';
+		if (!isAuth) {
+			// Redirect to login if not authenticated
+			window.location.href = '/login';
+		}
+	}
+</script>
+
 <Layout title="How FDA Politics Upended Replimune's RP1" description="Analysis of the FDA's surprising rejection of Replimune's RP1 and the implications for future drug approvals">
 	<Header currentPath="/research" />
 	

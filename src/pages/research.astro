@@ -3,6 +3,18 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import Footer from '../components/Footer.astro';
+---
+
+<script>
+	// Check authentication for research content
+	if (typeof window !== 'undefined') {
+		const isAuth = localStorage.getItem('novana-auth') === 'true';
+		if (!isAuth) {
+			// Redirect to login if not authenticated
+			window.location.href = '/login';
+		}
+	}
+</script>
 
 const allArticles = [
 	{
