@@ -1,4 +1,4 @@
-# Client Access Guide - Novana Insights
+# Client Access Guide - Novana
 
 ## 🔐 Login Credentials
 
@@ -17,7 +17,7 @@
 ## 🚫 What's Protected
 
 - **All Research Articles** - `/research`
-- **Market Analysis** - `/markets` 
+- **Market Analysis** - `/markets`
 - **Scientific Tools** - `/scientific`
 - **Individual Articles** - `/articles/*`
 - **Research Page** - `/research` (redirects to login if not authenticated)
