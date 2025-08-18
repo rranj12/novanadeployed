@@ -168,7 +168,7 @@ const { currentPath } = Astro.props;
 		height: 2px;
 		background: var(--text-primary);
 		transition: all 0.3s ease;
-		border-radius: 1px;
+		border-radius: 0;
 	}
 
 	.mobile-menu-button.active .hamburger-line:nth-child(1) {
@@ -203,23 +203,79 @@ const { currentPath } = Astro.props;
 		color: var(--text-primary);
 	}
 
+	.underline {
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		height: 2px;
+		background: var(--text-primary);
+		transition: all 0.3s ease;
+		border-radius: 0;
+	}
+
 	.theme-toggle {
 		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 8px;
-		border-radius: 6px;
+		border: none !important;
+		color: var(--text-primary);
+		border-radius: 0;
+		width: 32px;
+		height: 32px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: var(--text-secondary);
+		cursor: pointer;
 		transition: all 0.2s ease;
-		position: relative;
+		outline: none !important;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.theme-toggle:focus {
+		outline: none !important;
+		box-shadow: none !important;
+		border: none !important;
+	}
+
+	.theme-toggle:active {
+		outline: none !important;
+		border: none !important;
+		box-shadow: none !important;
+	}
+
+	.theme-toggle:focus-visible {
+		outline: none !important;
+		border: none !important;
+		box-shadow: none !important;
+	}
+
+	.theme-toggle::-moz-focus-inner {
+		border: none !important;
+		outline: none !important;
 	}
 
 	.theme-toggle:hover {
 		color: var(--text-primary);
 		background: var(--bg-light);
+		border: none !important;
+		outline: none !important;
+	}
+
+	/* Nuclear option - remove ALL possible outlines and borders */
+	.theme-toggle,
+	.theme-toggle *,
+	.theme-toggle::before,
+	.theme-toggle::after {
+		outline: none !important;
+		border: none !important;
+		box-shadow: none !important;
 	}
 
 	.theme-toggle .sun-icon,

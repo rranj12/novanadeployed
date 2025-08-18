@@ -17,6 +17,13 @@ const authors = [
 		linkedin: 'https://www.linkedin.com/in/rishabhranj/',
 		twitter: 'https://x.com/rishabh12ranjan',
 		image: '/rishabh.jpeg'
+	},
+	{
+		name: 'Ayush Tripathi',
+		title: 'Co-Founder & Principal Engineer',
+		linkedin: 'https://www.linkedin.com/in/ayush-tripathi-1bb543279/',
+		twitter: '#',
+		image: '/ayush.jpg'
 	}
 ];
 ---
@@ -200,11 +207,11 @@ const authors = [
 
 	.team-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		gap: 0; /* Remove gap to connect containers */
 		justify-items: stretch; /* Stretch to fill available space */
 		align-items: start;
-		max-width: 600px; /* Constrain total width (320px * 2) */
+		max-width: 900px; /* Increased from 600px to accommodate 3 members */
 		margin: 0 auto; /* Center the grid */
 		margin-bottom: var(--spacing-3xl);
 	}
@@ -221,7 +228,7 @@ const authors = [
 		flex-direction: column;
 	}
 
-	/* Add right border only to the last (rightmost) container */
+	/* Add right border to all team members except remove from middle one to maintain connected look */
 	.team-member:last-child {
 		border-right: 1px solid var(--border-color);
 	}
@@ -277,7 +284,7 @@ const authors = [
 		align-items: center;
 		justify-content: center;
 		padding: var(--spacing-sm);
-		border-radius: 6px;
+		border-radius: 0;
 		border: 1px solid var(--border-color);
 		background: var(--bg-white);
 	}
@@ -288,13 +295,19 @@ const authors = [
 	}
 
 	@media (max-width: 1024px) {
-		.member-image img {
-			max-width: 280px;
-			height: auto;
+		.team-grid {
+			max-width: 100%;
+			gap: var(--spacing-sm);
 		}
-		
+
 		.team-member {
-			min-height: 350px; /* Slightly smaller on tablets */
+			padding: var(--spacing-md);
+			min-height: 350px;
+		}
+
+		.member-image img {
+			max-width: 180px;
+			height: auto;
 		}
 	}
 

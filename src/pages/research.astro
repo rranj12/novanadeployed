@@ -220,17 +220,15 @@ const allArticles = [
 	}
 
 	.filter-btn {
-		padding: 8px 20px;
-		border: 1px solid var(--border-color);
-		background: var(--bg-white);
+		padding: 8px 16px;
+		background: transparent;
 		color: var(--text-secondary);
-		border-radius: 25px;
-		cursor: pointer;
+		border: 1px solid var(--border-color);
+		border-radius: 0;
 		font-size: 14px;
 		font-weight: 500;
+		cursor: pointer;
 		transition: all 0.2s ease;
-		text-decoration: none;
-		display: inline-block;
 	}
 
 	.filter-btn:hover {
@@ -242,6 +240,10 @@ const allArticles = [
 		background: var(--text-primary);
 		border-color: var(--text-primary);
 		color: var(--bg-white);
+	}
+
+	.filter-btn:first-child {
+		border-radius: 0;
 	}
 
 	.articles-grid {
@@ -389,7 +391,7 @@ const allArticles = [
 		
 		.articles-grid :global(.article-card) {
 			border: 1px solid var(--border-color); /* Add individual borders */
-			border-radius: 8px; /* Add rounded corners */
+			border-radius: 0; /* Add rounded corners */
 			padding: var(--spacing-lg);
 			margin-bottom: 0;
 		}

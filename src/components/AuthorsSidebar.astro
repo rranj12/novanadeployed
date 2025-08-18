@@ -181,10 +181,22 @@ const safeAuthors = Array.isArray(authors) ? authors : [];
 
 	.authors-sidebar::-webkit-scrollbar-thumb {
 		background: var(--border-color);
-		border-radius: 1px;
+		border-radius: 0;
 	}
 
 	.authors-sidebar::-webkit-scrollbar-thumb:hover {
 		background: var(--text-muted);
+	}
+
+	.active-indicator {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 3px;
+		height: 100%;
+		background: var(--text-primary);
+		border-radius: 0;
+		opacity: 0;
+		transition: opacity 0.2s ease;
 	}
 </style> 
