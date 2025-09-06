@@ -99,16 +99,6 @@ const allArticles = [
 ];
 ---
 
-<script>
-	// Check authentication for research content
-	if (typeof window !== 'undefined') {
-		const isAuth = localStorage.getItem('novana-auth') === 'true';
-		if (!isAuth) {
-			// Redirect to login if not authenticated
-			window.location.href = '/login';
-		}
-	}
-</script>
 
 <Layout title="Research" description="In-depth research on emerging technology opportunities and market trends">
 	<Header currentPath="/research" />
